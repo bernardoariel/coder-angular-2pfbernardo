@@ -25,6 +25,7 @@ export class DetalleComponent {
     private alumnosService:AlumnoService
   ){
     if(data && data.inscripcion){
+      console.log('data.inscripcion::: ', data.inscripcion);
 
       let fotoUrl = `../assets/img/cursos/${data.inscripcion.idCurso}.png`
 

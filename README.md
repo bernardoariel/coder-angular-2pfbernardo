@@ -1,27 +1,41 @@
 # PFinalBernardo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+## Segunda Entrega Final
 
-## Development server
+He creado todo de cero nuevamente reordenando la info
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Objetivos Especificos
+1. Se añadieron 3 modulos en el dashboar
+  1. Alumnos
+  2. Cursos
+  3. Inscripciones
+2. Se utilizo el routing en el modulo general y en los submodulos
+3. en Shared tengo creado todo lo de angular material
 
-## Code scaffolding
+## Aspectos a Incluir en el Entregable
+1. Se agregaron los servicios para los Abm de los modulos.
+2. Se utilizaron los servicios en los componentes
+3. Se realizo la modularizacion con el core, shared y features modules
+4. Tenemos la navegacion de rutas desde el menu lateral
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## En listado de alumnos:
+  Se puede agregar un alumno pide nombre apellido y fecha de nacimiento
+  Con esos datos utiliza los pipe de nombre completo, y de los errores
+  ver: Se podra ver los detalles el nombre el apellido, la fecha de nacimiento y los cursos en los que esta inscripto. Tambien se podraa eliminar (Todo harckodeado)
+  editar: Podemos cambiar los valores
+  eliminar: elimina un alumno
+## En listado de Cursos:
+  Agregar un curso, y tomara una foto por defecto
+  Eliminar un curso
+  Editar un curso
+  Ver un curso permite ver una foto y el nombre del curso
+## En listado de inscripciones:
+  Agregar un nuevo curso para tomarlo , agregando el nombre, el tipo de curso que viene de los cursos
+  la fecha de inicio y fecha de fin
+  Eliminar un curso
+  editar el curso
+  Ver el curso me trae el nombre y quienes lo estan haciendo
+  
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

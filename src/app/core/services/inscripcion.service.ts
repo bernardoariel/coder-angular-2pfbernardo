@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, of, take } from 'rxjs';
+import { Curso } from '../interfaces/curso.interface';
 
 
 export interface Inscripcion {
@@ -97,6 +98,10 @@ export class InscripcionService {
     ).subscribe(cursosActualizados => this.inscripciones$.next(cursosActualizados));
 
     return this.inscripciones$.asObservable();
+  }
+
+  getCursosDelAlumno(alumnoId: number): Inscripcion[] {
+    return inscripciones.filter(inscripcion => inscripcion.alumnosInscriptos?.includes(alumnoId));
   }
 
 }

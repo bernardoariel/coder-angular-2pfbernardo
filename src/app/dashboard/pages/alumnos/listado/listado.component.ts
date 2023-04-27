@@ -68,6 +68,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
   editarAlumno(alumno:Estudiante){
 
     const dialog =  this.matDialog.open(AlumnoComponent, {
+
       data:{
         alumno
       }

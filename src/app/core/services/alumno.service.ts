@@ -6,8 +6,8 @@ import { Estudiante } from '../interfaces/estudiante.interface';
 const alumnos: Estudiante[] = [
   {
     id: 1,
-    nombre: 'lucía',
-    apellido: 'gonzález',
+    nombre: 'Federico',
+    apellido: 'González',
     fechaNacimiento: '2001-01-15',
     matricula: '001',
     fotoPerfilUrl: `https://randomuser.me/api/portraits/med/men/1.jpg`,
@@ -16,8 +16,8 @@ const alumnos: Estudiante[] = [
   },
   {
     id: 2,
-    nombre: 'tomás',
-    apellido: 'lópez',
+    nombre: 'Tomás',
+    apellido: 'López',
     fechaNacimiento: '2002-03-20',
     matricula: '002',
     fotoPerfilUrl: 'https://randomuser.me/api/portraits/med/men/2.jpg',
@@ -26,7 +26,7 @@ const alumnos: Estudiante[] = [
   },
   {
     id: 3,
-    nombre: 'sofía',
+    nombre: 'Juan',
     apellido: 'MarTínez',
     fechaNacimiento: '2000-05-08',
     matricula: '003',
@@ -36,8 +36,8 @@ const alumnos: Estudiante[] = [
   },
   {
     id:4,
-    nombre: 'PeDro',
-    apellido: 'GarcíA',
+    nombre: 'Pedro',
+    apellido: 'García',
     fechaNacimiento: '1999-07-12',
     matricula: '004',
     fotoPerfilUrl: 'https://randomuser.me/api/portraits/med/men/4.jpg',
@@ -46,7 +46,7 @@ const alumnos: Estudiante[] = [
   },
   {
     id:5,
-    nombre: 'Ana',
+    nombre: 'Hernan',
     apellido: 'Hernández',
     fechaNacimiento: '2002-10-22',
     matricula: '005',
@@ -58,7 +58,7 @@ const alumnos: Estudiante[] = [
   {
     id:6,
     nombre: 'Luis',
-    apellido: 'ramírez',
+    apellido: 'Ramírez',
     fechaNacimiento: '2001-12-05',
     matricula: '006',
     fotoPerfilUrl: 'https://randomuser.me/api/portraits/med/men/6.jpg',

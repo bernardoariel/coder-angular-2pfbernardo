@@ -58,6 +58,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
   editariInscripcion(inscripcion:Inscripcion){
 
     const dialog =  this.matDialog.open(InscripcionComponent, {
+
      data:{
       inscripcion
      }
