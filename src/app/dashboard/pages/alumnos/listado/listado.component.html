@@ -1,0 +1,62 @@
+<h2>Listado de ALumnos</h2>
+<hr>
+
+<div class="filter-container">
+  <mat-form-field>
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="buscar ..." #input>
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="crearAlumno()">Agregar Alumno</button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- matricula Column -->
+  <ng-container matColumnDef="matricula">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Matricula </th>
+    <td mat-cell *matCellDef="let estudiante"> {{estudiante.matricula}} </td>
+  </ng-container>
+  <!-- Nombre Completo Column -->
+  <ng-container matColumnDef="nombreCompleto">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Nombre </th>
+    <td mat-cell *matCellDef="let estudiante"> {{  estudiante | nombreCompleto }} </td>
+  </ng-container>
+
+  <!-- fechaNacimiento Column -->
+  <ng-container matColumnDef="fechaNacimiento">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Edad </th>
+    <td mat-cell *matCellDef="let estudiante">  {{ calcularEdad(estudiante.fechaNacimiento) }} años  </td>
+  </ng-container>
+
+
+  <!-- fotoPerfilUrl Column -->
+  <ng-container matColumnDef="fotoPerfilUrl">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Foto </th>
+    <td mat-cell *matCellDef="let estudiante">
+      <img src="{{estudiante.fotoPerfilUrl}}" alt="foto perfil" height="40px">
+    </td>
+  </ng-container>
+
+
+  <!-- acciones Column -->
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Acciones </th>
+    <td mat-cell *matCellDef="let estudiante">
+      <button mat-button color="basic" (click)="detalleAlumno(estudiante)">
+        <mat-icon>visibility</mat-icon>
+        Ver
+      </button>
+      <button mat-button color="primary" (click)="editarAlumno(estudiante)">
+        <mat-icon>edit</mat-icon>
+        Editar
+      </button>
+      <button mat-button color="warn" (click)="eliminarAlumno(estudiante)">
+        <mat-icon>delete</mat-icon>
+        Eliminar
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>

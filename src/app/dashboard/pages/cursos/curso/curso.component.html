@@ -1,0 +1,55 @@
+
+<h1 mat-dialog-title>ABM Curso</h1>
+
+<div mat-dialog-content class="p-3">
+
+  <form [formGroup]="cursoForm">
+
+    <div class="row">
+
+      <div class="col-12 mb-1">
+
+        <mat-form-field class="w-100">
+
+          <mat-label>Nombre</mat-label>
+
+          <input
+            [formControl]="nombreControl"
+            matInput
+            type="text">
+
+          <mat-error *ngFor="let error of nombreControl.errors | keyvalue">
+              {{ error | controlErrorMessages:'texto' }}
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="col-12 mb-1">
+        <mat-form-field class="w-100">
+          <mat-label>Dificultad</mat-label>
+          <input
+           [formControl]="tipoControl"
+            matInput
+            type="text">
+
+            <mat-error *ngFor="let error of tipoControl.errors | keyvalue">
+              {{ error | controlErrorMessages: 'texto' }}
+            </mat-error>
+        </mat-form-field>
+
+      </div>
+
+
+    </div>
+
+  </form>
+
+</div>
+
+<div mat-dialog-actions class="justify-content-end">
+
+  <button mat-button mat-dialog-close> Cancelar </button>
+  <button mat-button (click)="guardar()" [disabled]="cursoForm.invalid"> Guardar </button>
+
+</div>

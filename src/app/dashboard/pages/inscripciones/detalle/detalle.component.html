@@ -1,0 +1,22 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <!-- <div mat-card-avatar class="example-header-image"></div> -->
+    <mat-card-title>{{titulo}}</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{ foto }}" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+
+    <mat-list role="list">
+      <mat-list-item role="listitem">Alumnos Inscriptos en este Curso de :{{ nombreCurso }}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngFor="let alumno of alumnos" role="listitem">{{ alumno | uppercase}} </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button mat-dialog-close="true">ok</button>
+
+  </mat-card-actions>
+</mat-card>
+

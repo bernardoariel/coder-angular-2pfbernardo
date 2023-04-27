@@ -1,0 +1,67 @@
+
+<h1 mat-dialog-title>ABM Estudiante</h1>
+
+<div mat-dialog-content class="p-3">
+
+  <form [formGroup]="estudianteForm">
+
+    <div class="row">
+
+      <div class="col-12 mb-1">
+
+        <mat-form-field class="w-100">
+
+          <mat-label>Nombre</mat-label>
+
+          <input
+            [formControl]="nombreControl"
+            matInput
+            type="text">
+
+          <mat-error *ngFor="let error of nombreControl.errors | keyvalue">
+              {{ error | controlErrorMessages:'texto' }}
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="col-12 mb-1">
+        <mat-form-field class="w-100">
+          <mat-label>Apellido</mat-label>
+          <input
+           [formControl]="apellidoControl"
+            matInput
+            type="text">
+
+            <mat-error *ngFor="let error of apellidoControl.errors | keyvalue">
+              {{ error | controlErrorMessages: 'texto' }}
+            </mat-error>
+        </mat-form-field>
+
+      </div>
+      <div class="col-10 mb-1">
+        <mat-form-field>
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter" [formControl]="fechaNacimientoControl"
+          readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker ></mat-datepicker>
+          <mat-hint>dd/mm/yyyy</mat-hint>
+          <mat-error *ngFor="let error of fechaNacimientoControl.errors | keyvalue">
+            {{ error | controlErrorMessages: 'fecha' }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>
+
+<div mat-dialog-actions class="justify-content-end">
+
+  <button mat-button mat-dialog-close> Cancelar </button>
+  <button mat-button (click)="guardar()" [disabled]="estudianteForm.invalid"> Guardar </button>
+
+</div>
