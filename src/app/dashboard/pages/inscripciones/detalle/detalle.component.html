@@ -7,11 +7,34 @@
   <img mat-card-image src="{{ foto }}" alt="Photo of a Shiba Inu">
   <mat-card-content>
 
-    <mat-list role="list">
-      <mat-list-item role="listitem">Alumnos Inscriptos en este Curso de :{{ nombreCurso }}</mat-list-item>
+    <!-- <mat-list role="list">
+      <mat-list-item role="listitem"></mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item *ngFor="let alumno of alumnos" role="listitem">{{ alumno | uppercase}} </mat-list-item>
-    </mat-list>
+    </mat-list> -->
+    <h2>Alumnos Inscriptos en este Curso de :{{ nombreCurso }}</h2>
+    <hr>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let alumno of alumnos" [expanded]="false" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+           {{ alumno.nombre | uppercase }}
+          </mat-panel-title>
+          <mat-panel-description>
+            Type your name and age
+            <mat-icon>account_circle</mat-icon>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-action-row>
+          <button mat-button color="warn"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+
+
+    </mat-accordion>
   </mat-card-content>
 
   <mat-card-actions>
