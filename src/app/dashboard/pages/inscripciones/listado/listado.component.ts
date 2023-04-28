@@ -59,6 +59,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
   editariInscripcion(inscripcion:Inscripcion){
 
     const dialog =  this.matDialog.open(InscripcionComponent, {
+      width: '450px',
      data:{
       inscripcion
      }
@@ -78,7 +79,10 @@ export class ListadoComponent  implements OnInit , OnDestroy {
     }
   }
   crearInscripcion(){
-    const dialog =  this.matDialog.open(InscripcionComponent)
+    const dialog =  this.matDialog.open(InscripcionComponent,
+      {
+        width: '450px',
+      })
     let nuevaInscripcion
 
     dialog.afterClosed()
