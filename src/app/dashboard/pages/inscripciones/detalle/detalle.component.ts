@@ -4,6 +4,7 @@ import { ListadoComponent } from '../listado/listado.component';
 import { Inscripcion } from 'src/app/core/services/inscripcion.service';
 import { CursoService } from 'src/app/core/services/curso.service';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
+import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
 
 @Component({
   selector: 'app-detalle',
@@ -17,7 +18,21 @@ export class DetalleComponent {
   fotoDefault:string = '../assets/img/cursos/default.png'
   idCurso:number = 0;
   nombreCurso:string = '';
-  alumnos:string[]=[]
+  alumnos: Estudiante[] = [];
+
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { inscripcion?: Inscripcion },
@@ -43,10 +58,12 @@ export class DetalleComponent {
       // Obtener los detalles de los alumnos inscritos en el curso
       this.alumnosService.getAlumnos().subscribe(
         alumnos => {
-          this.alumnos = data.inscripcion?.alumnosInscriptos?.map(
-            alumnoId => {
-              const alumno = alumnos.find(alumno => alumno.id === alumnoId);
-              return alumno ? alumno.nombre  : 'No encontrado';
+          this.alumnos = data.inscripcion!.alumnosInscriptos?.map(
+            (alumnoId: number): Estudiante => {
+              const alumno: Estudiante | undefined = alumnos.find(alumno => alumno.id === alumnoId);
+              console.log('alumno::: ', alumno);
+
+              return alumno!;
             }
           ) || [];
         }
