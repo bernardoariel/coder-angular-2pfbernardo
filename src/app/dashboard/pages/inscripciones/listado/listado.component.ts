@@ -41,8 +41,9 @@ export class ListadoComponent  implements OnInit , OnDestroy {
     this.subscripcionRef?.unsubscribe();
   }
   detalleInscripcion(inscripcion:Inscripcion){
-    console.log('inscripcion::: ', inscripcion);
+
     const dialog =  this.matDialog.open(DetalleComponent, {
+      width: '600px',
       data:{
         inscripcion
       }
@@ -58,7 +59,6 @@ export class ListadoComponent  implements OnInit , OnDestroy {
   editariInscripcion(inscripcion:Inscripcion){
 
     const dialog =  this.matDialog.open(InscripcionComponent, {
-
      data:{
       inscripcion
      }

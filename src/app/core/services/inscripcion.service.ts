@@ -75,6 +75,7 @@ export class InscripcionService {
 
     return this.inscripciones$.asObservable();
   }
+
   eliminarInscripcion(payload:Inscripcion): Observable<Inscripcion[]> {
     this.inscripciones$
       .pipe(
@@ -102,6 +103,23 @@ export class InscripcionService {
 
   getCursosDelAlumno(alumnoId: number): Inscripcion[] {
     return inscripciones.filter(inscripcion => inscripcion.alumnosInscriptos?.includes(alumnoId));
+  }
+
+  eliminarInscripcionDelAlumno( inscripcionId: number,alumnoId: number){
+    // obtener la inscripcion por idCurso
+    let inscripcion = inscripciones.find(inscripcion => inscripcion.id === inscripcionId);
+
+    // eliminar el alumno del array de alumnosInscriptos
+    inscripcion!.alumnosInscriptos = inscripcion!.alumnosInscriptos!.filter(num => num !== alumnoId);
+
+  }
+  agregarInscripcionAlumno(inscripcionId: number,alumnoId?: number){
+    // obtener la inscripcion por idCurso
+    let inscripcion = inscripciones.find(inscripcion => inscripcion.id === inscripcionId);
+
+    // eliminar el alumno del array de alumnosInscriptos
+    inscripcion!.alumnosInscriptos?.push(alumnoId!);
+
   }
 
 }
