@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, of, switchMap, take } from 'rxjs';
+import { BehaviorSubject, Observable, map, of, switchMap, take, tap } from 'rxjs';
 import { Estudiante } from '../interfaces/estudiante.interface';
+import { HttpClient } from '@angular/common/http';
 
 
-const alumnos: Estudiante[] = [
+/* const alumnos: Estudiante[] = [
   {
     id: 1,
     nombre: 'Federico',
@@ -65,23 +66,32 @@ const alumnos: Estudiante[] = [
     fotoUrl: 'https://randomuser.me/api/portraits/men/3.jpg',
     idCurso:2
   },
-];
+]; */
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlumnoService {
+  alumnos: Estudiante[]= [];
+    // private alumnos$ = new BehaviorSubject<Estudiante[]>([])
 
   private alumnos$ = new BehaviorSubject<Estudiante[]>([])
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.http.get<Estudiante[]>('http://localhost:3000/alumnos')
+      .pipe(
+        tap((alumnos) => console.log(alumnos)) // Loguea la lista de estudiantes
+      )
+      .subscribe((alumnos) => this.alumnos = alumnos); // Asigna la lista de estudiantes a this.alumnos
+
+   }
 
   getAlumnos(): Observable<Estudiante[]> {
 
-    this.alumnos$.next(alumnos)
+    this.alumnos$.next(this.alumnos)
     return this.alumnos$.asObservable()
   }
   getAlumnoById(alumnoId: number): Observable<Estudiante | undefined> {
-    return of(alumnos.find((alumno) => alumno.id === alumnoId));
+    return of(this.alumnos.find((alumno) => alumno.id === alumnoId));
   }
   crearAlumno(payload:Estudiante): Observable<Estudiante[]> {
     const totalAlumnos = this.alumnos$.getValue().length + 1;
@@ -136,5 +146,5 @@ export class AlumnoService {
 
     return this.alumnos$.asObservable();
   }
- 
+
 }

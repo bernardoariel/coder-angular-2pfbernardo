@@ -1,5 +1,5 @@
 {
-  "alumnos":[
+  "alumnos": [
     {
       "id": 1,
       "nombre": "Federico",
@@ -8,7 +8,7 @@
       "matricula": "001",
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg",
-      "idCurso":1
+      "idCurso": 1
     },
     {
       "id": 2,
@@ -18,48 +18,37 @@
       "matricula": "002",
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/2.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/2.jpg",
-      "idCurso":3
+      "idCurso": 3
     },
     {
-      "id": 3,
-      "nombre": "Juan",
-      "apellido": "MarTínez",
-      "fechaNacimiento": "2000-05-08",
-      "matricula": "003",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/3.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
-      "idCurso":2
-    },
-    {
-      "id":4,
-      "nombre": "Pedro",
-      "apellido": "García",
-      "fechaNacimiento": "1999-07-12",
-      "matricula": "004",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/4.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/4.jpg",
-      "idCurso":4
-    },
-    {
-      "id":5,
+      "id": 5,
       "nombre": "Hernan",
       "apellido": "Hernández",
       "fechaNacimiento": "2002-10-22",
       "matricula": "005",
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/5.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/5.jpg",
-      "idCurso":4
+      "idCurso": 4
     },
-
     {
-      "id":6,
+      "id": 6,
+      "nombre": "Ariel",
+      "apellido": "Ramírez",
+      "fechaNacimiento": "2001-12-05",
+      "matricula": "006",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/6.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
+      "idCurso": 2
+    },
+    {
+      "id": 7,
       "nombre": "Luis",
       "apellido": "Ramírez",
       "fechaNacimiento": "2001-12-05",
       "matricula": "006",
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/6.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
-      "idCurso":2
+      "idCurso": 2
     }
   ]
 }
