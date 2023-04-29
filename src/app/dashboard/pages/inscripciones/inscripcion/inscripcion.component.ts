@@ -30,7 +30,7 @@ export class InscripcionComponent implements OnInit{
     nombre: this.nombreControl,
     fecha_inicio: this.fechaInicioControl,
     fecha_fin: this.fechaFinControl,
-    curso_id: this.selectedCursoControl
+    idCurso: this.selectedCursoControl
   });
 
   constructor(
@@ -39,6 +39,7 @@ export class InscripcionComponent implements OnInit{
     private cursosService: CursoService
   ) {
     if (data && data.inscripcion) {
+
       const inscripcionParaEditar = data.inscripcion;
 
       this.nombreControl.setValue(inscripcionParaEditar.nombre);
@@ -49,6 +50,7 @@ export class InscripcionComponent implements OnInit{
   }
   ngOnInit(): void {
     this.cursosService.getCursos().subscribe(cursos => {
+     
       this.cursos = cursos;
       this.cursosOptions = cursos.map(curso => ({
         value: curso.id.toString(),

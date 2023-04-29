@@ -30,20 +30,27 @@ export class DetalleComponent {
     private inscripcionesService:InscripcionService
   ){
     if(data && data.inscripcion){
-      // console.log('data.inscripcion::: ', data.inscripcion);
+      console.log('datos en detalle ', data.inscripcion);
 
-      let fotoUrl = `../assets/img/cursos/${data.inscripcion.idCurso}.png`
-      this.foto = fotoUrl
-      this.titulo = data.inscripcion.nombre ;
-      this.idInscripcion = data.inscripcion.id;
+      let fotoUrl = '';
+      if (data && data.inscripcion && data.inscripcion.idCurso) {
+        fotoUrl = `../assets/img/cursos/${data.inscripcion.idCurso}.png`;
+      } else {
+        fotoUrl = this.fotoDefault;
+      }
+      this.foto = fotoUrl //tengo la foto
+      this.titulo = data.inscripcion.nombre ; //tengo el nombre
+      this.idInscripcion = data.inscripcion.id; //tengo el id de la inscripcion o curso a inscribir
       this.foto =(data.inscripcion.id<4)?fotoUrl : this.fotoDefault
-
-      this.cursoService.getCursoById(data.inscripcion.idCurso).subscribe(
-        curso => {
-          this.idCurso = curso!.id
-          this.nombreCurso = curso?.nombre || 'No encontrado'
-        }
-      )
+      const idCurso = data.inscripcion?.idCurso;
+      if (idCurso) {
+        this.cursoService.getCursoById(idCurso).subscribe(
+          curso => {
+            this.idCurso = curso!.id
+            this.nombreCurso = curso?.nombre ?? 'No encontrado'
+          }
+        )
+      }
 
       // Obtener los detalles de los alumnos inscritos en el curso
       this.alumnosService.getAlumnos().subscribe(
@@ -89,23 +96,26 @@ export class DetalleComponent {
     }
 
     // Eliminar fila de la vista
-
-  if (i !== undefined && i >= 0) {
-    const alumnoEliminado = this.alumnos.find(alumno => alumno.id === idAlumno);
-    if (alumnoEliminado) {
-      console.log('alumnoEliminado::: ', alumnoEliminado);
-      this.alumnosNoInscriptos.push(alumnoEliminado);
+    if (i !== undefined && i >= 0) {
+      const alumnoEliminado = this.alumnos.find(alumno => alumno.id === idAlumno);
+      if (alumnoEliminado) {
+        console.log('alumnoEliminado::: ', alumnoEliminado);
+        this.alumnosNoInscriptos.push(alumnoEliminado);
+      }
+      this.alumnos.splice(i, 1);
     }
-    this.alumnos.splice(i, 1);
-  }
   }
 
   agregarAlumno(alumno: Estudiante) {
-    if (alumno) {
-      this.alumnos.push(alumno);
-      this.alumnosNoInscriptos = this.alumnosNoInscriptos.filter(a => a.id !== alumno.id);
-      this.inscripcionesService.agregarInscripcionAlumno(this.idInscripcion, alumno.id);
-    }
+    this.inscripcionesService.inscripciones$.subscribe(inscripciones => {
+      const inscripcion = inscripciones.find(inscripcion => inscripcion.id === this.idInscripcion);
+      if (inscripcion && alumno) {
+        inscripcion.alumnosInscriptos?.push(alumno.id || 0);
+        // this.inscripcionesService.editarInscripcion(inscripcion);
+        this.alumnos.push(alumno);
+        this.alumnosNoInscriptos = this.alumnosNoInscriptos.filter(a => a.id !== alumno.id);
+      }
+    });
   }
 
 }

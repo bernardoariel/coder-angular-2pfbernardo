@@ -77,19 +77,34 @@ export class ListadoComponent  implements OnInit , OnDestroy {
       this.inscripcionService.eliminarInscripcion(inscripcion)
     }
   }
-  crearInscripcion(){
-    const dialog =  this.matDialog.open(InscripcionComponent)
-    let nuevaInscripcion
+  crearInscripcion() {
+    const dialog = this.matDialog.open(InscripcionComponent);
+    let nuevaInscripcion: Inscripcion;
 
-    dialog.afterClosed()
-    .subscribe((inscripcion) => {
-      if(inscripcion && Object.keys(inscripcion).length > 0) { // Verifica si el objeto inscripcion no es vacío
+    dialog.afterClosed().subscribe((inscripcion) => {
+      console.log('inscripcion::: ', inscripcion);
+      if (inscripcion && Object.keys(inscripcion).length > 0) {
         nuevaInscripcion = {
           ...inscripcion,
+          idCurso: parseInt(inscripcion.idCurso),
+          alumnosInscriptos: [],
           id: this.inscripciones.length + 1,
-        }
-        this.inscripcionService.crearIscripcion(nuevaInscripcion)
+        };
+
+        // Agregar la nueva inscripción al arreglo local
+
+
+       this.inscripcionService.crearIscripcion(nuevaInscripcion).subscribe((inscripciones) => {
+        console.log('inscripciones desde listado:', inscripciones);
+
+        // Agregar la nueva inscripción al arreglo local
+       /*  this.inscripciones.push(nuevaInscripcion);
+        console.log('this.inscripciones::: ', this.inscripciones); */
+
+        // this.dataSource.data = inscripciones;
+        });
       }
-    })
+    });
   }
+
 }
