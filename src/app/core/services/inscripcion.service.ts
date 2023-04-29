@@ -28,13 +28,22 @@ const inscripciones: Inscripcion[] = [
     fecha_fin: new Date(),
     fecha_inicio: new Date(),
     alumnosInscriptos:[2,4]
-  },{
+  },
+  {
     id: 3,
     idCurso: 1,
     nombre: 'Curso Nuevo de JavaScript',
     fecha_fin: new Date(),
     fecha_inicio: new Date(),
     alumnosInscriptos:[1,2,3,4]
+  },
+  {
+    id: 4,
+    idCurso: 1,
+    nombre: 'Curso Nuevo de TS',
+    fecha_fin: new Date(),
+    fecha_inicio: new Date(),
+    alumnosInscriptos:[]
   }
 
 ];
@@ -44,7 +53,7 @@ const inscripciones: Inscripcion[] = [
 })
 export class InscripcionService {
 
-  private inscripciones$ = new BehaviorSubject<Inscripcion[]>([])
+  public inscripciones$ = new BehaviorSubject<Inscripcion[]>([])
   constructor() { }
 
   getCursosNuevos(): Observable<Inscripcion[]> {
@@ -95,7 +104,8 @@ export class InscripcionService {
     console.log('actualizacion::: ', actualizacion);
     this.inscripciones$.pipe(
       take(1),
-      map(inscripciones => inscripciones.map(inscripcion => inscripcion.id === inscripcionId ? { ...inscripcion, ...actualizacion } : inscripcion))
+      map(inscripciones =>
+        inscripciones.map(inscripcion => inscripcion.id === inscripcionId ? { ...inscripcion, ...actualizacion } : inscripcion))
     ).subscribe(cursosActualizados => this.inscripciones$.next(cursosActualizados));
 
     return this.inscripciones$.asObservable();
