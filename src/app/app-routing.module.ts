@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CursoComponent } from './dashboard/pages/cursos/curso/curso.component';
 import { AlumnosRoutingModule } from './dashboard/pages/alumnos/alumnos-routing.module';
+import { HomeComponent } from './dashboard/pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
       {
         path:'inscripciones',
         loadChildren:()=>import('./dashboard/pages/inscripciones/inscripciones.module').then(m=>m.InscripcionesModule)
+      },
+      {
+        path:'',
+        component:HomeComponent
+
       }
     ]
   }
