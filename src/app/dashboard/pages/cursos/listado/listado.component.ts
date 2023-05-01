@@ -17,11 +17,10 @@ import { DetalleComponent } from '../detalle/detalle.component';
 })
 export class ListadoComponent  implements OnInit , OnDestroy{
 
-  cursos!: Curso[] ;
-  cursosObs!: Curso[];
-
+  cursos: Curso[] = [];
   subscripcionRef!: Subscription | null
-  dataSource = new MatTableDataSource();
+
+  dataSource: MatTableDataSource<Curso> = new MatTableDataSource();
   displayedColumns: string[] = ['nombre', 'tipo','acciones'];
 
   applyFilter(event: Event) {
@@ -36,41 +35,42 @@ export class ListadoComponent  implements OnInit , OnDestroy{
 
   }
   ngOnDestroy(): void {
-    this.subscripcionRef?.unsubscribe();
+    if (this.subscripcionRef) {
+      this.subscripcionRef.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
-    const cursosPromises = obtenerCursos();
-    cursosPromises.then(cursos => {
-      this.cursos = cursos;
-    });
-    this.subscripcionRef = interval(1000)
-      .pipe(concatMap(() => this.cursoService.getCursos().pipe(
-        map((cursos: any[]) => cursos.map(curso => ({...curso, nombre: curso.nombre.toUpperCase()}))),
-        concatMap(c => of(c).pipe(delay(100)))
-      ))).subscribe(cursos => {
-
-        this.dataSource.data = cursos;
-      });
+   this.cursoService.getCursos().subscribe((cursos) => {
+      this.cursos = cursos
+      this.dataSource.data = cursos
+    })
   }
   crearCurso(){
     const dialog =  this.matDialog.open(CursoComponent)
-    let nuevoCurso
+
     dialog.afterClosed()
-    .subscribe((curso) => {
-        if(curso && Object.keys(curso).length > 0) {
-        nuevoCurso = {
-          ...curso,
-          id: this.cursos.length + 1,
+    .subscribe((formValue) => {
+        if(formValue && Object.keys(formValue).length > 0) {
+          let nuevoCurso = {
+          ...formValue,
         }
-        this.cursoService.crearCurso(nuevoCurso)
+        this.cursoService.agregarCurso(nuevoCurso).subscribe(
+          (curso) => this.dataSource.data = (this.dataSource.data as Curso[])
+          .concat(curso)
+        )
       }
-      })
+    })
   }
-  eliminarCurso(curso:Curso){
-    console.log('curso::: ', curso);
-    if(confirm('Está seguro?')){
-      this.cursoService.eliminarCurso(curso)
+  eliminarCurso(cursoDelete:Curso){
+    if (confirm('Está seguro?')) {
+      this.cursoService.borrarCurso(cursoDelete.id!).subscribe(
+          () => {
+              this.dataSource.data = (this.dataSource.data as Curso[])
+              .filter(
+                (curso) => curso.id !== cursoDelete.id);
+          }
+      )
     }
   }
   editarCurso(curso:Curso){
@@ -81,10 +81,20 @@ export class ListadoComponent  implements OnInit , OnDestroy{
      }
     })
 
-    dialog.afterClosed()
-      .subscribe((formValue) => {
+    dialog.afterClosed().subscribe((formValue) => {
        if(formValue){
-        this.cursoService.editarCurso(curso.id,formValue)
+        const cursoEditado = {
+          ...curso,
+          ...formValue
+        }
+        this.cursoService.actualizarCurso(cursoEditado).subscribe(
+          (curso)=>{
+            this.dataSource.data = (this.dataSource.data as Curso[])
+            .map(
+              (curso) => curso.id === cursoEditado.id ? cursoEditado : curso
+            )
+          }
+        )
        }
       })
   }
@@ -98,7 +108,7 @@ export class ListadoComponent  implements OnInit , OnDestroy{
      dialog.afterClosed()
       .subscribe((formValue) => {
        if(formValue){
-        this.cursoService.editarCurso(curso.id!, formValue)
+        // this.cursoService.editarCurso(curso.id!, formValue)
        }
       })
   }

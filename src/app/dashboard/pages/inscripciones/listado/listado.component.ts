@@ -16,101 +16,120 @@ export class ListadoComponent  implements OnInit , OnDestroy {
 
   inscripciones!: Inscripcion[] ;
   subscripcionRef!: Subscription | null
-  dataSource = new MatTableDataSource();
+  dataSource: MatTableDataSource<Inscripcion> = new MatTableDataSource();
   displayedColumns: string[] = ['nombre', 'inicio','fin','acciones'];
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = (filterValue as string).trim().toLowerCase();
 
-  }
   constructor(
     private inscripcionService: InscripcionService,
     private matDialog: MatDialog
     ){
 
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = (filterValue as string).trim().toLowerCase();
+
+  }
+
   ngOnInit(): void {
-    this.subscripcionRef = this.inscripcionService.getCursosNuevos().subscribe(
+    this.subscripcionRef = this.inscripcionService.getInscripciones().subscribe(
       (inscripciones: any[]) => {
         this.inscripciones = inscripciones;
         this.dataSource.data = inscripciones;
       })
   }
   ngOnDestroy(): void {
-    this.subscripcionRef?.unsubscribe();
+    if (this.subscripcionRef) {
+      this.subscripcionRef.unsubscribe();
+    }
   }
-  detalleInscripcion(inscripcion:Inscripcion){
 
-    const dialog =  this.matDialog.open(DetalleComponent, {
-      width: '600px',
-      data:{
-        inscripcion
-      }
-     })
-
-     dialog.afterClosed()
-      .subscribe((formValue) => {
-       if(formValue){
-        this.inscripcionService.editarInscripcion(inscripcion.id!, formValue)
-       }
+  crearInscripcion(){
+    const dialog =  this.matDialog.open(InscripcionComponent,{
+        width: '450px',
       })
+
+    dialog.afterClosed().subscribe((formValue) => {
+
+      if (formValue && Object.keys(formValue).length > 0) {
+        let nuevaInscripcion = {
+          ...formValue,
+          idCurso: parseInt(formValue.idCurso),
+          alumnosInscriptos: []
+        };
+        this.inscripcionService.agregarIscripcion(nuevaInscripcion).subscribe(
+          (inscripcion) => this.dataSource.data = [...this.dataSource.data, inscripcion]
+        )
+      }
+    });
+  }
+
+  eliminarInscripcion(inscripcionDelete:Inscripcion){
+
+    if (confirm('Está seguro?')) {
+      this.inscripcionService.borrarInscripcion(inscripcionDelete.id!).subscribe(
+          () => {
+              this.dataSource.data = (this.dataSource.data as Inscripcion[])
+              .filter((inscripcion) => inscripcion.id !== inscripcionDelete.id);
+          }
+      )
+    }
   }
   editariInscripcion(inscripcion:Inscripcion){
 
     const dialog =  this.matDialog.open(InscripcionComponent, {
-      width: '450px',
+     width: '450px',
      data:{
       inscripcion
      }
     })
 
-    dialog.afterClosed()
-      .subscribe((formValue) => {
-       if(formValue){
-        this.inscripcionService.editarInscripcion(inscripcion.id,formValue)
-       }
-      })
-  }
-  eliminarInscripcion(inscripcion:Inscripcion){
+    dialog.afterClosed().subscribe((formValue) => {
 
-    if(confirm('Está seguro?')){
-      this.inscripcionService.eliminarInscripcion(inscripcion)
-    }
-  }
-
-  crearInscripcion(){
-    const dialog =  this.matDialog.open(InscripcionComponent,
-      {
-        width: '450px',
-      })
-    let nuevaInscripcion
-
-
-    dialog.afterClosed().subscribe((inscripcion) => {
-      console.log('inscripcion::: ', inscripcion);
-      if (inscripcion && Object.keys(inscripcion).length > 0) {
-        nuevaInscripcion = {
+      if (formValue) {
+        const inscripcionEditado = {
           ...inscripcion,
-          idCurso: parseInt(inscripcion.idCurso),
-          alumnosInscriptos: [],
-          id: this.inscripciones.length + 1,
+          ...formValue
         };
-
-        // Agregar la nueva inscripción al arreglo local
-
-
-       this.inscripcionService.crearIscripcion(nuevaInscripcion).subscribe((inscripciones) => {
-        console.log('inscripciones desde listado:', inscripciones);
-
-        // Agregar la nueva inscripción al arreglo local
-       /*  this.inscripciones.push(nuevaInscripcion);
-        console.log('this.inscripciones::: ', this.inscripciones); */
-
-        // this.dataSource.data = inscripciones;
-        });
+        this.inscripcionService.actualizarInscripcion(inscripcionEditado).subscribe((inscrip)=>{
+          console.log('alumno::: ', inscrip);
+          const index = this.dataSource.data.findIndex(a => a.id === inscrip.id);
+          if (index !== -1) {
+            this.dataSource.data[index] = inscrip;
+            this.dataSource.data = [...this.dataSource.data];
+          }
+        })
       }
-    });
+    })
   }
+
+  detalleInscripcion(inscripcion:Inscripcion){
+
+    const dialog =  this.matDialog.open(DetalleComponent, {
+     width: '600px',
+      data:{
+        inscripcion
+      }
+
+    })
+
+     dialog.afterClosed()
+      .subscribe((formValue) => {
+        console.log('formValue::: ', formValue);
+        if(formValue){
+          this.subscripcionRef = this.inscripcionService.getInscripciones().subscribe(
+            (inscripciones: any[]) => {
+              this.inscripciones = inscripciones;
+              this.dataSource.data = inscripciones;
+            })
+        }
+      })
+  }
+
+
+
+
 
 }

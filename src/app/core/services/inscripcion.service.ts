@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, of, take } from 'rxjs';
-import { Curso } from '../interfaces/curso.interface';
+import { BehaviorSubject, EMPTY, Observable, map, mergeMap, of, switchMap, take } from 'rxjs';
+import { enviroment } from 'src/environments/enviroments';
+import { Estudiante } from '../interfaces/estudiante.interface';
 
 
 export interface Inscripcion {
@@ -12,124 +14,77 @@ export interface Inscripcion {
   alumnosInscriptos?: number[];
 }
 
-const inscripciones: Inscripcion[] = [
-  {
-    id: 1,
-    idCurso: 3,
-    nombre: 'Curso Nuevo de Java',
-    fecha_fin: new Date(),
-    fecha_inicio: new Date(),
-    alumnosInscriptos:[1,3]
-  },
-  {
-    id: 2,
-    idCurso: 2,
-    nombre: 'Curso Nuevo de Python',
-    fecha_fin: new Date(),
-    fecha_inicio: new Date(),
-    alumnosInscriptos:[2,4]
-  },
-  {
-    id: 3,
-    idCurso: 1,
-    nombre: 'Curso Nuevo de JavaScript',
-    fecha_fin: new Date(),
-    fecha_inicio: new Date(),
-    alumnosInscriptos:[1,2,3,4]
-  },
-  {
-    id: 4,
-    idCurso: 1,
-    nombre: 'Curso Nuevo de TS',
-    fecha_fin: new Date(),
-    fecha_inicio: new Date(),
-    alumnosInscriptos:[]
-  }
-
-];
 
 @Injectable({
   providedIn: 'root'
 })
 export class InscripcionService {
 
-  public inscripciones$ = new BehaviorSubject<Inscripcion[]>([])
-  constructor() { }
 
-  getCursosNuevos(): Observable<Inscripcion[]> {
+  private baseUrl: string = enviroment.baseUrl;
+  constructor( private http:HttpClient) { }
 
-    this.inscripciones$.next(inscripciones);
-    return this.inscripciones$.asObservable();
+  getInscripciones(): Observable<Inscripcion[]> {
 
-  }
-  crearIscripcion(payload: Inscripcion): Observable<Inscripcion[]> {
-    console.log('payload::: ', payload);
-
-    this.inscripciones$
-      .pipe(
-        take(1)
-      ).subscribe({
-        next: (inscripciones) => {
-          this.inscripciones$.next([
-            ...inscripciones,
-            {
-              ...payload
-            }
-
-          ])
-        },
-        complete: () => {},
-        error: () => {}
-      });
-
-    return this.inscripciones$.asObservable();
-  }
-
-  eliminarInscripcion(payload:Inscripcion): Observable<Inscripcion[]> {
-    this.inscripciones$
-      .pipe(
-        take(1),
-        map((inscripciones) => inscripciones.filter((inscripcion) => inscripcion.id !== payload.id))
-      )
-      .subscribe({
-        next: (cursos) => this.inscripciones$.next(cursos),
-        complete: () => {},
-        error: () => {}
-      });
-
-    return this.inscripciones$.asObservable();
-  }
-
-  editarInscripcion(inscripcionId: number, actualizacion: Partial<Inscripcion>): Observable<Inscripcion[]> {
-    console.log('actualizacion::: ', actualizacion);
-    this.inscripciones$.pipe(
-      take(1),
-      map(inscripciones =>
-        inscripciones.map(inscripcion => inscripcion.id === inscripcionId ? { ...inscripcion, ...actualizacion } : inscripcion))
-    ).subscribe(cursosActualizados => this.inscripciones$.next(cursosActualizados));
-
-    return this.inscripciones$.asObservable();
-  }
-
-  getCursosDelAlumno(alumnoId: number): Inscripcion[] {
-    return inscripciones.filter(inscripcion => inscripcion.alumnosInscriptos?.includes(alumnoId));
-  }
-
-  eliminarInscripcionDelAlumno( inscripcionId: number,alumnoId: number){
-    // obtener la inscripcion por idCurso
-    let inscripcion = inscripciones.find(inscripcion => inscripcion.id === inscripcionId);
-
-    // eliminar el alumno del array de alumnosInscriptos
-    inscripcion!.alumnosInscriptos = inscripcion!.alumnosInscriptos!.filter(num => num !== alumnoId);
+    return this.http.get<Inscripcion[]>(`${ this.baseUrl }/inscripciones`)
 
   }
-  agregarInscripcionAlumno(inscripcionId: number,alumnoId?: number){
-    // obtener la inscripcion por idCurso
-    let inscripcion = inscripciones.find(inscripcion => inscripcion.id === inscripcionId);
-
-    // eliminar el alumno del array de alumnosInscriptos
-    inscripcion!.alumnosInscriptos?.push(alumnoId!);
+  getInscripcionById(id:number):Observable<Inscripcion>{
+    return this.http.get<Inscripcion>(`${ this.baseUrl }/inscripciones/${id}`)
 
   }
+
+  agregarIscripcion( payload: Inscripcion): Observable<Inscripcion>{
+    return this.http.post<Inscripcion>(`${ this.baseUrl }/inscripciones`, payload)
+  }
+
+  borrarInscripcion( id: number): Observable<any>{
+    return this.http.delete<any>(`${ this.baseUrl }/inscripciones/${ id }`)
+  }
+
+  actualizarInscripcion( inscripcion: Inscripcion): Observable<Inscripcion>{
+    return this.http.put<Inscripcion>(`${ this.baseUrl }/inscripciones/${ inscripcion.id }`, inscripcion)
+  }
+
+  getCursosDelAlumno(alumnoId: number): Observable<Inscripcion[]> {
+    return this.http.get<Inscripcion[]>(`${this.baseUrl}/inscripciones`).pipe(
+      map(inscripciones => inscripciones.filter(inscripcion => inscripcion.alumnosInscriptos?.includes(alumnoId)))
+    );
+  }
+
+  eliminarInscripcionDelAlumno(inscripcionId: number, alumnoId: number) {
+    // Obtener la inscripción actual del servidor
+    return this.http.get<Inscripcion>(`${this.baseUrl}/inscripciones/${inscripcionId}`).pipe(
+      switchMap(inscripcion => {
+        if(inscripcion.alumnosInscriptos){
+
+          inscripcion.alumnosInscriptos = inscripcion.alumnosInscriptos.filter(id => id !== alumnoId);
+          // Enviar una solicitud PUT al servidor con la inscripción actualizada
+          return this.http.put<Inscripcion>(`${this.baseUrl}/inscripciones/${inscripcionId}`, inscripcion);
+        }else{
+          return EMPTY;
+        }
+      })
+    );
+  }
+
+  agregarInscripcionAlumno(inscripcionId: number, alumno: Estudiante): Observable<Inscripcion> {
+    console.log('alumno::: ', alumno);
+    console.log('inscripcionId::: ', inscripcionId);
+    // Obtener la inscripción por idCurso
+    return this.http.get<Inscripcion>(`${this.baseUrl}/inscripciones/${inscripcionId}`).pipe(
+      mergeMap(inscripcion => {
+        // Agregar el alumno al array de alumnosInscriptos
+        if (!inscripcion.alumnosInscriptos) {
+          inscripcion.alumnosInscriptos = []; // si no hay alumnos inscriptos, crear un array vacío
+        }
+        inscripcion.alumnosInscriptos.push(alumno.id!);
+        // Actualizar la inscripción
+        return this.actualizarInscripcion(inscripcion);
+      })
+    );
+  }
+
+
 
 }

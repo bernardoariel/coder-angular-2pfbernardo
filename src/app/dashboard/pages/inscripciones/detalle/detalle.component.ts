@@ -22,6 +22,7 @@ export class DetalleComponent {
   alumnos: Estudiante[] = [];
   alumnosNoInscriptos: Estudiante[] = [];
   alumnosTodos: Estudiante[] | undefined;
+  alumnosInscriptos: Estudiante[] = []
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { inscripcion?: Inscripcion },
@@ -43,39 +44,61 @@ export class DetalleComponent {
       this.idInscripcion = data.inscripcion.id; //tengo el id de la inscripcion o curso a inscribir
       this.foto =(data.inscripcion.id<4)?fotoUrl : this.fotoDefault
       const idCurso = data.inscripcion?.idCurso;
+
       if (idCurso) {
         this.cursoService.getCursoById(idCurso).subscribe(
           curso => {
+            console.log('curso::: ', curso);
             this.idCurso = curso!.id
             this.nombreCurso = curso?.nombre ?? 'No encontrado'
           }
         )
       }
-
-      // Obtener los detalles de los alumnos inscritos en el curso
       this.alumnosService.getAlumnos().subscribe(
         alumnos => {
-          const alumnosInscriptos =  this.alumnos = data.inscripcion!.alumnosInscriptos?.map(
-            (alumnoId: number): Estudiante => {
-              const alumno: Estudiante | undefined = alumnos.find(alumno => alumno.id === alumnoId);
-              return alumno!;
-            }
-          ) || [];
-          this.alumnosNoInscriptos = alumnos.filter(
-            alumno => !alumnosInscriptos.includes(alumno)
-          );
-        }
-      );
+          this.alumnosTodos = alumnos;
+          this.alumnosNoInscriptos = alumnos.filter(alumno => !data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id));
+          this.alumnosInscriptos = alumnos.filter(alumno => data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id));
+      })
 
-    } else {
-      this.alumnos = [];
     }
   }
-  eliminarCursoAlumno(id: number, idAlumno?: number, i?: number) {
+  obtenerAlumnosInscriptos(alumnosInscriptos: number[]): void {
+    console.log('alumnosInscriptos::: ', alumnosInscriptos);
+    const alumnos: any[] = [];
+    for (const id of alumnosInscriptos) {
+      this.alumnosService.getEstudiantePorId(id)
+        .subscribe(estudiante => {
+          console.log('estudiante::: ', estudiante);
+          // Agrega el objeto alumno a la lista
+          alumnos.push({id: estudiante.id, nombre: estudiante.nombre, apellido: estudiante.apellido});
+        });
+    }
+    this.alumnosInscriptos = alumnos;
+  }
 
-    this.inscripcionesService.eliminarInscripcionDelAlumno(id, idAlumno!);
+  obtenerAlumnosNoInscriptos(alumnosInscriptos: any[]): void {
+    this.alumnosService.getAlumnos().subscribe(
+      alumnos => {
+        return alumnos.filter(alumno => !alumnosInscriptos.find(a => a.id === alumno.id));
+      }
+    );
+  }
 
-    const inscripcion = this.data.inscripcion;
+  eliminarCursoAlumno(id: number, alumno: Estudiante) {
+
+      this.inscripcionesService.eliminarInscripcionDelAlumno(id, alumno.id!).subscribe(
+        inscripcion => {
+
+          this.alumnosInscriptos = this.alumnosInscriptos.filter(a => a.id !== alumno.id);
+          this.alumnosNoInscriptos.push(alumno);
+        }
+      );
+  }
+
+
+
+   /*  const inscripcion = this.data.inscripcion;
     if (inscripcion) {
 
       const indice = inscripcion.alumnosInscriptos?.findIndex(alumnoId => alumnoId === idAlumno);
@@ -93,29 +116,28 @@ export class DetalleComponent {
 
 
       }
-    }
+    } */
 
     // Eliminar fila de la vista
-    if (i !== undefined && i >= 0) {
+    /* if (i !== undefined && i >= 0) {
       const alumnoEliminado = this.alumnos.find(alumno => alumno.id === idAlumno);
       if (alumnoEliminado) {
         console.log('alumnoEliminado::: ', alumnoEliminado);
         this.alumnosNoInscriptos.push(alumnoEliminado);
       }
       this.alumnos.splice(i, 1);
-    }
-  }
+    } */
 
   agregarAlumno(alumno: Estudiante) {
-    this.inscripcionesService.inscripciones$.subscribe(inscripciones => {
-      const inscripcion = inscripciones.find(inscripcion => inscripcion.id === this.idInscripcion);
-      if (inscripcion && alumno) {
-        inscripcion.alumnosInscriptos?.push(alumno.id || 0);
-        // this.inscripcionesService.editarInscripcion(inscripcion);
-        this.alumnos.push(alumno);
+
+    this.inscripcionesService.agregarInscripcionAlumno(this.idInscripcion, alumno).subscribe(
+      inscripcion => {
+        console.log('inscripcion::: ', inscripcion);
+        this.alumnosInscriptos.push(alumno);
         this.alumnosNoInscriptos = this.alumnosNoInscriptos.filter(a => a.id !== alumno.id);
-      }
-    });
+
+
+    })
   }
 
 }
