@@ -32,7 +32,7 @@
   </div>
   <mat-accordion class="example-headers-align">
 
-    <mat-expansion-panel *ngFor="let alumno of alumnos; let i = index" [expanded]="false"  hideToggle>
+    <mat-expansion-panel *ngFor="let alumno of alumnosInscriptos; let i = index" [expanded]="false"  hideToggle>
 
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -45,7 +45,7 @@
       </mat-expansion-panel-header>
 
       <mat-action-row >
-        <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno.id,i)"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
+        <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
       </mat-action-row>
     </mat-expansion-panel>
 
