@@ -100,7 +100,9 @@
       "nombre": "Curso Nuevo de Python",
       "fecha_fin": "2022-30-12",
       "fecha_inicio": "2022-30-10",
-      "alumnosInscriptos": []
+      "alumnosInscriptos": [
+        1
+      ]
     },
     {
       "id": 3,
