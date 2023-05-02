@@ -6,7 +6,8 @@
 
     <img width="50" height="50" src="../../assets/img/usuarios/admin.png">
 
-    <p></p>
+
+    <p>{{ (authUser$ | async)?.email }}</p>
 
 
     <mat-nav-list>
@@ -16,6 +17,9 @@
         *ngFor="let link of links"
       >
         <mat-icon *ngIf="link.icon">{{ link.icon }}</mat-icon> {{ link.titulo }}
+      </a>
+      <a mat-list-item (click)="logout()">
+        Cerrar Sesión
       </a>
 
     </mat-nav-list>
@@ -53,7 +57,7 @@
     <main>
       <router-outlet></router-outlet>
 
-     
+
     </main>
   </div>
 </mat-drawer-container>

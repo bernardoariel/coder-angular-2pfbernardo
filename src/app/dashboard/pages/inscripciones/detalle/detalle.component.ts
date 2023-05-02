@@ -96,38 +96,6 @@ export class DetalleComponent {
       );
   }
 
-
-
-   /*  const inscripcion = this.data.inscripcion;
-    if (inscripcion) {
-
-      const indice = inscripcion.alumnosInscriptos?.findIndex(alumnoId => alumnoId === idAlumno);
-
-      if (indice !== undefined && indice >= 0) {
-
-        inscripcion.alumnosInscriptos?.splice(indice, 1);
-        // Actualizar la lista de alumnos inscriptos
-        this.alumnos = inscripcion.alumnosInscriptos?.map(
-          (alumnoId: number): Estudiante => {
-            const alumno: Estudiante | undefined = this.alumnosTodos?.find(alumno => alumno.id === alumnoId);
-            return alumno!;
-          }
-        ) || [];
-
-
-      }
-    } */
-
-    // Eliminar fila de la vista
-    /* if (i !== undefined && i >= 0) {
-      const alumnoEliminado = this.alumnos.find(alumno => alumno.id === idAlumno);
-      if (alumnoEliminado) {
-        console.log('alumnoEliminado::: ', alumnoEliminado);
-        this.alumnosNoInscriptos.push(alumnoEliminado);
-      }
-      this.alumnos.splice(i, 1);
-    } */
-
   agregarAlumno(alumno: Estudiante) {
 
     this.inscripcionesService.agregarInscripcionAlumno(this.idInscripcion, alumno).subscribe(

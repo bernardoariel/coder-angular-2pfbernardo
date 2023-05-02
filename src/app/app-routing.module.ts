@@ -5,6 +5,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CursoComponent } from './dashboard/pages/cursos/curso/curso.component';
 import { AlumnosRoutingModule } from './dashboard/pages/alumnos/alumnos-routing.module';
 import { HomeComponent } from './dashboard/pages/home/home.component';
+import { AuthComponent } from './auth/auth.component';
+import { AutGuard } from './auth/guards/aut.guard';
+import { LoginGuard } from './auth/guards/login.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +17,7 @@ const routes: Routes = [
   },
   {
     path:'dashboard',
+    canActivate:[AutGuard],
     component: DashboardComponent,
     children:[
       {
@@ -34,7 +38,13 @@ const routes: Routes = [
 
       }
     ]
-  }
+  },
+  {
+    path:'auth',
+    canActivate:[LoginGuard],
+    component:AuthComponent,
+    loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)
+  },
 ];
 
 @NgModule({

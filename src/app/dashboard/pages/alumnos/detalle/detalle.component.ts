@@ -16,6 +16,7 @@ export class DetalleComponent {
   foto:string = 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200';
   fechaNacimiento: any
   cursosDelAlumno: any;
+  alumnoId!: number
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { alumno?: Estudiante },
@@ -26,15 +27,22 @@ export class DetalleComponent {
       this.titulo = data.alumno.nombre + ' ' + data.alumno.apellido;
       this.avatar = data.alumno.fotoPerfilUrl
       this.foto = data.alumno.fotoPerfilUrl
+      this.alumnoId = data.alumno.id!
       this.fechaNacimiento= data.alumno.fechaNacimiento
-      this.cursosDelAlumno = this.inscripcionesService.getCursosDelAlumno(data.alumno.id!);
+       this.inscripcionesService.getCursosDelAlumno(data.alumno.id!).subscribe((cursos:any)=>{
+        this.cursosDelAlumno = cursos
+        console.log('this.cursosDelAlumno ::: ', this.cursosDelAlumno );
+      })
+
     }
   }
-  eliminarCurso(curso:any ) {
-    const index = this.cursosDelAlumno.indexOf(curso);
-    if (index >= 0) {
-      this.cursosDelAlumno.splice(index, 1);
-    }
+  eliminarCurso(curso:any) {
+     this.inscripcionesService.eliminarInscripcionDelAlumno(curso.id, this.alumnoId).subscribe(
+      inscripcion => {
+
+        this.cursosDelAlumno = this.cursosDelAlumno.filter((c:any)=>c.id!=curso.id)
+      }
+    );
   }
 
 
