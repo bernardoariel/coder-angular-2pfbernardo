@@ -27,16 +27,19 @@ export class LoginComponent {
   onSubmit(): void {
 
     this.isLoadding = true
-    
+    setTimeout(() => {
+      // cambiar el valor de la variable después de 5 segundos
+      this.isLoadding = false;
+    }, 5000);
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-      // this.isLoadding = false
-      console.log('this.isLoadding::: ', this.isLoadding);
+      /* this.isLoadding = false
+      console.log('this.isLoadding::: ', this.isLoadding); */
     } else {
       console.log(this.loginForm.value)
       this.authService.login(this.loginForm.value as LoginFormValue)
-      // this.isLoadding = false
-      console.log('this.isLoadding::: ', this.isLoadding);
+    /*    this.isLoadding = false
+      console.log('this.isLoadding::: ', this.isLoadding); */
     }
 
   }
