@@ -8,8 +8,11 @@
   </mat-form-field>
   <button mat-flat-button color="primary" (click)="crearAlumno()">Agregar Alumno</button>
 </div>
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!isLoading">
   <!-- matricula Column -->
   <ng-container matColumnDef="matricula">
     <th mat-header-cell *matHeaderCellDef appFontSize> ID </th>

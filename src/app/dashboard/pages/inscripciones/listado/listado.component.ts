@@ -20,7 +20,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
   subscripcionRef!: Subscription | null
   dataSource: MatTableDataSource<Inscripcion> = new MatTableDataSource();
   displayedColumns: string[] = ['nombre', 'inicio','fin','acciones'];
-
+  isLoading = true
 
   constructor(
     private inscripcionService: InscripcionService,
@@ -41,6 +41,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
       (inscripciones: any[]) => {
         this.inscripciones = inscripciones;
         this.dataSource.data = inscripciones;
+        this.isLoading = false
       })
   }
   ngOnDestroy(): void {

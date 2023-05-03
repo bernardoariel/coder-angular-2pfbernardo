@@ -25,7 +25,7 @@ export class ListadoComponent  implements OnInit , OnDestroy{
 
   dataSource: MatTableDataSource<Curso> = new MatTableDataSource();
   displayedColumns: string[] = ['nombre', 'tipo','acciones'];
-
+  isLoading = true
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = (filterValue as string).trim().toLowerCase();
@@ -48,6 +48,7 @@ export class ListadoComponent  implements OnInit , OnDestroy{
    this.cursoService.getCursos().subscribe((cursos) => {
       this.cursos = cursos
       this.dataSource.data = cursos
+      this.isLoading = false
     })
   }
   crearCurso(){

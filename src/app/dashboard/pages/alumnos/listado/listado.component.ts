@@ -25,7 +25,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
   ultimoId: number = 0
   ultimoIdSubscription!: Subscription;
   durationInSeconds = 5;
-
+  isLoading = true;
   constructor(
     private alumnoService: AlumnoService,
     private matDialog: MatDialog,
@@ -41,6 +41,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
     this.alumnoService.getAlumnos().subscribe((alumnos) => {
       this.alumnos = alumnos
       this.dataSource.data = alumnos;
+      this.isLoading = false;
     })
   }
 
@@ -95,7 +96,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
         }
       )
     });
-    
+
 }
   editarAlumno(alumno: Estudiante) {
 
