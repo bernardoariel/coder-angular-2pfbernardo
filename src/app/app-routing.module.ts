@@ -8,6 +8,7 @@ import { HomeComponent } from './dashboard/pages/home/home.component';
 import { AuthComponent } from './auth/auth.component';
 import { AutGuard } from './auth/guards/aut.guard';
 import { LoginGuard } from './auth/guards/login.guard';
+import { AdminGuard } from './auth/guards/admin.guard';
 
 const routes: Routes = [
   {

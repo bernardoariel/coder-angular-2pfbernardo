@@ -18,7 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -42,7 +42,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatSelectModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule { }

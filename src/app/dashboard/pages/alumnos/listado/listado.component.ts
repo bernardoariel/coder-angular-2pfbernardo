@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlumnoComponent } from '../alumno/alumno.component';
 import { DetalleComponent } from '../detalle/detalle.component';
 import { id } from 'date-fns/locale';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 
 @Component({
@@ -22,19 +24,18 @@ export class ListadoComponent implements OnInit, OnDestroy  {
   displayedColumns: string[] = ['matricula','nombreCompleto','fechaNacimiento','fotoPerfilUrl','acciones'];
   ultimoId: number = 0
   ultimoIdSubscription!: Subscription;
-
+  durationInSeconds = 5;
 
   constructor(
     private alumnoService: AlumnoService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private snackBar:MatSnackBar
   ) { }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = (filterValue as string).trim().toLowerCase();
   }
-
-
 
   ngOnInit(): void {
     this.alumnoService.getAlumnos().subscribe((alumnos) => {
@@ -70,19 +71,31 @@ export class ListadoComponent implements OnInit, OnDestroy  {
           fotoUrl: `https://randomuser.me/api/portraits/men/${this.ultimoId + 1}.jpg`,
         }
         this.alumnoService.agregarAlumno(alumnoNuevo).subscribe(
-          (alumno) => this.dataSource.data = (this.dataSource.data as Estudiante[]).concat(alumno)
+          (alumno) =>{
+            this.dataSource.data = (this.dataSource.data as Estudiante[]).concat(alumno)
+            this.snackBar.open('Estudiante agregado con exito', '', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          }
         )
       }
     });
   }
   eliminarAlumno(alumnoDelete: Estudiante): void {
-    if (confirm('Está seguro?')) {
-        this.alumnoService.borrarAlumno(alumnoDelete.id!).subscribe(
-            () => {
-                this.dataSource.data = (this.dataSource.data as Estudiante[]).filter((alumno) => alumno.id !== alumnoDelete.id);
-            }
-        )
-    }
+    const dialogRef =  this.matDialog.open(ConfirmComponent,{
+      data: 'Está seguro que desea eliminar este Alumno?'
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result) return;
+      this.alumnoService.borrarAlumno(alumnoDelete.id!).subscribe(
+        () => {
+            this.dataSource.data = (this.dataSource.data as Estudiante[]).filter((alumno) => alumno.id !== alumnoDelete.id);
+        }
+      )
+    });
+    
 }
   editarAlumno(alumno: Estudiante) {
 

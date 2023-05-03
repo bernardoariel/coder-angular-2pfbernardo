@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { Inscripcion, InscripcionService } from 'src/app/core/services/inscripcion.service';
 import { InscripcionComponent } from '../inscripcion/inscripcion.component';
 import { DetalleComponent } from '../detalle/detalle.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
   selector: 'app-listado',
@@ -22,7 +24,8 @@ export class ListadoComponent  implements OnInit , OnDestroy {
 
   constructor(
     private inscripcionService: InscripcionService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private snackBar:MatSnackBar
     ){
 
   }
@@ -60,22 +63,36 @@ export class ListadoComponent  implements OnInit , OnDestroy {
           alumnosInscriptos: []
         };
         this.inscripcionService.agregarIscripcion(nuevaInscripcion).subscribe(
-          (inscripcion) => this.dataSource.data = [...this.dataSource.data, inscripcion]
+          (inscripcion) => {
+            this.dataSource.data = [...this.dataSource.data, inscripcion]
+            this.snackBar.open('Inscripcion agregada con exito', '', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          }
         )
       }
     });
   }
 
   eliminarInscripcion(inscripcionDelete:Inscripcion){
+    const dialogRef =  this.matDialog.open(ConfirmComponent,{
+      data: 'Está seguro que desea eliminar esta Inscripcion?'
+    })
 
-    if (confirm('Está seguro?')) {
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result) return;
       this.inscripcionService.borrarInscripcion(inscripcionDelete.id!).subscribe(
-          () => {
-              this.dataSource.data = (this.dataSource.data as Inscripcion[])
-              .filter((inscripcion) => inscripcion.id !== inscripcionDelete.id);
-          }
-      )
-    }
+        () => {
+            this.dataSource.data = (this.dataSource.data as Inscripcion[])
+            .filter((inscripcion) => inscripcion.id !== inscripcionDelete.id);
+        }
+    )
+    });
+
+
+
   }
   editariInscripcion(inscripcion:Inscripcion){
 

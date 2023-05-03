@@ -9,6 +9,7 @@ import { AuthService, LoginFormValue } from 'src/app/core/services/auth.service'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  isLoadding = false
   emailControl = new FormControl('', [Validators.required]);
   passwordControl = new FormControl('', [Validators.required]);
   loginForm = new FormGroup({
@@ -24,12 +25,19 @@ export class LoginComponent {
 
 
   onSubmit(): void {
+
+    this.isLoadding = true
+    
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-
+      // this.isLoadding = false
+      console.log('this.isLoadding::: ', this.isLoadding);
     } else {
       console.log(this.loginForm.value)
       this.authService.login(this.loginForm.value as LoginFormValue)
+      // this.isLoadding = false
+      console.log('this.isLoadding::: ', this.isLoadding);
     }
+
   }
 }

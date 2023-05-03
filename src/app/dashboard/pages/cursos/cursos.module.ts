@@ -8,6 +8,7 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { DetalleComponent } from './detalle/detalle.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DetalleComponent } from './detalle/detalle.component';
 
     CursoComponent,
     ListadoComponent,
-    DetalleComponent
+    DetalleComponent,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,

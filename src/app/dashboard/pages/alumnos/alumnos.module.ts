@@ -8,13 +8,15 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 import { PipesModule } from "../../../shared/pipes/pipes.module";
 import { ReactiveFormsModule } from '@angular/forms';
 import { DetalleComponent } from './detalle/detalle.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 
 @NgModule({
     declarations: [
         AlumnoComponent,
         ListadoComponent,
-        DetalleComponent
+        DetalleComponent,
+        ConfirmComponent
     ],
     exports: [
         AlumnoComponent,

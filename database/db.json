@@ -2,19 +2,11 @@
   "alumnos": [
     {
       "id": 1,
-      "nombre": "Federico",
+      "nombre": "Federicoa",
       "apellido": "González",
       "fechaNacimiento": "2001-01-15",
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg"
-    },
-    {
-      "id": 2,
-      "nombre": "Tomás",
-      "apellido": "López",
-      "fechaNacimiento": "2002-03-20",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/2.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/2.jpg"
     },
     {
       "id": 3,
@@ -63,16 +55,6 @@
       "tipo": "avanzado"
     },
     {
-      "id": 5,
-      "nombre": "Ruby",
-      "tipo": "basico"
-    },
-    {
-      "id": 6,
-      "nombre": "Swift",
-      "tipo": "basico"
-    },
-    {
       "id": 7,
       "nombre": "Go",
       "tipo": "basico"
@@ -81,16 +63,6 @@
       "id": 8,
       "nombre": "PHP",
       "tipo": "intermedio"
-    },
-    {
-      "id": 9,
-      "nombre": "TypeScript",
-      "tipo": "avanzado"
-    },
-    {
-      "id": 10,
-      "nombre": "Rust",
-      "tipo": "basico"
     }
   ],
   "inscripciones": [
@@ -100,10 +72,7 @@
       "nombre": "Curso Nuevo de Python",
       "fecha_fin": "2022-30-12",
       "fecha_inicio": "2022-30-10",
-      "alumnosInscriptos": [
-        3,
-        1
-      ]
+      "alumnosInscriptos": []
     },
     {
       "id": 3,
@@ -111,9 +80,7 @@
       "nombre": "Curso Nuevo de JavaScript",
       "fecha_fin": "2023-30-10",
       "fecha_inicio": "2023-30-12",
-      "alumnosInscriptos": [
-        1
-      ]
+      "alumnosInscriptos": []
     },
     {
       "id": 4,
@@ -134,10 +101,13 @@
   ],
   "usuarios": [
     {
-      "id": 1,
-      "nombre": "admin",
-      "apellido": "admin",
-      "email": "admin@admin.com"
+      "nombre": "ariel",
+      "apellido": "apellido",
+      "email": "admin@admin.com",
+      "password": "123456",
+      "rol": "admin",
+      "token": "dsLnKJtyBluy0987876asdaasd",
+      "id": 1
     }
   ]
 }
