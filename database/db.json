@@ -1,14 +1,6 @@
 {
   "alumnos": [
     {
-      "id": 1,
-      "nombre": "Federico",
-      "apellido": "González",
-      "fechaNacimiento": "2001-01-15",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg"
-    },
-    {
       "id": 3,
       "nombre": "Ariel",
       "apellido": "Ramírez",

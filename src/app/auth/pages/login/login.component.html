@@ -15,7 +15,7 @@
     </mat-form-field>
   </div>
   <div class="flex justify-content-end">
-    <button type="submit" color="primary" mat-flat-button>
+    <button type="submit" color="primary" mat-flat-button [disabled]="!this.loginForm.valid">
       Ingresar
     </button>
   </div>
