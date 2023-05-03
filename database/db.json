@@ -2,7 +2,7 @@
   "alumnos": [
     {
       "id": 1,
-      "nombre": "Federicoa",
+      "nombre": "Federico",
       "apellido": "González",
       "fechaNacimiento": "2001-01-15",
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
