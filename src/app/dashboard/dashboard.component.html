@@ -4,10 +4,15 @@
   <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
 
 
-    <img width="50" height="50" src="../../assets/img/usuarios/admin.png">
 
+    <div class="text-center">
+      
+      <img width="50" height="50" src="../../assets/img/usuarios/admin.png">
 
-    <p>{{ (authUser$ | async)?.email }}</p>
+      <p class="mt-2">{{ (authUser$ | async)?.nombre | titlecase }} - {{ (authUser$ | async)?.apellido | titlecase }}</p>
+      <p>{{ (authUser$ | async)?.email | uppercase }}</p>
+
+    </div>
 
 
     <mat-nav-list>

@@ -23,6 +23,9 @@ export class DetalleComponent {
   alumnosNoInscriptos: Estudiante[] = [];
   alumnosTodos: Estudiante[] | undefined;
   alumnosInscriptos: Estudiante[] = []
+  fechaFin!:Date
+  esFechaFinAnteriorAHoy: boolean = false;
+
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { inscripcion?: Inscripcion },
@@ -43,6 +46,9 @@ export class DetalleComponent {
       this.titulo = data.inscripcion.nombre ; //tengo el nombre
       this.idInscripcion = data.inscripcion.id; //tengo el id de la inscripcion o curso a inscribir
       this.foto =(data.inscripcion.id<4)?fotoUrl : this.fotoDefault
+
+
+
       const idCurso = data.inscripcion?.idCurso;
 
       if (idCurso) {
@@ -51,6 +57,7 @@ export class DetalleComponent {
             console.log('curso::: ', curso);
             this.idCurso = curso!.id
             this.nombreCurso = curso?.nombre ?? 'No encontrado'
+
           }
         )
       }

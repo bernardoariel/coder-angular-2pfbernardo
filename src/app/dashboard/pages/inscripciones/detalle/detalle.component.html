@@ -28,7 +28,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-flat-button class="mb-3" (click)="agregarAlumno(alumnoSelect?.value)">Agregar Alumno</button>
+    <button mat-flat-button class="mb-3" (click)="agregarAlumno(alumnoSelect?.value)" [disabled]="esFechaFinAnteriorAHoy">Agregar Alumno</button>
   </div>
   <mat-accordion class="example-headers-align">
 
@@ -45,7 +45,7 @@
       </mat-expansion-panel-header>
 
       <mat-action-row >
-        <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
+        <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)" [disabled]="esFechaFinAnteriorAHoy"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
       </mat-action-row>
     </mat-expansion-panel>
 

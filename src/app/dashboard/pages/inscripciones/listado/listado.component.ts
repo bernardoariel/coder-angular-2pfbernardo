@@ -19,7 +19,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
   inscripciones!: Inscripcion[] ;
   subscripcionRef!: Subscription | null
   dataSource: MatTableDataSource<Inscripcion> = new MatTableDataSource();
-  displayedColumns: string[] = ['nombre', 'inicio','fin','acciones'];
+  displayedColumns: string[] = ['nombre', 'inicio','fin','estado','acciones'];
   isLoading = true
 
   constructor(
@@ -76,7 +76,19 @@ export class ListadoComponent  implements OnInit , OnDestroy {
       }
     });
   }
+  getEstadoInscripcion(inscripcion: Inscripcion) {
+    const hoy = new Date();
+    const fechaInicio = new Date(inscripcion.fecha_inicio);
+    const fechaFin = new Date(inscripcion.fecha_fin);
 
+    if (fechaInicio > hoy) {
+      return 'Próximo';
+    } else if (fechaInicio <= hoy && (fechaFin >= hoy || fechaInicio.getTime() === fechaFin.getTime())) {
+      return 'En Curso';
+    } else {
+      return 'Finalizado';
+    }
+  }
   eliminarInscripcion(inscripcionDelete:Inscripcion){
     const dialogRef =  this.matDialog.open(ConfirmComponent,{
       data: 'Está seguro que desea eliminar esta Inscripcion?'
@@ -133,17 +145,17 @@ export class ListadoComponent  implements OnInit , OnDestroy {
 
     })
 
-     dialog.afterClosed()
-      .subscribe((formValue) => {
-        console.log('formValue::: ', formValue);
-        if(formValue){
-          this.subscripcionRef = this.inscripcionService.getInscripciones().subscribe(
-            (inscripciones: any[]) => {
-              this.inscripciones = inscripciones;
-              this.dataSource.data = inscripciones;
-            })
-        }
-      })
+    dialog.afterClosed()
+    .subscribe((formValue) => {
+      console.log('formValue::: ', formValue);
+      if(formValue){
+        this.subscripcionRef = this.inscripcionService.getInscripciones().subscribe(
+          (inscripciones: any[]) => {
+            this.inscripciones = inscripciones;
+            this.dataSource.data = inscripciones;
+          })
+      }
+    })
   }
 
 

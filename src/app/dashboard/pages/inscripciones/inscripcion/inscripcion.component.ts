@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit, SimpleChanges } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Curso } from 'src/app/core/interfaces/curso.interface';
 import { CursoService } from 'src/app/core/services/curso.service';
@@ -32,6 +32,7 @@ export class InscripcionComponent implements OnInit{
     fecha_fin: this.fechaFinControl,
     idCurso: this.selectedCursoControl
   });
+  disabled: boolean= true
 
   constructor(
     private dialogRef: MatDialogRef<InscripcionComponent>,
@@ -50,20 +51,42 @@ export class InscripcionComponent implements OnInit{
   }
   ngOnInit(): void {
     this.cursosService.getCursos().subscribe(cursos => {
-     
+
       this.cursos = cursos;
       this.cursosOptions = cursos.map(curso => ({
         value: curso.id.toString(),
         viewValue: curso.nombre,
       }));
     });
+
   }
 
+
+
   guardar(){
-    if(this.inscripcionForm.valid){
-      this.dialogRef.close(this.inscripcionForm.value)
-    }else{
-      this.dialogRef.close()
+    if (this.inscripcionForm.valid) {
+      const fechaInicio = new Date(this.fechaInicioControl.value!);
+      console.log('fechaInicio::: ', fechaInicio);
+      const fechaFin = new Date(this.fechaFinControl.value!);
+      console.log('fechaFin::: ', fechaFin);
+
+      if (fechaInicio.getTime() === fechaFin.getTime()) {
+        // las fechas son iguales, mostrar mensaje de error
+        this.fechaFinControl.setErrors({ fechaInvalida: true });
+        return;
+      }
+
+      if (fechaInicio > fechaFin) {
+        // la fecha de inicio es mayor a la fecha de fin, mostrar mensaje de error
+        this.fechaFinControl.setErrors({ fechaInvalida: true });
+        return;
+      }
+
+      // cerrar el dialogo y enviar los datos de la inscripción
+      this.dialogRef.close(this.inscripcionForm.value);
+    } else {
+      this.dialogRef.close();
     }
+
   }
 }
