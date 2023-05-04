@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
 import { enviroment } from 'src/environments/enviroments';
 
 export interface Usuario {
@@ -86,8 +86,9 @@ export class AuthService {
           return !!usuarioAutenticado
         }),
         catchError((err)=>{
-          alert('Error al veridivar el token');
-          return throwError(()=>err)
+          console.log('Error al veridivar el token');
+          // return throwError(()=>err)
+          return of(false)
         })
       )
 
