@@ -9,7 +9,7 @@
 
       <div class="col-12 mb-1">
 
-        <!-- <mat-form-field class="w-100">
+        <mat-form-field class="w-100">
 
           <mat-label>Nombre</mat-label>
 
@@ -21,7 +21,7 @@
           <mat-error *ngFor="let error of nombreControl.errors | keyvalue">
               {{ error | controlErrorMessages:'texto' }}
           </mat-error>
-        </mat-form-field> -->
+        </mat-form-field>
 
       </div>
 
@@ -37,14 +37,6 @@
           </mat-form-field>
         </div>
       </div>
-      <mat-form-field>
-        <mat-label>Nivel de curso</mat-label>
-        <mat-select [(value)]="nivelCursoSeleccionado">
-          <mat-option *ngFor="let nivel of nivelesCursos" [value]="nivel" (click)="seleccionarNivelCurso(nivel)">
-            {{nivel}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
       <div class="row">
         <div class="col-12">
           <mat-form-field class="w-full">
@@ -84,6 +76,6 @@
 <div mat-dialog-actions class="justify-content-end">
 
   <button mat-button mat-dialog-close> Cancelar </button>
-  <button mat-button (click)="guardar()"  > Guardar </button>
+  <button mat-button (click)="guardar()" [disabled]="disabled" > Guardar </button>
 
 </div>
