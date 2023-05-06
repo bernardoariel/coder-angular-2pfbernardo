@@ -6,12 +6,18 @@ import { Estudiante } from '../interfaces/estudiante.interface';
 
 
 export interface Inscripcion {
+
+  formatoCurso: string;
   id: number;
   idCurso: number;
   nombre: string;
-  fecha_inicio: Date;
-  fecha_fin: Date;
+  fecha_inicio: string;
+  fecha_fin: string;
   alumnosInscriptos?: number[];
+  detalleCurso?: string | null;
+  nombreCurso?: string | null;
+  tipoCurso?: string | null;
+  nivelCurso?: string | null;
 }
 
 
