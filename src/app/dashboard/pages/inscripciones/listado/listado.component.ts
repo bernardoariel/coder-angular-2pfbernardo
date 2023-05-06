@@ -19,7 +19,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
   inscripciones!: Inscripcion[] ;
   subscripcionRef!: Subscription | null
   dataSource: MatTableDataSource<Inscripcion> = new MatTableDataSource();
-  displayedColumns: string[] = ['nombre', 'inicio','fin','estado','acciones'];
+  displayedColumns: string[] = ['nombre', 'fechas','modo','estado','acciones'];
   isLoading = true
 
   constructor(

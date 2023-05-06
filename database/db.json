@@ -67,70 +67,16 @@
   ],
   "inscripciones": [
     {
-      "id": 2,
       "idCurso": 2,
-      "nombre": "Curso Nuevo de Python",
-      "fecha_fin": "2022-30-12",
-      "fecha_inicio": "2022-30-10",
-      "alumnosInscriptos": []
-    },
-    {
-      "id": 3,
-      "idCurso": 1,
-      "nombre": "Curso Nuevo de JavaScript",
-      "fecha_fin": "2023-30-10",
-      "fecha_inicio": "2023-30-12",
+      "nombreCurso": "Python",
+      "nivelCurso": "Intermedio",
+      "tipoCurso": "Presencial",
+      "fecha_inicio": "2023-05-06",
+      "fecha_fin": "2023-05-07",
       "alumnosInscriptos": [
         3
-      ]
-    },
-    {
-      "id": 4,
-      "idCurso": 1,
-      "nombre": "Curso Nuevo de TS",
-      "fecha_fin": "2021-20-12",
-      "fecha_inicio": "2022-20-03",
-      "alumnosInscriptos": []
-    },
-    {
-      "nombre": "Curso Avanzado de ",
-      "fecha_inicio": "2023-05-01T13:12:03.415Z",
-      "fecha_fin": "2023-05-01T13:12:03.415Z",
-      "idCurso": "4",
-      "alumnosInscriptos": [],
-      "id": 5
-    },
-    {
-      "nombre": "Curso JAVA",
-      "fecha_inicio": "2023-04-04T03:00:00.000Z",
-      "fecha_fin": "2023-05-31T03:00:00.000Z",
-      "idCurso": 2,
-      "alumnosInscriptos": [],
-      "id": 6
-    },
-    {
-      "nombre": "fda",
-      "fecha_inicio": "2023-05-03T21:21:32.704Z",
-      "fecha_fin": "2023-05-03T21:21:32.705Z",
-      "idCurso": 2,
-      "alumnosInscriptos": [],
-      "id": 7
-    },
-    {
-      "nombre": "ffasfd",
-      "fecha_inicio": "2023-05-03T21:26:32.301Z",
-      "fecha_fin": "2023-05-03T21:26:32.301Z",
-      "idCurso": 3,
-      "alumnosInscriptos": [],
-      "id": 8
-    },
-    {
-      "nombre": "kljklj",
-      "fecha_inicio": "2023-05-01T03:00:00.000Z",
-      "fecha_fin": "2023-05-24T03:00:00.000Z",
-      "idCurso": 2,
-      "alumnosInscriptos": [],
-      "id": 9
+      ],
+      "id": 1
     }
   ],
   "usuarios": [

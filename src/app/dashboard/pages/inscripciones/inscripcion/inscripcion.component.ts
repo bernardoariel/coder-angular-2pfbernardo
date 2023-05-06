@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { distinctUntilChanged, first } from 'rxjs';
@@ -16,31 +16,47 @@ interface CursoOption {
   styleUrls: ['./inscripcion.component.scss']
 })
 export class InscripcionComponent implements OnInit{
-  selectedCursoControl = new FormControl('', [Validators.required]);
-  selectedTipoCursoControl = new FormControl('', [Validators.required]);
-  selectedNivelCursoControl = new FormControl('', [Validators.required]);
-  cursos: Curso[] = [];
-  tiposCursos: string[] = ['Presencial', 'Virtual'];
-  nivelesCursos: string[] = ['Básico', 'Intermedio', 'Avanzado'];
 
-  nivelCursoSeleccionado: string = '';
+  /* controles */
+  selectedCursoControl = new FormControl('', [Validators.required]);
+  selectedNivelCursoControl = new FormControl('Básico', [Validators.required]);
+  selectedTipoCursoControl = new FormControl('Presencial', [Validators.required]);
+  fechaInicioControl = new FormControl(new Date().toISOString().substring(0, 10), [Validators.required]);
+  fechaFinControl = new FormControl(new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().substring(0, 10), [Validators.required])
+
+  /* valores para los controles */
+  cursos: Curso[] = [];
+  nivelesCursos: string[] = ['Básico', 'Intermedio', 'Avanzado'];
+  tiposCursos: string[] = ['Presencial', 'Virtual'];
+  nivelCursoSeleccionado: string = ''
   nombreCursoSeleccionado:string = ''
-  fechaInicioControl = new FormControl(new Date(), [Validators.required]);
-  fechaFinControl = new FormControl(new Date(), [Validators.required]);
+
+ /* form */
 
   inscripcionForm = new FormGroup({
     idCurso: this.selectedCursoControl,
     nombreCurso: new FormControl(this.nombreCursoSeleccionado, [Validators.required]),
-    nivelCurso: this.selectedTipoCursoControl,
+    nivelCurso: this.selectedNivelCursoControl,
+    tipoCurso: this.selectedTipoCursoControl,
     fecha_inicio: this.fechaInicioControl,
-    fecha_fin: this.fechaFinControl,
+    fecha_fin: this.fechaFinControl
   });
 
+  fechaInicioInvalida = false;
+  fechaFinInvalida = false;
   disabled: boolean= true
   cursosOptions!: { value: string; viewValue: string; }[];
-seleccionarNivelCurso(nivel: string) {
-    this.nivelCursoSeleccionado = nivel;
+
+  seleccionarNivelCurso(nivel: string) {
+    console.log('nivel::: ', nivel);
+    this.selectedNivelCursoControl.setValue(nivel);
   }
+
+  seleccionarTipoCurso(tipo: string) {
+    console.log('tipo::: ', tipo);
+    this.selectedTipoCursoControl.setValue(tipo);
+  }
+
   constructor(
     private dialogRef: MatDialogRef<InscripcionComponent>,
     @Inject(MAT_DIALOG_DATA) private data: { inscripcion?: Inscripcion},
@@ -55,7 +71,11 @@ seleccionarNivelCurso(nivel: string) {
       this.fechaFinControl.setValue(inscripcionParaEditar.fecha_fin);
       this.selectedCursoControl.setValue((inscripcionParaEditar.idCurso).toString());
     }
+    this.fechaInicioInvalida = false;
+    this.fechaFinInvalida = false;
+
   }
+
   ngOnInit(): void {
     this.cursosService.getCursos().subscribe(cursos => {
 
@@ -69,8 +89,6 @@ seleccionarNivelCurso(nivel: string) {
       distinctUntilChanged()
     ).subscribe(cursoId => {
       const cursoSeleccionado = this.cursos.find(curso => curso.id === (+cursoId! ?? -1));
-
-
       if (cursoSeleccionado) {
         console.log('cursoSeleccionado::: ', cursoSeleccionado);
         this.inscripcionForm.get('idCurso')?.setValue(cursoSeleccionado.id.toString());
@@ -87,32 +105,31 @@ seleccionarNivelCurso(nivel: string) {
 
 
 
-  guardar(){
-    console.log('this.inscripcionForm.value::: ', this.inscripcionForm.value)
-    if (this.inscripcionForm.valid) {
+  guardar() {
+    const fechaInicio = new Date(this.inscripcionForm.get('fecha_inicio')!.value!);
+    const fechaFin = new Date(this.inscripcionForm.get('fecha_fin')!.value!);
+
+    if (fechaInicio.getTime() === fechaFin.getTime()) {
+      this.fechaInicioInvalida = true;
+      this.fechaFinInvalida = true;
+      this.inscripcionForm.get('fecha_inicio')!.setErrors({ fechaInvalida: true });
+      this.inscripcionForm.get('fecha_fin')!.setErrors({ fechaInvalida: true });
       return;
-      const fechaInicio = new Date(this.fechaInicioControl.value!);
-      console.log('fechaInicio::: ', fechaInicio);
-      const fechaFin = new Date(this.fechaFinControl.value!);
-      console.log('fechaFin::: ', fechaFin);
-
-      if (fechaInicio.getTime() === fechaFin.getTime()) {
-        // las fechas son iguales, mostrar mensaje de error
-        this.fechaFinControl.setErrors({ fechaInvalida: true });
-        return;
-      }
-
-      if (fechaInicio > fechaFin) {
-        // la fecha de inicio es mayor a la fecha de fin, mostrar mensaje de error
-        this.fechaFinControl.setErrors({ fechaInvalida: true });
-        return;
-      }
-
-      // cerrar el dialogo y enviar los datos de la inscripción
-      this.dialogRef.close(this.inscripcionForm.value);
-    } else {
-      this.dialogRef.close();
     }
 
+    if (fechaInicio > fechaFin) {
+      this.fechaInicioInvalida = true;
+      this.fechaFinInvalida = true;
+     this.inscripcionForm.get('fecha_inicio')!.setErrors({ fechaInvalida: true });
+     this.inscripcionForm.get('fecha_fin')!.setErrors({ fechaInvalida: true });
+     return;
+
+    }
+
+    if (this.inscripcionForm.valid) {
+      // Resto del código
+      this.dialogRef.close(this.inscripcionForm.value);
+    }
   }
+
 }

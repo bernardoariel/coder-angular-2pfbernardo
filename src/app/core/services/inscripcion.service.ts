@@ -9,8 +9,8 @@ export interface Inscripcion {
   id: number;
   idCurso: number;
   nombre: string;
-  fecha_inicio: Date;
-  fecha_fin: Date;
+  fecha_inicio: string;
+  fecha_fin: string;
   alumnosInscriptos?: number[];
 }
 
