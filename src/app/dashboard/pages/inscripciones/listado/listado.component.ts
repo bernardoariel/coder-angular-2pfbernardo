@@ -9,6 +9,18 @@ import { DetalleComponent } from '../detalle/detalle.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../confirm/confirm.component';
 
+interface InscripcionOption {
+  nivelCurso: string | null;
+  formatoCurso: string | null;
+  id: number;
+  idCurso: number;
+  nombreCurso: string;
+  fecha_inicio: string;
+  fecha_fin: string;
+  alumnosInscriptos?: number[];
+  detalleCurso: string | null;
+}
+
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -16,7 +28,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 })
 export class ListadoComponent  implements OnInit , OnDestroy {
 
-  inscripciones!: Inscripcion[] ;
+  inscripciones!: InscripcionOption[] ;
   subscripcionRef!: Subscription | null
   dataSource: MatTableDataSource<Inscripcion> = new MatTableDataSource();
   displayedColumns: string[] = ['nombre', 'fechas','modo','estado','acciones'];
@@ -158,7 +170,35 @@ export class ListadoComponent  implements OnInit , OnDestroy {
     })
   }
 
+  getDetalle(inscripcion:InscripcionOption){
 
+    let detalle:string;
+    if(inscripcion.formatoCurso && inscripcion.formatoCurso== 'Clase'){
+
+      detalle = inscripcion.detalleCurso!.trim() + ` en ${inscripcion.nombreCurso}`
+      return detalle
+
+    }else{
+
+      detalle = inscripcion.formatoCurso!.trim() + ` de ${inscripcion.nombreCurso} ${inscripcion.nivelCurso}`
+      return detalle
+
+    }
+
+
+  }
+  getFechas(inscripcion:InscripcionOption){
+    let fechas:string;
+    if(inscripcion.formatoCurso=='Clase'){
+
+      fechas = `${inscripcion.fecha_inicio}`
+      return fechas
+    } else{
+      fechas = `${inscripcion.fecha_inicio} al ${inscripcion.fecha_fin}`
+      return fechas
+    }
+
+  }
 
 
 

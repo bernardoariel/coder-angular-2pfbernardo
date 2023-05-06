@@ -63,20 +63,37 @@
       "id": 8,
       "nombre": "PHP",
       "tipo": "intermedio"
+    },
+    {
+      "nombre": "Angular",
+      "tipo": "avanzado",
+      "id": 9
     }
   ],
   "inscripciones": [
     {
-      "idCurso": 2,
+      "idCurso": "2",
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
       "nombreCurso": "Python",
-      "nivelCurso": "Intermedio",
+      "nivelCurso": "Avanzado",
+      "tipoCurso": "Virtual",
+      "fecha_inicio": "2023-05-06",
+      "fecha_fin": "2023-05-07",
+      "alumnosInscriptos": [],
+      "id": 1
+    },
+    {
+      "idCurso": 2,
+      "detalleCurso": "MasterClass WPA",
+      "formatoCurso": "Clase",
+      "nombreCurso": "Python",
+      "nivelCurso": "Básico",
       "tipoCurso": "Presencial",
       "fecha_inicio": "2023-05-06",
       "fecha_fin": "2023-05-07",
-      "alumnosInscriptos": [
-        3
-      ],
-      "id": 1
+      "alumnosInscriptos": [],
+      "id": 2
     }
   ],
   "usuarios": [
