@@ -98,7 +98,11 @@
       "tipoCurso": "Presencial",
       "fecha_inicio": "2023-05-07",
       "fecha_fin": "2023-05-31",
-      "alumnosInscriptos": [],
+      "alumnosInscriptos": [
+        3,
+        4,
+        5
+      ],
       "id": 3
     }
   ],

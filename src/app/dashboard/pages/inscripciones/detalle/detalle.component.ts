@@ -39,6 +39,10 @@ export class DetalleComponent {
       this.titulo = data.inscripcion.nombre ; //tengo el nombre
       this.idInscripcion = data.inscripcion.id; //tengo el id de la inscripcion o curso a inscribir
       this.foto = '../assets/img/cursos/default.png'
+      const fechaFin = new Date(data.inscripcion?.fecha_fin!);
+      const hoy = new Date();
+      this.esFechaFinAnteriorAHoy = fechaFin < hoy;
+
       const idCurso = data.inscripcion?.idCurso;
 
       if (idCurso) {
@@ -49,6 +53,7 @@ export class DetalleComponent {
             this.idCurso = curso!.id
             this.nombreCurso = curso?.nombre ?? 'No encontrado'
             this.foto = curso?.foto!
+
           }
         )
       }
