@@ -27,39 +27,39 @@
   ],
   "cursos": [
     {
-      "id": 1,
-      "nombre": "JavaScript",
-      "tipo": "basico"
-    },
-    {
-      "id": 2,
-      "nombre": "Python",
-      "tipo": "intermedio"
-    },
-    {
-      "id": 3,
-      "nombre": "Java",
-      "tipo": "avanzado"
-    },
-    {
-      "id": 4,
-      "nombre": "C++",
-      "tipo": "avanzado"
-    },
-    {
-      "id": 7,
-      "nombre": "Go",
-      "tipo": "basico"
-    },
-    {
-      "id": 8,
-      "nombre": "PHP",
-      "tipo": "intermedio"
-    },
-    {
-      "nombre": "Angular",
-      "tipo": "avanzado",
+      "nombre": "Angulars",
+      "foto": "https://i.ytimg.com/vi/qalOpo6Mc-8/maxresdefault.jpg",
       "id": 9
+    },
+    {
+      "nombre": "JavaScript",
+      "foto": "https://miro.medium.com/v2/resize:fit:1400/1*BPSx-c--z6r7tY29L19ukQ.png",
+      "id": 10
+    },
+    {
+      "nombre": "Typescript",
+      "foto": "https://cdn.worldvectorlogo.com/logos/typescript-2.svg",
+      "id": 11
+    },
+    {
+      "nombre": "Laravel",
+      "foto": "https://codersfree.nyc3.cdn.digitaloceanspaces.com/posts/laravel-10-9-caracteristicas-que-debes-conocer.jpg",
+      "id": 13
+    },
+    {
+      "nombre": "Nest",
+      "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPRU6iVjlSx6G5QteZY3OHC_xDNmQqeWhbeANjePFuzSLrAiDOYL6WKfk8hO8EnL5zmmU&usqp=CAU",
+      "id": 14
+    },
+    {
+      "nombre": "IONIC",
+      "foto": "https://constructs.stampede-design.com/wp-content/uploads/2016/03/ionic-framework.jpg",
+      "id": 15
+    },
+    {
+      "nombre": "Php",
+      "foto": "imagen php",
+      "id": 16
     }
   ],
   "inscripciones": [
@@ -72,7 +72,9 @@
       "tipoCurso": "Virtual",
       "fecha_inicio": "2023-05-06",
       "fecha_fin": "2023-05-07",
-      "alumnosInscriptos": [],
+      "alumnosInscriptos": [
+        4
+      ],
       "id": 1
     },
     {
@@ -86,6 +88,18 @@
       "fecha_fin": "2023-05-07",
       "alumnosInscriptos": [],
       "id": 2
+    },
+    {
+      "idCurso": 9,
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
+      "nombreCurso": "Angulars",
+      "nivelCurso": "Intermedio",
+      "tipoCurso": "Presencial",
+      "fecha_inicio": "2023-05-07",
+      "fecha_fin": "2023-05-31",
+      "alumnosInscriptos": [],
+      "id": 3
     }
   ],
   "usuarios": [

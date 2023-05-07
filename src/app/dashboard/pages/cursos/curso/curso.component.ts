@@ -11,6 +11,7 @@ import { Curso } from 'src/app/core/interfaces/curso.interface';
 })
 export class CursoComponent {
 
+
   nombreControl = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
@@ -18,23 +19,23 @@ export class CursoComponent {
     Validators.pattern(/^[^0-9]+$/)
   ])
 
-  tipoControl = new FormControl('', [
+  fotoControl = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
-    Validators.maxLength(20),
-    Validators.pattern(/^[^0-9]+$/)
+    Validators.maxLength(200)
   ])
   cursoForm = new FormGroup({
     nombre: this.nombreControl,
-    tipo: this.tipoControl
+    foto: this.fotoControl
   })
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { curso?: Curso }
   ){
     if(data && data.curso){
+
       this.nombreControl.setValue(data.curso.nombre)
-      this.tipoControl.setValue(data.curso.tipo)
+      this.fotoControl.setValue(data.curso.foto!)
     }
   }
 
@@ -45,4 +46,5 @@ export class CursoComponent {
       this.dialogRef.close()
     }
   }
+
 }

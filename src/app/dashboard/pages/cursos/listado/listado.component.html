@@ -22,9 +22,13 @@
   </ng-container>
 
   <!-- Tipo Column -->
-  <ng-container matColumnDef="tipo">
+  <ng-container matColumnDef="foto">
     <th mat-header-cell *matHeaderCellDef> Tipo </th>
-    <td mat-cell *matCellDef="let curso"> {{curso.tipo}} </td>
+    <td mat-cell *matCellDef="let curso">
+      <img src="{{curso.foto}}" alt="Imagen del curso de {{curso.nombre}}"
+      class="img-thumbnail"
+      onerror="this.src='../assets/img/cursos/default.png'">
+    </td>
   </ng-container>
 
   <!-- Acciones Column -->

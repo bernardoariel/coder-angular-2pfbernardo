@@ -36,28 +36,19 @@ export class DetalleComponent {
     if(data && data.inscripcion){
       console.log('datos en detalle ', data.inscripcion);
 
-      let fotoUrl = '';
-      if (data && data.inscripcion && data.inscripcion.idCurso) {
-        fotoUrl = `../assets/img/cursos/${data.inscripcion.idCurso}.png`;
-      } else {
-        fotoUrl = this.fotoDefault;
-      }
-      this.foto = fotoUrl //tengo la foto
       this.titulo = data.inscripcion.nombre ; //tengo el nombre
       this.idInscripcion = data.inscripcion.id; //tengo el id de la inscripcion o curso a inscribir
-      this.foto =(data.inscripcion.id<4)?fotoUrl : this.fotoDefault
-
-
-
+      this.foto = '../assets/img/cursos/default.png'
       const idCurso = data.inscripcion?.idCurso;
 
       if (idCurso) {
+        console.log('idCurso::: ', idCurso);
         this.cursoService.getCursoById(idCurso).subscribe(
           curso => {
             console.log('curso::: ', curso);
             this.idCurso = curso!.id
             this.nombreCurso = curso?.nombre ?? 'No encontrado'
-
+            this.foto = curso?.foto!
           }
         )
       }

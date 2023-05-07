@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, concatMap, delay, interval, map, of } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 
 import { CursoService } from 'src/app/core/services/curso.service';
-import { obtenerCursos } from '../datos-curso_promise';
 import { Curso } from 'src/app/core/interfaces/curso.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,7 +23,7 @@ export class ListadoComponent  implements OnInit , OnDestroy{
   subscripcionRef!: Subscription | null
 
   dataSource: MatTableDataSource<Curso> = new MatTableDataSource();
-  displayedColumns: string[] = ['nombre', 'tipo','acciones'];
+  displayedColumns: string[] = ['nombre', 'foto','acciones'];
   isLoading = true
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

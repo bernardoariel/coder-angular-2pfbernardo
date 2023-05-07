@@ -27,16 +27,19 @@
 
       <div class="col-12 mb-1">
         <mat-form-field class="w-100">
-          <mat-label>Dificultad</mat-label>
-          <input
-           [formControl]="tipoControl"
-            matInput
-            type="text">
+          <mat-label>Link de Foto</mat-label>
+          <input [formControl]="fotoControl" matInput type="text">
 
-            <mat-error *ngFor="let error of tipoControl.errors | keyvalue">
-              {{ error | controlErrorMessages: 'texto' }}
-            </mat-error>
+
+
+
+
+
+          <mat-error *ngFor="let error of fotoControl.errors | keyvalue">
+            {{ error | controlErrorMessages: 'texto' }}
+          </mat-error>
         </mat-form-field>
+
 
       </div>
 
