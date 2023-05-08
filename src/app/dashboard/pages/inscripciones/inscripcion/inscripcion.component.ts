@@ -73,13 +73,12 @@ export class InscripcionComponent implements OnInit{
   ) {
 
     if (data && data.inscripcion) {
-      console.log('data.inscripcion::: ', data.inscripcion);
+
       const inscripcionParaEditar = data.inscripcion;
       this.fechaInicioControl.setValue(inscripcionParaEditar.fecha_inicio);
       this.fechaFinControl.setValue(inscripcionParaEditar.fecha_fin);
       this.selectedCursoControl.setValue((inscripcionParaEditar.idCurso).toString());
       this.nombreCursoSeleccionado = inscripcionParaEditar.nombreCurso as string;
-      console.log('inscripcionParaEditar.nombreCurso ::: ', inscripcionParaEditar.nombreCurso );
       this.selectedNivelCursoControl.setValue(inscripcionParaEditar.nivelCurso as string);
       this.selectedTipoCursoControl.setValue(inscripcionParaEditar.tipoCurso as string);
 

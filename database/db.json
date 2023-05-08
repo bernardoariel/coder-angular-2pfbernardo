@@ -1,33 +1,42 @@
 {
   "alumnos": [
     {
-      "id": 3,
       "nombre": "Ariel",
-      "apellido": "Ramírez",
-      "fechaNacimiento": "2001-12-05",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/6.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg"
+      "apellido": "Bernardo",
+      "fechaNacimiento": "1974-08-26",
+      "genero": "Masculino",
+      "dni": "24159131",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg",
+      "id": 1
     },
     {
-      "id": 4,
-      "nombre": "Luis",
-      "apellido": "Ramírez",
-      "fechaNacimiento": "2001-12-05",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/6.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg"
+      "nombre": "noelia",
+      "apellido": "gonzalez",
+      "fechaNacimiento": "1993-06-18",
+      "genero": "Femenino",
+      "dni": "30533170",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/2.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/2.jpg",
+      "id": 2
     },
     {
-      "nombre": "juan",
-      "apellido": "carlos",
-      "fechaNacimiento": "2002-10-22",
-      "id": 5,
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/9.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/9.jpg"
+      "nombre": "lorena",
+      "apellido": "benayo",
+      "fechaNacimiento": "2023-04-04",
+      "genero": "No especificado",
+      "dni": "1234562",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/3.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
+      "id": 3
     }
   ],
   "cursos": [
     {
-      "nombre": "Angulars",
+      "nombre": "Angular",
       "foto": "https://i.ytimg.com/vi/qalOpo6Mc-8/maxresdefault.jpg",
       "id": 9
     },
@@ -72,9 +81,7 @@
       "tipoCurso": "Virtual",
       "fecha_inicio": "2023-05-06",
       "fecha_fin": "2023-05-07",
-      "alumnosInscriptos": [
-        4
-      ],
+      "alumnosInscriptos": [],
       "id": 1
     },
     {
@@ -99,11 +106,23 @@
       "fecha_inicio": "2023-05-07",
       "fecha_fin": "2023-05-31",
       "alumnosInscriptos": [
-        3,
-        4,
-        5
+        1
       ],
       "id": 3
+    },
+    {
+      "idCurso": 11,
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
+      "nombreCurso": "Typescript",
+      "nivelCurso": "Básico",
+      "tipoCurso": "Virtual",
+      "fecha_inicio": "2023-06-01",
+      "fecha_fin": "2023-06-30",
+      "alumnosInscriptos": [
+        2
+      ],
+      "id": 4
     }
   ],
   "usuarios": [
@@ -112,9 +131,34 @@
       "apellido": "apellido",
       "email": "admin@admin.com",
       "password": "123456",
-      "rol": "admin",
+      "role": "admin",
       "token": "dsLnKJtyBluy0987876asdaasd",
-      "id": 1
+      "id": 1,
+      "idEstudiante": 0
+    },
+    {
+      "idEstudiante": 1,
+      "email": "ariel@bernardo.com.ar",
+      "password": "24159131",
+      "role": "Estudiante",
+      "token": "fodxJuyFPg7BjJs1",
+      "id": 2
+    },
+    {
+      "idEstudiante": 2,
+      "email": "nolluy6@jut.com",
+      "password": "30533170",
+      "role": "Estudiante",
+      "token": "eFsgf42qhtClEhqy",
+      "id": 3
+    },
+    {
+      "idEstudiante": 3,
+      "email": "aaa@hotmail.com",
+      "password": "1234562",
+      "role": "Estudiante",
+      "token": "fMKexyuYn6PFHzAA",
+      "id": 4
     }
   ]
 }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, map, of, switchMap, take, tap } from 'rxjs';
+import {  Observable,  map,  switchMap } from 'rxjs';
 import { Estudiante } from '../interfaces/estudiante.interface';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from 'src/environments/enviroments';
+import { UsuarioService } from './usuario.service';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { enviroment } from 'src/environments/enviroments';
 export class AlumnoService {
 
   private baseUrl: string = enviroment.baseUrl;
-  constructor( private http:HttpClient) { }
+  constructor( private http:HttpClient, private usuariosService:UsuarioService) { }
 
   getAlumnos():Observable<Estudiante[]>{
 
@@ -35,13 +36,25 @@ export class AlumnoService {
 
   }
 
-  agregarAlumno( alumno: Estudiante): Observable<Estudiante>{
+/*   agregarAlumno( alumno: Estudiante): Observable<Estudiante>{
     return this.http.post<Estudiante>(`${ this.baseUrl }/alumnos`, alumno)
-  }
+  } */
 
   actualizarAlumno( alumno: Estudiante): Observable<Estudiante>{
     return this.http.put<Estudiante>(`${ this.baseUrl }/alumnos/${ alumno.id }`, alumno)
   }
+  agregarAlumno(alumno: Estudiante): Observable<Estudiante> {
+    const { email,...alumnoWithoutEmail } = alumno;
+    return this.http.post<Estudiante>(`${ this.baseUrl }/alumnos`, alumnoWithoutEmail).pipe(
+      switchMap((estudianteCreado: Estudiante) => {
+        return this.usuariosService.guardarEmailYPasswordEnTablaSeparada(estudianteCreado.id!, email, alumno.dni, alumno.role).pipe(
+          map(() => estudianteCreado)
+        );
+      })
+    );
+  }
+
+
 
   borrarAlumno( id: number): Observable<any>{
     return this.http.delete<any>(`${ this.baseUrl }/alumnos/${ id }`)

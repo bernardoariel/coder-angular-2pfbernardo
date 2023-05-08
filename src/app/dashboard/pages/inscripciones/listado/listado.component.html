@@ -31,7 +31,12 @@
   </ng-container>
   <ng-container matColumnDef="estado">
     <th mat-header-cell *matHeaderCellDef> Estado. </th>
-    <td mat-cell *matCellDef="let inscripcion">{{(inscripcion.fecha_inicio!=inscripcion.fecha_fin)?getEstadoInscripcion(inscripcion):'Chequear las fechas'}}  </td>
+    <td mat-cell *matCellDef="let inscripcion">
+      <mat-chip
+      [ngStyle]="{'background-color': getEstadoInscripcion(inscripcion) === 'Finalizado' ? '#F44336' : getEstadoInscripcion(inscripcion) === 'En Curso' ? '#4CAF50' : '#E91E63'}">
+        {{(inscripcion.fecha_inicio!=inscripcion.fecha_fin)?getEstadoInscripcion(inscripcion):'Chequear las fechas'}}
+      </mat-chip>
+    </td>
   </ng-container>
 
   <!-- acciones Column -->

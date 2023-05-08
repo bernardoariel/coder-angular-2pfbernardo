@@ -52,6 +52,52 @@
           </mat-error>
         </mat-form-field>
       </div>
+      <mat-form-field>
+        <mat-label>Seleccione el Genero</mat-label>
+        <mat-select [formControl]="selectedGeneroControl">
+          <mat-option *ngFor="let genero of generoEstudiante" [value]="genero" (click)="seleccionarGenero(genero)">
+            {{genero}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngFor="let error of selectedGeneroControl.errors | keyvalue">
+          {{ error | controlErrorMessages: 'texto' }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Seleccione el tipo de Rol</mat-label>
+        <mat-select [formControl]="selectedRoleControl">
+          <mat-option *ngFor="let rol of tipoRole" [value]="rol" (click)="seleccionarRol(rol)">
+            {{rol}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngFor="let error of selectedGeneroControl.errors | keyvalue">
+          {{ error | controlErrorMessages: 'texto' }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>DNI</mat-label>
+        <input
+          [formControl]="dniControl"
+          matInput
+          type="text"
+          placeholder="Ingrese el DNI">
+          <mat-error *ngFor="let error of dniControl.errors | keyvalue">
+            {{ error | controlErrorMessages: 'numero' }}
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Email</mat-label>
+        <input
+          [formControl]="emailControl"
+          matInput
+          type="text"
+          placeholder="Ingrese el Email">
+          <mat-error *ngFor="let error of emailControl.errors | keyvalue">
+            {{ error | controlErrorMessages: 'email' }}
+          </mat-error>
+      </mat-form-field>
 
     </div>
 
@@ -65,3 +111,5 @@
   <button mat-button (click)="guardar()" [disabled]="estudianteForm.invalid"> Guardar </button>
 
 </div>
+
+

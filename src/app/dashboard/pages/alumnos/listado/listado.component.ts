@@ -21,7 +21,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
   alumnos: Estudiante[] = [];
   subscripcionRef!: Subscription | null
   dataSource: MatTableDataSource<Estudiante> = new MatTableDataSource();
-  displayedColumns: string[] = ['matricula','nombreCompleto','fechaNacimiento','fotoPerfilUrl','acciones'];
+  displayedColumns: string[] = ['matricula','nombreCompleto','sexo','fechaNacimiento','fotoPerfilUrl','acciones'];
   ultimoId: number = 0
   ultimoIdSubscription!: Subscription;
   durationInSeconds = 5;
@@ -50,7 +50,18 @@ export class ListadoComponent implements OnInit, OnDestroy  {
       this.subscripcionRef.unsubscribe();
     }
   }
-
+  getColorForSexo(sexo: string) {
+    switch (sexo) {
+      case 'Masculino':
+        return 'blue';
+      case 'Femenino':
+        return 'pink';
+      case 'No especificado':
+        return 'violet';
+      default:
+        return 'black';
+    }
+  }
   calcularEdad(fechaNacimiento: string): number {
     const fechaNacimientoDate = new Date(fechaNacimiento);
     const hoy = new Date();
@@ -99,7 +110,6 @@ export class ListadoComponent implements OnInit, OnDestroy  {
 
 }
   editarAlumno(alumno: Estudiante) {
-
 
     const dialog = this.matDialog.open(AlumnoComponent, {
       data: {

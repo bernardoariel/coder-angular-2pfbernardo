@@ -19,9 +19,10 @@ export class DetalleComponent {
     @Inject(MAT_DIALOG_DATA) public data: { curso?: Curso }
   ){
     if(data && data.curso){
+      console.log('data.curso::: ', data.curso);
 
       this.titulo = data.curso.nombre! ;
-      this.foto = data.curso.foto!
+      this.foto = data.curso.foto || '../assets/img/cursos/default.png'
     }
   }
 }

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListadoComponent } from '../listado/listado.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
+import { UsuarioService } from 'src/app/core/services/usuario.service';
 
 @Component({
   selector: 'app-alumno',
@@ -26,16 +27,48 @@ export class AlumnoComponent {
   ])
   fechaNacimientoControl = new FormControl('', [
     Validators.required,
-    // Validators.pattern(/^([0-2]\d|3[0-1])\/(0\d|1[0-2])\/\d{4}$/)
   ]);
+  emailControl = new FormControl('', [
+    Validators.required,
+    Validators.email
+  ]);
+  selectedGeneroControl = new FormControl('No especificado', [Validators.required]);
+  dniControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(7),
+    Validators.maxLength(15),
+    Validators.pattern(/^[0-9]+$/)
+  ])
+  selectedRoleControl = new FormControl('Estudiante', [
+    Validators.required,
+  ])
+  generoEstudiante: string[] = ['Masculino', 'Femenino', 'No especificado'];
+  tipoRole: string[] = ['Estudiante', 'Admin', 'Profesor'];
 
+  valorEmail: string = '';
   estudianteForm = new FormGroup({
     nombre: this.nombreControl,
     apellido: this.apellidoControl,
     fechaNacimiento: this.fechaNacimientoControl,
+    genero: this.selectedGeneroControl,
+    dni: this.dniControl,
+    email:this.emailControl,
+    role:this.selectedRoleControl
   })
 
+
+  seleccionarGenero(genero: string) {
+
+      this.selectedGeneroControl.setValue(genero);
+
+  }
+  seleccionarRol(rol: string) {
+
+      this.selectedRoleControl.setValue(rol);
+
+  }
   constructor(
+    private usuarioService: UsuarioService,
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { alumno?: Estudiante }
   ){
@@ -44,6 +77,17 @@ export class AlumnoComponent {
       this.nombreControl.setValue(data.alumno.nombre)
       this.apellidoControl.setValue(data.alumno.apellido)
       this.fechaNacimientoControl.setValue(data.alumno.fechaNacimiento)
+
+      this.selectedGeneroControl.setValue(data.alumno.genero)
+      this.dniControl.setValue(data.alumno.dni)
+      this.selectedRoleControl.setValue(data.alumno.role)
+
+      this.usuarioService.getUsuarioByIdestudiante(data.alumno.id!).subscribe(usuario => {
+
+        this.emailControl.setValue(usuario[0].email)
+      })
+
+
     }
   }
 

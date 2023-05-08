@@ -23,6 +23,12 @@
     <th mat-header-cell *matHeaderCellDef appFontSize> Nombre </th>
     <td mat-cell *matCellDef="let estudiante"> {{  estudiante | nombreCompleto }} </td>
   </ng-container>
+  <ng-container matColumnDef="sexo">
+    <th mat-header-cell *matHeaderCellDef appFontSize> Género </th>
+    <td mat-cell *matCellDef="let estudiante" [ngStyle]="{'color': getColorForSexo(estudiante.genero)}">
+      <mat-icon>face</mat-icon> {{estudiante.sexo}}
+    </td>
+  </ng-container>
 
   <!-- fechaNacimiento Column -->
   <ng-container matColumnDef="fechaNacimiento">
