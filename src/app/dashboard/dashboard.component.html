@@ -6,7 +6,7 @@
 
 
     <div class="text-center">
-      
+
       <img width="50" height="50" src="../../assets/img/usuarios/admin.png">
 
       <p class="mt-2">{{ (authUser$ | async)?.nombre | titlecase }} - {{ (authUser$ | async)?.apellido | titlecase }}</p>
@@ -52,16 +52,15 @@
           >
             <mat-icon>menu</mat-icon>
           </button>
-          <span>EnseñanzaOnline</span>
+          <span>{{ titulo }}</span>
         </div>
         <p></p>
       </div>
     </mat-toolbar>
 
-
     <main>
-      <router-outlet></router-outlet>
 
+      <router-outlet></router-outlet>
 
     </main>
   </div>

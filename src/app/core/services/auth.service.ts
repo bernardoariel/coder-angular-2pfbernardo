@@ -12,6 +12,7 @@ export interface Usuario {
   password: string;
   email:string;
   token:string;
+  idEstudiante?:number;
 }
 
 export interface LoginFormValue {
@@ -56,9 +57,15 @@ export class AuthService {
         next:(usuarios)=>{
           const usuarioAutenticado = usuarios[0]
           if(usuarioAutenticado){
+            console.log('usuarioAutenticado::: ', usuarioAutenticado);
             localStorage.setItem('token',usuarioAutenticado.token)
             this.authUser$.next(usuarioAutenticado)
-            this.router.navigate(['/dashboard'])
+            if(usuarioAutenticado.role === 'admin'){
+              this.router.navigate(['/dashboard'])}
+              else{
+                this.router.navigate(['/landing'])
+              }
+            // this.router.navigate(['/dashboard'])
           }else{
             alert('usuario y contraseña incorrecta')
           }
@@ -96,6 +103,6 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token')
     this.authUser$.next(null)
-this.router.navigate(['auth','login'])
+    this.router.navigate(['landing'])
   }
 }

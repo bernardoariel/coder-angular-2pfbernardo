@@ -13,7 +13,7 @@ export class DashboardComponent implements OnDestroy{
   links = linkSidebar;
   authUser$:Observable<Usuario | null>;
   destroyed$ = new Subject<void>();
-
+  titulo:string = 'Click Academy';
  constructor(
   private router:Router,
   private authService:AuthService

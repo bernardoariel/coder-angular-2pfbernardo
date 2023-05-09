@@ -26,6 +26,12 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@fortawesome/fontawesome-free",
+                "output": "/assets/fontawesome"
+              },
               "src/favicon.ico",
               "src/assets"
             ],

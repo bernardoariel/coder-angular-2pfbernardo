@@ -9,11 +9,12 @@ import { AuthComponent } from './auth/auth.component';
 import { AutGuard } from './auth/guards/aut.guard';
 import { LoginGuard } from './auth/guards/login.guard';
 import { AdminGuard } from './auth/guards/admin.guard';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'dashboard',
+    redirectTo:'landing',
     pathMatch:'full'
   },
   {
@@ -45,6 +46,11 @@ const routes: Routes = [
     canActivate:[LoginGuard],
     component:AuthComponent,
     loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)
+  },
+  {
+    path:'landing',
+    component:LandingComponent,
+    loadChildren:()=>import('./landing/landing.module').then(m=>m.LandingModule)
   },
   {
     path:'**',

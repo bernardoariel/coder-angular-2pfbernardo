@@ -1,0 +1,45 @@
+:host ::ng-deep {
+  .product-item {
+      .product-item-content {
+          border: 1px solid var(--surface-d);
+          border-radius: 3px;
+          margin: .3rem;
+          text-align: center;
+          padding: 2rem 0;
+      }
+
+      .product-image {
+          width: 50%;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+      }
+  }
+}
+.custom-footer {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-links a {
+  margin-right: 1rem;
+}
+
+.social-links a:last-child {
+  margin-right: 0;
+}
+
+.fa {
+  color: #444;
+  font-size: 1.5rem;
+}
+
+.copyrigh {
+  color: #666;
+  font-size: 0.8rem;
+}
+.btnEscritorio {
+
+  cursor: pointer;
+}

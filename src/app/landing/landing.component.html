@@ -1,0 +1,145 @@
+<link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css">
+<!-- navbar -->
+<p-menubar [model]="[]" styleClass="my-menubar">
+  <ng-template pTemplate="start">
+    <div class="d-flex align-items-center justify-content-between">
+      <img src="../../assets/img/logo.png" height="40" class="mr-2" />
+      <p-chip class="ml-3 btnEscritorio" *ngIf="isLogged" label="Ir al Escritorio" styleClass="p-clickable" routerLink="dashboard"><span class="material-icons ml-2">dashboard</span></p-chip>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="flex flex-wrap justify-content-center gap-3" *ngIf="!isLogged">
+
+      <p-button label="Registrarse" icon="pi pi-user-plus" class="gap-1"></p-button>
+      <p-button label="Ingresar" icon="pi pi-sign-in" iconPos="right" routerLink="auth/login"></p-button>
+
+    </div>
+    <div class="flex flex-wrap justify-content-center gap-3" *ngIf="isLogged">
+      <p-chip class="mt-1"label="{{estudiante.nombre | titlecase}} {{ estudiante.apellido | titlecase}}" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"></p-chip>
+      <p></p>
+      <p-button label="Salir" icon="pi pi-fw pi-power-off"
+      styleClass="p-button-rounded p-button-outlined"
+      (click)="logout()"></p-button>
+
+    </div>
+
+  </ng-template>
+</p-menubar>
+<!-- hero -->
+<div class="grid grid-nogutter surface-section text-800">
+  <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+      <section>
+          <span class="block text-6xl font-bold mb-1">Estudiar es tu futuro!</span>
+          <div class="text-6xl text-primary font-bold mb-3">no pierdas esta oportunidad!</div>
+          <p class="mt-0 mb-4 text-700 line-height-3">
+            Ingresa a nuestra comunidad, seguí creciendo , y sumá tu conocimiento.</p>
+
+          <button pButton pRipple label="Learn More" type="button" class="mr-3 p-button-raised"></button>
+          <button pButton pRipple label="Live Demo" type="button" class="p-button-outlined"></button>
+      </section>
+  </div>
+  <div class="col-12 md:col-6 overflow-hidden">
+      <img src="assets/imagenes/blocks/hero/hero-1.png" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
+  </div>
+</div>
+
+<!-- soluciones -->
+<div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center">
+  <div class="mb-3 font-bold text-3xl">
+      <span class="text-900">Un producto, </span>
+      <span class="text-blue-600">muchas soluciones</span>
+  </div>
+  <div class="text-700 mb-6">Descubre cómo el estudio de programación puede abrirte un mundo de oportunidades.</div>
+  <div class="grid">
+      <div class="col-12 md:col-4 mb-4 px-5">
+          <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+              <i class="pi pi-desktop text-4xl text-blue-500"></i>
+          </span>
+          <div class="text-900 text-xl mb-3 font-medium">Developers al PODER!</div>
+          <span class="text-700 line-height-3">Conviértete en un programador profesional con nosotros</span>
+      </div>
+      <div class="col-12 md:col-4 mb-4 px-5">
+          <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+              <i class="pi pi-lock text-4xl text-blue-500"></i>
+          </span>
+          <div class="text-900 text-xl mb-3 font-medium">Desarrollo y Seguridad</div>
+          <span class="text-700 line-height-3">Aprende las últimas técnicas y tecnologías para mantener seguros los sistemas y datos de empresas y organizaciones en un mundo cada vez más interconectado.</span>
+      </div>
+      <div class="col-12 md:col-4 mb-4 px-5">
+          <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+              <i class="pi pi-check-circle text-4xl text-blue-500"></i>
+          </span>
+          <div class="text-900 text-xl mb-3 font-medium">Acceso Ilimitado</div>
+          <span class="text-700 line-height-3">Accedé en cualquier momento y de cualquier parte del mundo al contenido de tu curso.</span>
+      </div>
+      <div class="col-12 md:col-4 mb-4 px-5">
+          <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+              <i class="pi pi-globe text-4xl text-blue-500"></i>
+          </span>
+          <div class="text-900 text-xl mb-3 font-medium">No estás solo</div>
+          <span class="text-700 line-height-3">Únete a nuestra comunidad de exalumnos, ahora profesionales en el mundo de la programación y la ciberseguridad, y comienza a construir tu futuro junto a otros apasionados por la tecnología</span>
+      </div>
+      <div class="col-12 md:col-4 mb-4 px-5">
+          <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+              <i class="pi pi-github text-4xl text-blue-500"></i>
+          </span>
+          <div class="text-900 text-xl mb-3 font-medium">Compartí tu saber</div>
+          <span class="text-700 line-height-3">Comparte tus proyectos personales con la comunidad, y colaborá en proyectos de otros, todos juntos somos mas. </span>
+      </div>
+      <div class="col-12 md:col-4 md:mb-4 mb-0 px-3">
+          <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+              <i class="pi pi-shield text-4xl text-blue-500"></i>
+          </span>
+          <div class="text-900 text-xl mb-3 font-medium">Certificación Internacional</div>
+          <span class="text-700 line-height-3">Certificaciones reconocidas en el mercado y de la industria.</span>
+      </div>
+  </div>
+</div>
+
+
+
+<div class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
+  <div class="font-bold mr-8">🔥 HotSale!</div>
+  <div class="align-items-center hidden lg:flex">
+      <span class="line-height-3">Aprende, crea, comparte: el ciclo de éxito en programación.</span>
+  </div>
+  <a class="flex align-items-center ml-2 mr-8">
+      <a class="text-white" href="#"><span class="underline font-bold">Learn More</span></a>
+  </a>
+  <a pRipple class="flex align-items-center no-underline justify-content-center border-circle text-gray-50 hover:bg-bluegray-700 cursor-pointer transition-colors transition-duration-150" style="width:2rem; height: 2rem">
+      <i class="pi pi-times"></i>
+  </a>
+</div>
+
+<p-carousel
+[value]="products" [numVisible]="3" [numScroll]="3" [circular]="false"
+[responsiveOptions]="responsiveOptions">
+  <ng-template let-product pTemplate="item">
+      <div class="border-1 surface-border border-round m-2 text-center py-5 px-3 mt-5">
+          <div class="mb-3">
+              <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="w-6 shadow-2" />
+          </div>
+          <div>
+              <h4 class="mb-1">{{ product.name }}</h4>
+              <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6>
+              <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
+              <div class="car-buttons mt-5 p-button-secondary">
+                  <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+                  <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
+              </div>
+          </div>
+      </div>
+  </ng-template>
+</p-carousel>
+
+<p-footer class="custom-footer">
+  <div class="social-links">
+    <a href="#"><i class="pi pi-facebook text-blue-500"></i></a>
+    <a href="#"><i class="pi pi-twitter text-blue-500"></i></a>
+    <a href="#"><i class="pi pi-linkedin text-blue-500"></i></a>
+  </div>
+  <div class="copyright">
+    © 2023 Todos los derechos reservados
+  </div>
+</p-footer>
+<!-- <pre>{{authUser$ | async | json}}</pre> -->
