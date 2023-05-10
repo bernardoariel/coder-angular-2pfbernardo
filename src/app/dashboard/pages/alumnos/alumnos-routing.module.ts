@@ -8,7 +8,8 @@ const routes: Routes = [
     children:[
       {
         path:'listado',
-        component:ListadoComponent
+        component:ListadoComponent,
+        data: { breadcrumb: {alias: 'dashboard/ALUMNOS/listado'} },
       },
       {
         path:'**',

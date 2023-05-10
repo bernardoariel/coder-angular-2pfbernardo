@@ -12,3 +12,29 @@
   padding: 20px;
 }
 
+.menu-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu-button {
+  margin-right: 1rem;
+}
+
+.title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+ .title {
+  font-size: 1.5rem;
+
+}
+
+.breadcrumbs {
+  font-size: 0.50rem;
+  margin-top: -15px;
+  margin-left: 2px;
+}

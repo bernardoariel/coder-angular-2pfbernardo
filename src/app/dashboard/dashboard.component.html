@@ -42,20 +42,18 @@
   <div class="example-sidenav-content">
     <!-- TOOLBAR  -->
     <mat-toolbar color="primary">
-      <div class="flex justify-content-between">
-        <div>
-          <button
-            (click)="drawer.toggle()"
-            mat-icon-button
-            class="example-icon"
-            aria-label="Example icon-button with menu icon"
-          >
+      <div class="menu-wrapper">
+        <div class="menu-button">
+          <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
             <mat-icon>menu</mat-icon>
           </button>
-          <span>{{ titulo }}</span>
         </div>
-        <p></p>
+        <div class="title-wrapper">
+          <span class="title">{{ title }}</span>
+          <small class="breadcrumbs">{{ breadcrumbs | async }}</small>
+        </div>
       </div>
+      <p></p>
     </mat-toolbar>
 
     <main>

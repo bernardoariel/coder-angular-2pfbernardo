@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,8 @@ import { InscripcionComponent } from '../inscripcion/inscripcion.component';
 import { DetalleComponent } from '../detalle/detalle.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../confirm/confirm.component';
+import { TitleService } from 'src/app/core/services/title.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface InscripcionOption {
   nivelCurso: string | null;
@@ -33,11 +35,14 @@ export class ListadoComponent  implements OnInit , OnDestroy {
   dataSource: MatTableDataSource<Inscripcion> = new MatTableDataSource();
   displayedColumns: string[] = ['nombre', 'fechas','modo','estado','acciones'];
   isLoading = true
-
+  titulo:string = 'Click Academy';
   constructor(
     private inscripcionService: InscripcionService,
     private matDialog: MatDialog,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private titleService: TitleService,
+    private cd: ChangeDetectorRef,
+    private activatedRoute:ActivatedRoute
     ){
 
   }
@@ -55,6 +60,16 @@ export class ListadoComponent  implements OnInit , OnDestroy {
         this.dataSource.data = inscripciones;
         this.isLoading = false
       })
+      setTimeout(() => {
+        this.activatedRoute.data.subscribe(data => {
+          this.titulo = data['breadcrumb'].alias;
+          console.log('this.titulo::: ', this.titulo);
+          this.titleService.setTitle(this.titulo);
+        });
+
+        // this.titleService.setTitle('/dashboard/alumnos/listado');
+        this.cd.detectChanges();
+      }, 0);
   }
   ngOnDestroy(): void {
     if (this.subscripcionRef) {

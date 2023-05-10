@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 
@@ -10,6 +10,8 @@ import { CursoComponent } from '../curso/curso.component';
 import { DetalleComponent } from '../detalle/detalle.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../confirm/confirm.component';
+import { TitleService } from 'src/app/core/services/title.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class ListadoComponent  implements OnInit , OnDestroy{
   dataSource: MatTableDataSource<Curso> = new MatTableDataSource();
   displayedColumns: string[] = ['nombre', 'foto','acciones'];
   isLoading = true
+  titulo:string = 'Click Academy';
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = (filterValue as string).trim().toLowerCase();
@@ -33,7 +36,10 @@ export class ListadoComponent  implements OnInit , OnDestroy{
   constructor(
     private cursoService: CursoService,
     private matDialog: MatDialog,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private titleService: TitleService,
+    private cd: ChangeDetectorRef,
+    private activatedRoute:ActivatedRoute
     ){
 
   }
@@ -49,6 +55,16 @@ export class ListadoComponent  implements OnInit , OnDestroy{
       this.dataSource.data = cursos
       this.isLoading = false
     })
+    setTimeout(() => {
+      this.activatedRoute.data.subscribe(data => {
+        this.titulo = data['breadcrumb'].alias;
+        console.log('this.titulo::: ', this.titulo);
+        this.titleService.setTitle(this.titulo);
+      });
+
+      // this.titleService.setTitle('/dashboard/alumnos/listado');
+      this.cd.detectChanges();
+    }, 0);
   }
   crearCurso(){
     const dialog =  this.matDialog.open(CursoComponent)

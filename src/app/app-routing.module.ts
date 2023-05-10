@@ -21,6 +21,7 @@ const routes: Routes = [
     path:'dashboard',
     canActivate:[AutGuard],
     component: DashboardComponent,
+    data: { breadcrumb: {alias: '/dashboard'} },
     children:[
       {
         path:'alumnos',

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
 import { differenceInYears } from 'date-fns';
@@ -10,6 +10,8 @@ import { DetalleComponent } from '../detalle/detalle.component';
 import { id } from 'date-fns/locale';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../confirm/confirm.component';
+import { TitleService } from 'src/app/core/services/title.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -26,11 +28,17 @@ export class ListadoComponent implements OnInit, OnDestroy  {
   ultimoIdSubscription!: Subscription;
   durationInSeconds = 5;
   isLoading = true;
+  titulo:string = 'Click Academy';
   constructor(
     private alumnoService: AlumnoService,
     private matDialog: MatDialog,
-    private snackBar:MatSnackBar
-  ) { }
+    private snackBar:MatSnackBar,
+    private titleService: TitleService,
+    private cd: ChangeDetectorRef,
+    private activatedRoute:ActivatedRoute
+  ) {
+
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -43,6 +51,16 @@ export class ListadoComponent implements OnInit, OnDestroy  {
       this.dataSource.data = alumnos;
       this.isLoading = false;
     })
+    setTimeout(() => {
+      this.activatedRoute.data.subscribe(data => {
+        this.titulo = data['breadcrumb'].alias;
+        console.log('this.titulo::: ', this.titulo);
+        this.titleService.setTitle(this.titulo);
+      });
+
+      // this.titleService.setTitle('/dashboard/alumnos/listado');
+      this.cd.detectChanges();
+    }, 0);
   }
 
   ngOnDestroy(): void {
