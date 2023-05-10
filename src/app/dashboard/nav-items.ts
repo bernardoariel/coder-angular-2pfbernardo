@@ -15,7 +15,12 @@ const linkSidebar:NavItem[]=[
     path:'inscripciones',
     titulo:'Inscripciones',
     icon:'assignment'
-  }
+  },
+  {
+    path:'usuarios',
+    titulo:'Usuarios',
+    icon: 'manage_accounts'
+  },
 ]
 
 export default linkSidebar

@@ -36,6 +36,10 @@ const routes: Routes = [
         loadChildren:()=>import('./dashboard/pages/inscripciones/inscripciones.module').then(m=>m.InscripcionesModule)
       },
       {
+        path:'usuarios',
+        loadChildren:()=>import('./dashboard/pages/usuarios/usuarios.module').then(m=>m.UsuariosModule)
+      },
+      {
         path:'',
         component:HomeComponent
 
