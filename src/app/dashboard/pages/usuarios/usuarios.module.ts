@@ -6,6 +6,8 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { ListadoComponent } from './listado/listado.component';
 import { DetalleComponent } from './detalle/detalle.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { MaterialModule } from 'src/app/shared/material/material.module';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ConfirmComponent } from './confirm/confirm.component';
   ],
   imports: [
     CommonModule,
-    UsuariosRoutingModule
+    UsuariosRoutingModule,
+    MaterialModule,
+    PipesModule
   ]
 })
 export class UsuariosModule { }
