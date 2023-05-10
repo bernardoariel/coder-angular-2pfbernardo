@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ChangeDetectorRef, OnInit } from '@angular/core';
 import linkSidebar from './nav-items';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, take } from 'rxjs';
 import { AuthService, Usuario } from '../core/services/auth.service';
 import { TitleService } from '../core/services/title.service';
 
@@ -13,6 +13,7 @@ import { TitleService } from '../core/services/title.service';
 export class DashboardComponent implements OnInit, OnDestroy{
   links = linkSidebar;
   authUser$:Observable<Usuario | null>;
+  authUserRole!:Usuario | null;
   destroyed$ = new Subject<void>();
   title:string = 'Click Academy';
   titulo:string = '';
@@ -26,7 +27,14 @@ export class DashboardComponent implements OnInit, OnDestroy{
   private activatedRoute:ActivatedRoute
  ) {
   this.authUser$ = this.authService.obtenerUsuarioAutenticado()
+  console.log('this.authUser$::: ', this.authUser$);
   this.breadcrumbs = this.titleService.obtenerBreadcrumbs();
+  this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
+    (usuario: Usuario | null) => {
+      this.authUserRole = usuario;
+      console.log('Valor de authUser:', this.authUserRole?.role);
+    }
+  );
   // console.log('this.breadcrumbs ::: ', this.breadcrumbs );
  }
   ngOnInit(): void {

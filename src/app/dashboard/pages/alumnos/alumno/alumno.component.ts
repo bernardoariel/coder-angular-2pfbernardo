@@ -4,6 +4,8 @@ import { ListadoComponent } from '../listado/listado.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
+import { AuthService, Usuario } from 'src/app/core/services/auth.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-alumno',
@@ -55,7 +57,7 @@ export class AlumnoComponent {
     email:this.emailControl,
     role:this.selectedRoleControl
   })
-
+  authUserRole: Usuario | null = null;
 
   seleccionarGenero(genero: string) {
 
@@ -69,6 +71,7 @@ export class AlumnoComponent {
   }
   constructor(
     private usuarioService: UsuarioService,
+    private authService: AuthService,
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { alumno?: Estudiante }
   ){
@@ -86,7 +89,18 @@ export class AlumnoComponent {
 
         this.emailControl.setValue(usuario[0].email)
       })
-
+      this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
+        (usuario: Usuario | null) => {
+          console.log('Usuario::: ', usuario);
+          this.authUserRole = usuario;
+          if(this.authUserRole?.role == 'Estudiante'){
+            this.tipoRole = ['Estudiante'];
+          }else if(this.authUserRole?.role == 'Profesor'){
+            this.tipoRole = ['Profesor'];
+          }
+          console.log('Valor de authUser:', this.authUserRole?.role);
+        }
+      );
 
     }
   }

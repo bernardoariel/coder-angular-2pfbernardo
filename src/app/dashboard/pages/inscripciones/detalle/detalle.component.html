@@ -19,7 +19,7 @@
     <h3 class="me-auto">Alumnos Inscriptos en este Curso de: {{idCurso}} - {{nombreCurso}}</h3>
     <button mat-flat-button class="ms-auto">Agregar Alumno</button>
   </div> -->
-  <div class="d-flex align-items-center" *ngIf="alumnosNoInscriptos.length>0">
+  <div class="d-flex align-items-center" *ngIf="alumnosNoInscriptos.length>0 && authUserRole?.role=='Admin'">
     <mat-form-field class="me-3">
       <mat-label>Seleccionar alumno</mat-label>
       <mat-select #alumnoSelect>
@@ -30,6 +30,7 @@
     </mat-form-field>
     <button mat-flat-button class="mb-3" (click)="agregarAlumno(alumnoSelect?.value)" [disabled]="esFechaFinAnteriorAHoy">Agregar Alumno</button>
   </div>
+  <button mat-flat-button class="mb-3" (click)="agregarEstudiante(authUserRole!)" [disabled]="esFechaFinAnteriorAHoy">Quiero Anotarme!</button>
   <mat-accordion class="example-headers-align">
 
     <mat-expansion-panel *ngFor="let alumno of alumnosInscriptos; let i = index" [expanded]="false"  hideToggle>
@@ -44,7 +45,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-action-row >
+      <mat-action-row *ngIf="authUserRole?.role=='Admin'">
         <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)" [disabled]="esFechaFinAnteriorAHoy"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
       </mat-action-row>
     </mat-expansion-panel>

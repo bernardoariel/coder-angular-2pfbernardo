@@ -6,7 +6,7 @@
     <mat-label>Buscar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="buscar ..." #input>
   </mat-form-field>
-  <button mat-flat-button color="primary" (click)="crearCurso()">Agregar Curso</button>
+  <button mat-flat-button color="primary" *ngIf="authUserRole?.role=='Admin'" (click)="crearCurso()">Agregar Curso</button>
 </div>
 
 <div *ngIf="isLoading" class="loading-container">
@@ -39,11 +39,11 @@
         <mat-icon>visibility</mat-icon>
         Ver
       </button>
-      <button mat-button color="primary" (click)="editarCurso(curso)">
+      <button mat-button color="primary" [disabled]="authUserRole?.role!='Admin'" (click)="editarCurso(curso)">
         <mat-icon>edit</mat-icon>
         Editar
       </button>
-      <button mat-button color="warn" (click)="eliminarCurso(curso)" >
+      <button mat-button color="warn" [disabled]="authUserRole?.role!='Admin'" (click)="eliminarCurso(curso)" >
         <mat-icon>delete</mat-icon>
         Eliminar
       </button>

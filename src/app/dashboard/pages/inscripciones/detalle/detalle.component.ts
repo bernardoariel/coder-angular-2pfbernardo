@@ -5,6 +5,8 @@ import { Inscripcion, InscripcionService } from 'src/app/core/services/inscripci
 import { CursoService } from 'src/app/core/services/curso.service';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
 import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
+import { AuthService, Usuario } from 'src/app/core/services/auth.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-detalle',
@@ -25,13 +27,14 @@ export class DetalleComponent {
   alumnosInscriptos: Estudiante[] = []
   fechaFin!:Date
   esFechaFinAnteriorAHoy: boolean = false;
-
+  authUserRole!:Usuario | null;
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { inscripcion?: Inscripcion },
     private cursoService:CursoService,
     private alumnosService:AlumnoService,
-    private inscripcionesService:InscripcionService
+    private inscripcionesService:InscripcionService,
+    private authService: AuthService
   ){
     if(data && data.inscripcion){
       console.log('datos en detalle ', data.inscripcion);
@@ -65,6 +68,13 @@ export class DetalleComponent {
       })
 
     }
+    this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
+      (usuario: Usuario | null) => {
+        console.log('Usuario::: ', usuario);
+        this.authUserRole = usuario;
+
+      }
+    );
   }
   obtenerAlumnosInscriptos(alumnosInscriptos: number[]): void {
     console.log('alumnosInscriptos::: ', alumnosInscriptos);
@@ -110,5 +120,9 @@ export class DetalleComponent {
 
     })
   }
+  agregarEstudiante(usuario: Usuario){
+    //TODO: Buscar un Estudiante por id de los estudiantes
+  }
+  //TODO desuscribirme de un curso
 
 }

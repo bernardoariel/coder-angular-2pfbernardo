@@ -1,4 +1,4 @@
-<h2>Listado de ALumnos</h2>
+<h2>Listado de Alumnos</h2>
 <hr>
 
 <div class="filter-container">
@@ -6,7 +6,7 @@
     <mat-label>Buscar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="buscar ..." #input>
   </mat-form-field>
-  <button mat-flat-button color="primary" (click)="crearAlumno()">Agregar Alumno</button>
+  <button mat-flat-button color="primary" *ngIf="authUserRole?.role == 'Admin'" (click)="crearAlumno()">Agregar Alumno</button>
 </div>
 <div *ngIf="isLoading" class="loading-container">
   <mat-spinner diameter="50"></mat-spinner>
@@ -54,11 +54,11 @@
         <mat-icon>visibility</mat-icon>
         Ver
       </button>
-      <button mat-button color="primary" (click)="editarAlumno(estudiante)">
+      <button mat-button color="primary" [disabled]="authUserRole?.role !== 'Admin' && authUserRole?.idEstudiante !=estudiante.id" (click)="editarAlumno(estudiante)">
         <mat-icon>edit</mat-icon>
         Editar
       </button>
-      <button mat-button color="warn" (click)="eliminarAlumno(estudiante)">
+      <button mat-button color="warn" [disabled]="authUserRole?.role !== 'Admin'" (click)="eliminarAlumno(estudiante)">
         <mat-icon>delete</mat-icon>
         Eliminar
       </button>

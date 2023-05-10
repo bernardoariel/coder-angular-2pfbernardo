@@ -1,8 +1,9 @@
+import { AuthService, Usuario } from 'src/app/core/services/auth.service';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
 import { differenceInYears } from 'date-fns';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, take } from 'rxjs';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AlumnoComponent } from '../alumno/alumno.component';
@@ -29,15 +30,24 @@ export class ListadoComponent implements OnInit, OnDestroy  {
   durationInSeconds = 5;
   isLoading = true;
   titulo:string = 'Click Academy';
+  authUserRole!:Usuario | null;
   constructor(
     private alumnoService: AlumnoService,
     private matDialog: MatDialog,
     private snackBar:MatSnackBar,
     private titleService: TitleService,
     private cd: ChangeDetectorRef,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+    private authService:AuthService
   ) {
+    this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
+      (usuario: Usuario | null) => {
+        console.log('Usuario::: ', usuario);
+        this.authUserRole = usuario;
 
+        console.log('Valor de authUser:', this.authUserRole?.role);
+      }
+    );
   }
 
   applyFilter(event: Event) {

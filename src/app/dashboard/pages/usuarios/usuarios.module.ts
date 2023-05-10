@@ -8,6 +8,7 @@ import { DetalleComponent } from './detalle/detalle.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
     CommonModule,
     UsuariosRoutingModule,
     MaterialModule,
-    PipesModule
+    PipesModule,
+    ReactiveFormsModule
   ]
 })
 export class UsuariosModule { }

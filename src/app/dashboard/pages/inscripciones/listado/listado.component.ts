@@ -2,7 +2,7 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Inscripcion, InscripcionService } from 'src/app/core/services/inscripcion.service';
 import { InscripcionComponent } from '../inscripcion/inscripcion.component';
 import { DetalleComponent } from '../detalle/detalle.component';
@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { TitleService } from 'src/app/core/services/title.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService, Usuario } from 'src/app/core/services/auth.service';
 
 interface InscripcionOption {
   nivelCurso: string | null;
@@ -36,15 +37,24 @@ export class ListadoComponent  implements OnInit , OnDestroy {
   displayedColumns: string[] = ['nombre', 'fechas','modo','estado','acciones'];
   isLoading = true
   titulo:string = 'Click Academy';
+  authUserRole!:Usuario | null;
   constructor(
     private inscripcionService: InscripcionService,
     private matDialog: MatDialog,
     private snackBar:MatSnackBar,
     private titleService: TitleService,
     private cd: ChangeDetectorRef,
-    private activatedRoute:ActivatedRoute
-    ){
+    private activatedRoute:ActivatedRoute,
+    private authService:AuthService
 
+    ){
+      this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
+        (usuario: Usuario | null) => {
+          console.log('Usuario::: ', usuario);
+          this.authUserRole = usuario;
+
+        }
+      );
   }
 
   applyFilter(event: Event) {

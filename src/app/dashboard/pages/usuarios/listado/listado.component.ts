@@ -7,6 +7,8 @@ import { TitleService } from 'src/app/core/services/title.service';
 import { ActivatedRoute } from '@angular/router';
 
 import {  UsuarioService } from 'src/app/core/services/usuario.service';
+import { UsuarioComponent } from '../usuario/usuario.component';
+import { ConfirmComponent } from '../confirm/confirm.component';
 interface Usuario{
   id:number;
   idEstrudiante:number;
@@ -72,27 +74,21 @@ export class ListadoComponent implements OnInit, OnDestroy {
       this.subscripcionRef.unsubscribe();
     }
   }
+  crearUsuario(){
 
+    const dialog = this.matDialog.open(UsuarioComponent);
 
-
- crearAlumno(){
-
-   /*  const dialog = this.matDialog.open(AlumnoComponent);
-    this.alumnoService.getUltimoAlumno().subscribe((ultimoAlumno) => {
-      this.ultimoId = ultimoAlumno.id || 0;
-    });
     dialog.afterClosed().subscribe((formValue) => {
-
-      if(formValue  && Object.keys(formValue).length > 0){
-        const alumnoNuevo = {
+      if(formValue){
+        //TODO: cambiar idestudiante por algo mas generico para tener estudiantes profesores y admin
+        const usurioNuevo = {
           ...formValue,
-          fotoPerfilUrl:`https://randomuser.me/api/portraits/med/men/${this.ultimoId + 1}.jpg`,
-          fotoUrl: `https://randomuser.me/api/portraits/men/${this.ultimoId + 1}.jpg`,
+          "idEstudiante": null
         }
-        this.alumnoService.agregarAlumno(alumnoNuevo).subscribe(
-          (alumno) =>{
-            this.dataSource.data = (this.dataSource.data as Estudiante[]).concat(alumno)
-            this.snackBar.open('Estudiante agregado con exito', '', {
+        this.usuarioService.agregarUsuario(usurioNuevo).subscribe(
+          (usuario)=>{
+            this.dataSource.data = (this.dataSource.data as Usuario[]).concat(usuario)
+            this.snackBar.open('Usuario agregado con exito', '', {
               duration: 3000,
               horizontalPosition: 'center',
               verticalPosition: 'top',
@@ -100,27 +96,31 @@ export class ListadoComponent implements OnInit, OnDestroy {
           }
         )
       }
-    }); */
-  }
-  eliminarAlumno(alumnoDelete: Usuario): void {
-   /*  const dialogRef =  this.matDialog.open(ConfirmComponent,{
-      data: 'Está seguro que desea eliminar este Alumno?'
     })
+
+  }
+  eliminarUsuario(usuarioDelete: Usuario): void {
+     const dialogRef =  this.matDialog.open(ConfirmComponent,{
+      data: 'Está seguro que desea eliminar este Usuario?'
+    })
+    //TODO si idEstudiante eliminamos solo al usuario , si idEstudiante no es null eliminamos al usuario y al estudiante
+    //TODO informar a quien se va a eliminar
     dialogRef.afterClosed().subscribe(result => {
       if(!result) return;
-      this.alumnoService.borrarAlumno(alumnoDelete.id!).subscribe(
+      this.usuarioService.borrarUsuario(usuarioDelete.id!).subscribe(
         () => {
-            this.dataSource.data = (this.dataSource.data as Estudiante[]).filter((alumno) => alumno.id !== alumnoDelete.id);
+            this.dataSource.data = (this.dataSource.data as Usuario[]).filter((usuario) => usuario.id !== usuarioDelete.id);
         }
       )
-    }); */
+    });
 
 }
-  editarAlumno(alumno: Usuario) {
+  editarUsuario(usuario: Usuario) {
 
-   /*  const dialog = this.matDialog.open(AlumnoComponent, {
+
+    const dialog = this.matDialog.open(UsuarioComponent, {
       data: {
-        alumno
+        usuario
       }
     });
 
@@ -128,26 +128,26 @@ export class ListadoComponent implements OnInit, OnDestroy {
 
       if (formValue) {
         const alumnoEditado = {
-          ...alumno,
+          ...usuario,
           ...formValue
         };
-        this.alumnoService.actualizarAlumno(alumnoEditado).subscribe((alumno)=>{
-          console.log('alumno::: ', alumno);
-          const index = this.dataSource.data.findIndex(a => a.id === alumno.id);
+        this.usuarioService.actualizarUsuario(alumnoEditado).subscribe((usuario)=>{
+          const index = this.dataSource.data.findIndex(a => a.id === usuario.id);
+
           if (index !== -1) {
-            this.dataSource.data[index] = alumno;
+            this.dataSource.data[index] = usuario;
             this.dataSource.data = [...this.dataSource.data];
           }
         });
 
       }
-    }); */
+    });
   }
 
 
-  detalleAlumno(alumno:Usuario){
+  /* detalleAlumno(alumno:Usuario){
 
-   /*  const dialog =  this.matDialog.open(DetalleComponent, {
+  const dialog =  this.matDialog.open(DetalleComponent, {
       data:{
         alumno
       }
@@ -158,6 +158,6 @@ export class ListadoComponent implements OnInit, OnDestroy {
        if(formValue){
         // this.alumnoService.editarAlumno(alumno.id!, formValue)
        }
-      }) */
-  }
+      })
+  } */
 }

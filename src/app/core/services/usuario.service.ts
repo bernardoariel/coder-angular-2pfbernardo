@@ -47,4 +47,19 @@ export class UsuarioService {
 
     return token;
   }
+
+  agregarUsuario( usuario: Usuario): Observable<Usuario>{
+    const userNew ={
+      ...usuario,
+      token:this.generateRandomToken(16)
+
+    }
+    return this.http.post<Usuario>(`${ this.baseUrl }/usuarios`, userNew)
+  }
+  borrarUsuario( id: number): Observable<any>{
+    return this.http.delete<any>(`${ this.baseUrl }/usuarios/${ id }`)
+  }
+  actualizarUsuario( usuario: Usuario): Observable<Usuario>{
+    return this.http.put<Usuario>(`${ this.baseUrl }/usuarios/${ usuario.id }`, usuario)
+  }
 }

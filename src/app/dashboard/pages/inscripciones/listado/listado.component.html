@@ -6,7 +6,7 @@
     <mat-label>Buscar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="buscar..." #input>
   </mat-form-field>
-  <button mat-flat-button color="primary" (click)="crearInscripcion()">Publicar Nuevo Curso</button>
+  <button mat-flat-button color="primary" *ngIf="authUserRole?.role =='Admin'" (click)="crearInscripcion()">Publicar Nuevo Curso</button>
 </div>
 <div *ngIf="isLoading" class="loading-container">
   <mat-spinner diameter="50"></mat-spinner>
@@ -47,11 +47,11 @@
         <mat-icon>visibility</mat-icon>
         Ver
       </button>
-      <button mat-button color="primary" (click)="editariInscripcion(inscripcion)"[disabled]="getEstadoInscripcion(inscripcion) === 'Finalizado'">
+      <button mat-button color="primary" (click)="editariInscripcion(inscripcion)"[disabled]="getEstadoInscripcion(inscripcion) === 'Finalizado' || authUserRole?.role !='Admin'">
         <mat-icon>edit</mat-icon>
         Editar
       </button>
-      <button mat-button color="warn" (click)="eliminarInscripcion(inscripcion)" [disabled]="getEstadoInscripcion(inscripcion) === 'Finalizado'">
+      <button mat-button color="warn" (click)="eliminarInscripcion(inscripcion)" [disabled]="getEstadoInscripcion(inscripcion) === 'Finalizado' || authUserRole?.role !='Admin'">
         <mat-icon>delete</mat-icon>
         Eliminar
       </button>

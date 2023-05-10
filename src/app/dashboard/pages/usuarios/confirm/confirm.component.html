@@ -1,1 +1,5 @@
-<p>confirm works!</p>
+<div mat-dialog-content>{{mensaje}}</div>
+<div mat-dialog-actions>
+  <button mat-flat-button (click)="onClickNO()">No</button>
+  <button mat-flat-button mat-dialog-close="true">SI</button>
+</div>

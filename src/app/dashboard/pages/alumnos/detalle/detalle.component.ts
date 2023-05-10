@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ListadoComponent } from '../listado/listado.component';
 import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
 import { InscripcionService } from 'src/app/core/services/inscripcion.service';
+import { AuthService, Usuario } from 'src/app/core/services/auth.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-detalle',
@@ -17,8 +19,10 @@ export class DetalleComponent {
   fechaNacimiento: any
   cursosDelAlumno: any;
   alumnoId!: number
+  authUserRole:Usuario | null = null;
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
+    private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data: { alumno?: Estudiante },
     private inscripcionesService: InscripcionService
   ){
@@ -33,7 +37,14 @@ export class DetalleComponent {
         this.cursosDelAlumno = cursos
         console.log('this.cursosDelAlumno ::: ', this.cursosDelAlumno );
       })
+      this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
+        (usuario: Usuario | null) => {
+          console.log('Usuario::: ', usuario);
+          this.authUserRole = usuario;
 
+         
+        }
+      );
     }
   }
   eliminarCurso(curso:any) {

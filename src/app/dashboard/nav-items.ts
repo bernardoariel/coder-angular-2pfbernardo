@@ -3,7 +3,7 @@ import { NavItem } from "../core/interfaces/navItem.interface"
 const linkSidebar:NavItem[]=[
   {
     path:'alumnos',
-    titulo:'Estudiantes',
+    titulo:'Alumnos',
     icon: 'person'
   },
   {

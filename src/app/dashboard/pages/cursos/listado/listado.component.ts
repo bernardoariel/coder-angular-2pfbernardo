@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 
 import { CursoService } from 'src/app/core/services/curso.service';
@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { TitleService } from 'src/app/core/services/title.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService, Usuario } from 'src/app/core/services/auth.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class ListadoComponent  implements OnInit , OnDestroy{
   displayedColumns: string[] = ['nombre', 'foto','acciones'];
   isLoading = true
   titulo:string = 'Click Academy';
+  authUserRole!:Usuario | null;
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = (filterValue as string).trim().toLowerCase();
@@ -39,9 +41,16 @@ export class ListadoComponent  implements OnInit , OnDestroy{
     private snackBar:MatSnackBar,
     private titleService: TitleService,
     private cd: ChangeDetectorRef,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+    private authService:AuthService
     ){
+      this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
+        (usuario: Usuario | null) => {
+          console.log('Usuario::: ', usuario);
+          this.authUserRole = usuario;
 
+        }
+      );
   }
   ngOnDestroy(): void {
     if (this.subscripcionRef) {

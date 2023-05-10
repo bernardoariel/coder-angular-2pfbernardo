@@ -9,24 +9,21 @@
 
       <img width="50" height="50" src="../../assets/img/usuarios/admin.png">
 
-      <p class="mt-2">{{ (authUser$ | async)?.nombre | titlecase }} - {{ (authUser$ | async)?.apellido | titlecase }}</p>
-      <p>{{ (authUser$ | async)?.email | uppercase }}</p>
+      <p class="mt-2">{{ (authUser$ | async)?.email | lowercase }} </p>
+      <p>{{ (authUser$ | async)?.role | uppercase }}</p>
 
     </div>
 
-
     <mat-nav-list>
-     <a
-        [routerLink]="link.path"
-        mat-list-item
-        *ngFor="let link of links"
-      >
-        <mat-icon *ngIf="link.icon">{{ link.icon }}</mat-icon> {{ link.titulo }}
-      </a>
-      <a mat-list-item (click)="logout()">
-        Cerrar Sesión
-      </a>
+      <ng-container *ngFor="let link of links">
+        <ng-container *ngIf="link.titulo !== 'Usuarios' || (link.titulo === 'Usuarios' && authUserRole?.role === 'Admin')">
+          <a [routerLink]="link.path" mat-list-item>
+            <mat-icon *ngIf="link.icon">{{ link.icon }}</mat-icon> {{ link.titulo }}
+          </a>
+        </ng-container>
+      </ng-container>
 
+      <a mat-list-item (click)="logout()">Cerrar Sesión</a>
     </mat-nav-list>
 
     <!-- <p>Auto-resizing sidenav</p>
