@@ -32,7 +32,7 @@ export class UsuarioComponent {
   valorEmail: string = '';
   usuarioForm = new FormGroup({
     email: this.emailControl,
-    apellido: this.passwordControl,
+    usuario: this.passwordControl,
     role:this.selectedRoleControl
   })
 

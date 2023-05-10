@@ -549,6 +549,7 @@ export class LandingComponent implements OnInit{
                   // console.log('estudiante::: ', estudiante);
                   // Agrega el objeto alumno a la lista
                   this.estudiante = estudiante;
+                  console.log('this.estudiante::: ', this.estudiante);
 
                 });
 
@@ -561,31 +562,7 @@ export class LandingComponent implements OnInit{
 
       });
 
-    /* this.authService.obtenerUsuarioAutenticado().subscribe(authUser => {
-      console.log('authUser::: ', authUser);
-      if(authUser){
 
-        this.idEstudiante = authUser!.idEstudiante!;
-        this.alumnosService.getEstudiantePorId(this.idEstudiante)
-        .subscribe(estudiante => {
-          // console.log('estudiante::: ', estudiante);
-          // Agrega el objeto alumno a la lista
-          this.estudiante = estudiante;
-
-        });
-
-      }else{
-
-      }
-
-    }); */
-    // console.log('this.authUser$::: ', this.authUser$);
-    /* this.alumnosService.getEstudiantePorId(this.authUser$._value?.idEstudiante)
-        .subscribe(estudiante => {
-          console.log('estudiante::: ', estudiante);
-          // Agrega el objeto alumno a la lista
-          this.estudiante = estudiante;
-        }); */
   }
   ngOnInit(): void {
 

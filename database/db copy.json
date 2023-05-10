@@ -1,0 +1,170 @@
+{
+  "alumnos": [
+    {
+      "nombre": "Ariel",
+      "apellido": "Bernardo",
+      "fechaNacimiento": "1974-08-26",
+      "genero": "Masculino",
+      "dni": "24159131",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg",
+      "id": 1
+    },
+    {
+      "nombre": "noelia",
+      "apellido": "gonzalez",
+      "fechaNacimiento": "1993-06-18",
+      "genero": "Femenino",
+      "dni": "30533170",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/2.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/2.jpg",
+      "id": 2
+    },
+    {
+      "nombre": "lorena",
+      "apellido": "benayo",
+      "fechaNacimiento": "2023-04-04",
+      "genero": "No especificado",
+      "dni": "1234562",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/3.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
+      "id": 3
+    }
+  ],
+  "cursos": [
+    {
+      "nombre": "Angular",
+      "foto": "https://i.ytimg.com/vi/qalOpo6Mc-8/maxresdefault.jpg",
+      "id": 9
+    },
+    {
+      "nombre": "JavaScript",
+      "foto": "https://miro.medium.com/v2/resize:fit:1400/1*BPSx-c--z6r7tY29L19ukQ.png",
+      "id": 10
+    },
+    {
+      "nombre": "Typescript",
+      "foto": "https://cdn.worldvectorlogo.com/logos/typescript-2.svg",
+      "id": 11
+    },
+    {
+      "nombre": "Laravel",
+      "foto": "https://codersfree.nyc3.cdn.digitaloceanspaces.com/posts/laravel-10-9-caracteristicas-que-debes-conocer.jpg",
+      "id": 13
+    },
+    {
+      "nombre": "Nest",
+      "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPRU6iVjlSx6G5QteZY3OHC_xDNmQqeWhbeANjePFuzSLrAiDOYL6WKfk8hO8EnL5zmmU&usqp=CAU",
+      "id": 14
+    },
+    {
+      "nombre": "IONIC",
+      "foto": "https://constructs.stampede-design.com/wp-content/uploads/2016/03/ionic-framework.jpg",
+      "id": 15
+    },
+    {
+      "nombre": "Php",
+      "foto": "imagen php",
+      "id": 16
+    }
+  ],
+  "inscripciones": [
+    {
+      "idCurso": "2",
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
+      "nombreCurso": "Python",
+      "nivelCurso": "Avanzado",
+      "tipoCurso": "Virtual",
+      "fecha_inicio": "2023-05-06",
+      "fecha_fin": "2023-05-07",
+      "alumnosInscriptos": [],
+      "id": 1
+    },
+    {
+      "idCurso": 2,
+      "detalleCurso": "MasterClass WPA",
+      "formatoCurso": "Clase",
+      "nombreCurso": "Python",
+      "nivelCurso": "Básico",
+      "tipoCurso": "Presencial",
+      "fecha_inicio": "2023-05-06",
+      "fecha_fin": "2023-05-07",
+      "alumnosInscriptos": [],
+      "id": 2
+    },
+    {
+      "idCurso": 9,
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
+      "nombreCurso": "Angulars",
+      "nivelCurso": "Intermedio",
+      "tipoCurso": "Presencial",
+      "fecha_inicio": "2023-05-07",
+      "fecha_fin": "2023-05-31",
+      "alumnosInscriptos": [
+        1
+      ],
+      "id": 3
+    },
+    {
+      "idCurso": 11,
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
+      "nombreCurso": "Typescript",
+      "nivelCurso": "Básico",
+      "tipoCurso": "Virtual",
+      "fecha_inicio": "2023-06-01",
+      "fecha_fin": "2023-06-30",
+      "alumnosInscriptos": [
+        2
+      ],
+      "id": 4
+    }
+  ],
+  "usuarios": [
+    {
+      "nombre": "ariel",
+      "apellido": "123456",
+      "email": "admin@admin.com",
+      "password": "123456",
+      "role": "Admin",
+      "token": "dsLnKJtyBluy0987876asdaasd",
+      "id": 1,
+      "idEstudiante": 0
+    },
+    {
+      "idEstudiante": 2,
+      "email": "ariel@bernardo.com.ar",
+      "password": "24159131",
+      "role": "Estudiante",
+      "token": "fodxJuyFPg7BjJs1",
+      "id": 2
+    },
+    {
+      "idEstudiante": 2,
+      "email": "nolluy6@jut.com",
+      "password": "30533170",
+      "role": "Estudiante",
+      "token": "eFsgf42qhtClEhqy",
+      "id": 3
+    },
+    {
+      "idEstudiante": 3,
+      "email": "aaa@hotmail.com",
+      "password": "1234562",
+      "role": "Estudiante",
+      "token": "fMKexyuYn6PFHzAA",
+      "id": 4
+    },
+    {
+      "email": "ariel@hotmail.com",
+      "apellido": "bernardo",
+      "role": "Estudiante",
+      "id": 5
+    }
+  ]
+}
