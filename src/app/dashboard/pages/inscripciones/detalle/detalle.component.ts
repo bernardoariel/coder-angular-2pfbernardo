@@ -120,8 +120,18 @@ export class DetalleComponent {
 
     })
   }
-  agregarEstudiante(usuario: Usuario){
-    //TODO: Buscar un Estudiante por id de los estudiantes
+  agregarEstudiante(usuario: Usuario) {
+    this.alumnosService.getEstudiantePorId(usuario.id).subscribe(estudiante => {
+      console.log(estudiante);
+      // Aquí puedes llamar a la función agregarInscripcionAlumno y pasar el estudiante como argumento
+      this.inscripcionesService.agregarInscripcionAlumno(this.idInscripcion, estudiante).subscribe(
+        inscripcion => {
+          console.log('inscripcion::: ', inscripcion);
+          this.alumnosInscriptos.push(estudiante);
+          this.alumnosNoInscriptos = this.alumnosNoInscriptos.filter(a => a.id !== estudiante.id);
+        }
+      );
+    });
   }
   //TODO desuscribirme de un curso
 

@@ -30,7 +30,7 @@
     </mat-form-field>
     <button mat-flat-button class="mb-3" (click)="agregarAlumno(alumnoSelect?.value)" [disabled]="esFechaFinAnteriorAHoy">Agregar Alumno</button>
   </div>
-  <button mat-flat-button class="mb-3" *ngIf="authUserRole?.role!='Admin'" (click)="agregarEstudiante(authUserRole!)" [disabled]="esFechaFinAnteriorAHoy">Quiero Anotarme!</button>
+  <button mat-flat-button class="mb-3" *ngIf="authUserRole?.role" (click)="agregarEstudiante(authUserRole!)" [disabled]="esFechaFinAnteriorAHoy">Quiero Anotarme!</button>
   <mat-accordion class="example-headers-align">
 
     <mat-expansion-panel *ngFor="let alumno of alumnosInscriptos; let i = index" [expanded]="false"  hideToggle>
