@@ -10,75 +10,6 @@
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg",
       "id": 1
-    },
-    {
-      "nombre": "Noelia",
-      "apellido": "Gonzalez",
-      "fechaNacimiento": "1993-02-18",
-      "genero": "Femenino",
-      "dni": "30533170",
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/2.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/2.jpg",
-      "id": 2
-    },
-    {
-      "nombre": "Lorena",
-      "apellido": "Maciel",
-      "fechaNacimiento": "1994-07-21",
-      "genero": "Masculino",
-      "dni": "30533171",
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/3.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
-      "id": 3
-    },
-    {
-      "usuario": "654321",
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/4.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/4.jpg",
-      "nombre": "user",
-      "apellido": "user",
-      "fechaNacimiento": "2021-01-01",
-      "genero": "Masculino",
-      "dni": "00000000",
-      "id": 4
-    },
-    {
-      "password": "666444",
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/5.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/5.jpg",
-      "nombre": "user",
-      "apellido": "user",
-      "fechaNacimiento": "2021-01-01",
-      "genero": "Masculino",
-      "dni": "00000000",
-      "id": 5
-    },
-    {
-      "password": "aaa123",
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/6.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/6.jpg",
-      "nombre": "user",
-      "apellido": "user",
-      "fechaNacimiento": "2021-01-01",
-      "genero": "Masculino",
-      "dni": "00000000",
-      "id": 6
-    },
-    {
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/7.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/7.jpg",
-      "nombre": "user",
-      "apellido": "user",
-      "fechaNacimiento": "2021-01-01",
-      "genero": "Masculino",
-      "dni": "00000000",
-      "id": 7
     }
   ],
   "cursos": [
@@ -86,11 +17,6 @@
       "nombre": "Angular",
       "foto": "https://i.ytimg.com/vi/qalOpo6Mc-8/maxresdefault.jpg",
       "id": 1
-    },
-    {
-      "nombre": "JavaScript",
-      "foto": "https://miro.medium.com/v2/resize:fit:1400/1*BPSx-c--z6r7tY29L19ukQ.png",
-      "id": 2
     }
   ],
   "inscripciones": [
@@ -99,13 +25,11 @@
       "detalleCurso": "",
       "formatoCurso": "Curso",
       "nombreCurso": "Angular",
-      "nivelCurso": "Intermedio",
-      "tipoCurso": "Presencial",
+      "nivelCurso": "Básico",
+      "tipoCurso": "Virtual",
       "fecha_inicio": "2023-06-01",
-      "fecha_fin": "2023-07-31",
-      "alumnosInscriptos": [
-        3
-      ],
+      "fecha_fin": "2023-06-30",
+      "alumnosInscriptos": [],
       "id": 1
     }
   ],
@@ -117,62 +41,6 @@
       "token": "dsLnKJtyBluy0987876asdaasd",
       "id": 1,
       "idEstudiante": 1
-    },
-    {
-      "idEstudiante": 2,
-      "email": "email@email.com",
-      "password": "30533170",
-      "role": "Estudiante",
-      "token": "gpPV6oGJBiNsmuqX",
-      "id": 2
-    },
-    {
-      "idEstudiante": 3,
-      "email": "aaa@aaa.com",
-      "password": "30533171",
-      "role": "Estudiante",
-      "token": "2IVNaKEliL36otj8",
-      "id": 3
-    },
-    {
-      "idEstudiante": null,
-      "email": "prueba@prueba.com",
-      "password": "123465",
-      "role": "Estudiante",
-      "token": "mE0bQa2w81NEiR49",
-      "id": 4
-    },
-    {
-      "idEstudiante": 4,
-      "email": "p2@p2.com",
-      "password": "00000000",
-      "role": "Estudiante",
-      "token": "5pX5XRSNid9GYYZL",
-      "id": 5
-    },
-    {
-      "idEstudiante": 5,
-      "email": "op.op@com",
-      "password": "00000000",
-      "role": "Estudiante",
-      "token": "zyGkX5wTaPdTiw0B",
-      "id": 6
-    },
-    {
-      "idEstudiante": 6,
-      "email": "all@jo.com",
-      "password": "00000000",
-      "role": "Estudiante",
-      "token": "Ow1Ikpuvn8yyMkFJ",
-      "id": 7
-    },
-    {
-      "idEstudiante": 7,
-      "email": "perez@hotmail.com",
-      "password": "123654",
-      "role": "Estudiante",
-      "token": "DdOyeLpEYRjASGUF",
-      "id": 8
     }
   ]
 }

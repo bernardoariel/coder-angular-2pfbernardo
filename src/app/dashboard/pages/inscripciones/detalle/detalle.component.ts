@@ -16,7 +16,7 @@ import { take } from 'rxjs';
 export class DetalleComponent {
   titulo:string = '';
   tipo:string = '';
-  foto:string = '';
+  foto:string = './assets/foto.js';
   fotoDefault:string = '../assets/img/cursos/default.png'
   idCurso:number = 0;
   idInscripcion: number = 0;
