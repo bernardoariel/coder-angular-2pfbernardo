@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import {  UsuarioService } from 'src/app/core/services/usuario.service';
 import { UsuarioComponent } from '../usuario/usuario.component';
 import { ConfirmComponent } from '../confirm/confirm.component';
+import { AlumnoService } from 'src/app/core/services/alumno.service';
+import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
 interface Usuario{
   id:number;
   idEstrudiante:number;
@@ -38,7 +40,8 @@ export class ListadoComponent implements OnInit, OnDestroy {
     private snackBar:MatSnackBar,
     private titleService: TitleService,
     private cd: ChangeDetectorRef,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+    private alumnoService:AlumnoService
   ) {
 
   }
@@ -74,7 +77,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
       this.subscripcionRef.unsubscribe();
     }
   }
-  crearUsuario(){
+  /* crearUsuario(){
 
     const dialog = this.matDialog.open(UsuarioComponent);
 
@@ -98,6 +101,47 @@ export class ListadoComponent implements OnInit, OnDestroy {
       }
     })
 
+  } */
+  crearUsuario(){
+
+    const dialog = this.matDialog.open(UsuarioComponent);
+    this.alumnoService.getUltimoAlumno().subscribe((ultimoAlumno) => {
+      this.ultimoId = ultimoAlumno.id || 0;
+    });
+    dialog.afterClosed().subscribe((formValue) => {
+      console.log('formValue::: ', formValue);
+
+      if(formValue  && Object.keys(formValue).length > 0){
+        const alumnoNuevo = {
+          ...formValue,
+          fotoPerfilUrl:`https://randomuser.me/api/portraits/med/men/${this.ultimoId + 1}.jpg`,
+          fotoUrl: `https://randomuser.me/api/portraits/men/${this.ultimoId + 1}.jpg`,
+          nombre:'user',
+          apellido:'user',
+          fechaNacimiento:'2021-01-01',
+          genero: "Masculino",
+          dni:"00000000",
+        }
+        this.alumnoService.agregarAlumno(alumnoNuevo).subscribe(
+          (alumno) =>{
+            // this.dataSource.data = (this.dataSource.data as Usuario[]).concat(alumno)
+            this.usuarioService.getUsuarios().subscribe(
+              (usuarios) => {
+                console.log('usuarios::: ', usuarios);
+                this.usuarios = usuarios;
+                this.dataSource.data = this.usuarios;
+                this.isLoading = false;
+              }
+            )
+            this.snackBar.open('Estudiante agregado con exito', '', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          }
+        )
+      }
+    });
   }
   eliminarUsuario(usuarioDelete: Usuario): void {
      const dialogRef =  this.matDialog.open(ConfirmComponent,{

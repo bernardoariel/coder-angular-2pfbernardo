@@ -3,7 +3,7 @@ import {  Observable,  map,  switchMap } from 'rxjs';
 import { Estudiante } from '../interfaces/estudiante.interface';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from 'src/environments/enviroments';
-import { UsuarioService } from './usuario.service';
+import { Usuario, UsuarioService } from './usuario.service';
 
 
 @Injectable({
@@ -44,15 +44,22 @@ export class AlumnoService {
     return this.http.put<Estudiante>(`${ this.baseUrl }/alumnos/${ alumno.id }`, alumno)
   }
   agregarAlumno(alumno: Estudiante): Observable<Estudiante> {
-    const { email,...alumnoWithoutEmail } = alumno;
-    return this.http.post<Estudiante>(`${ this.baseUrl }/alumnos`, alumnoWithoutEmail).pipe(
+    const { email, password, ...alumnoWithoutEmail } = alumno;
+    return this.http.post<Estudiante>(`${this.baseUrl}/alumnos`, alumnoWithoutEmail).pipe(
       switchMap((estudianteCreado: Estudiante) => {
-        return this.usuariosService.guardarEmailYPasswordEnTablaSeparada(estudianteCreado.id!, email, alumno.dni, alumno.role).pipe(
+        const passwordToSend = alumno.password || alumno.dni;
+        return this.usuariosService.guardarEmailYPasswordEnTablaSeparada(
+          estudianteCreado.id!,
+          email,
+          passwordToSend,
+          alumno.role,
+          ).pipe(
           map(() => estudianteCreado)
         );
       })
     );
   }
+
 
 
 

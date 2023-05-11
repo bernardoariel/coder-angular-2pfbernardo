@@ -10,4 +10,5 @@ export interface Estudiante {
   role: string;
   genero: string;
   idEstudiante?: number;
+  password?: string;
 }

@@ -32,6 +32,53 @@
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/3.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
       "id": 3
+    },
+    {
+      "usuario": "654321",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/4.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/4.jpg",
+      "nombre": "user",
+      "apellido": "user",
+      "fechaNacimiento": "2021-01-01",
+      "genero": "Masculino",
+      "dni": "00000000",
+      "id": 4
+    },
+    {
+      "password": "666444",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/5.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/5.jpg",
+      "nombre": "user",
+      "apellido": "user",
+      "fechaNacimiento": "2021-01-01",
+      "genero": "Masculino",
+      "dni": "00000000",
+      "id": 5
+    },
+    {
+      "password": "aaa123",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/6.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/6.jpg",
+      "nombre": "user",
+      "apellido": "user",
+      "fechaNacimiento": "2021-01-01",
+      "genero": "Masculino",
+      "dni": "00000000",
+      "id": 6
+    },
+    {
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/7.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/7.jpg",
+      "nombre": "user",
+      "apellido": "user",
+      "fechaNacimiento": "2021-01-01",
+      "genero": "Masculino",
+      "dni": "00000000",
+      "id": 7
     }
   ],
   "cursos": [
@@ -90,10 +137,42 @@
     {
       "idEstudiante": null,
       "email": "prueba@prueba.com",
-      "apellido": "123465",
+      "password": "123465",
       "role": "Estudiante",
       "token": "mE0bQa2w81NEiR49",
       "id": 4
+    },
+    {
+      "idEstudiante": 4,
+      "email": "p2@p2.com",
+      "password": "00000000",
+      "role": "Estudiante",
+      "token": "5pX5XRSNid9GYYZL",
+      "id": 5
+    },
+    {
+      "idEstudiante": 5,
+      "email": "op.op@com",
+      "password": "00000000",
+      "role": "Estudiante",
+      "token": "zyGkX5wTaPdTiw0B",
+      "id": 6
+    },
+    {
+      "idEstudiante": 6,
+      "email": "all@jo.com",
+      "password": "00000000",
+      "role": "Estudiante",
+      "token": "Ow1Ikpuvn8yyMkFJ",
+      "id": 7
+    },
+    {
+      "idEstudiante": 7,
+      "email": "perez@hotmail.com",
+      "password": "123654",
+      "role": "Estudiante",
+      "token": "DdOyeLpEYRjASGUF",
+      "id": 8
     }
   ]
 }
