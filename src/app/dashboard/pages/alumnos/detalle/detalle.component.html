@@ -15,8 +15,8 @@
     <mat-list *ngIf="cursosDelAlumno">
       <mat-list-item *ngFor="let curso of cursosDelAlumno">
         <div class="mat-list-item-content">
-          <h3 matLine>{{ curso.nombreCurso }}</h3>
-          <button mat-icon-button color="warn" *ngIf="authUserRole?.role == 'Admin'" (click)="eliminarCurso(curso)" style="margin-left: 8px;">
+          <h3 matLine>{{ curso.nombreCurso }} {{authUserRole?.role}}</h3>
+          <button mat-icon-button color="warn" *ngIf="authUserRole?.role != 'Admin'" (click)="eliminarCurso(curso)" style="margin-left: 8px;">
             <mat-icon>clear</mat-icon>
           </button>
         </div>

@@ -28,6 +28,8 @@ export class DetalleComponent {
   fechaFin!:Date
   esFechaFinAnteriorAHoy: boolean = false;
   authUserRole!:Usuario | null;
+  estoyInscripto:boolean = false
+  nrosAlumnoInscripto?:number[] = []
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { inscripcion?: Inscripcion },
@@ -45,7 +47,7 @@ export class DetalleComponent {
       const fechaFin = new Date(data.inscripcion?.fecha_fin!);
       const hoy = new Date();
       this.esFechaFinAnteriorAHoy = fechaFin < hoy;
-
+      this.nrosAlumnoInscripto = data.inscripcion.alumnosInscriptos
       const idCurso = data.inscripcion?.idCurso;
 
       if (idCurso) {
@@ -72,6 +74,9 @@ export class DetalleComponent {
       (usuario: Usuario | null) => {
         console.log('Usuario::: ', usuario);
         this.authUserRole = usuario;
+        if(this.nrosAlumnoInscripto && this.authUserRole && this.nrosAlumnoInscripto.includes(this.authUserRole.idEstudiante!)){
+          this.estoyInscripto = true
+        }
 
       }
     );
@@ -105,6 +110,7 @@ export class DetalleComponent {
 
           this.alumnosInscriptos = this.alumnosInscriptos.filter(a => a.id !== alumno.id);
           this.alumnosNoInscriptos.push(alumno);
+          this.estoyInscripto = false
         }
       );
   }

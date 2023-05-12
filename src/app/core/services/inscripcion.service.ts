@@ -37,7 +37,6 @@ export class InscripcionService {
   }
   getInscripcionById(id:number):Observable<Inscripcion>{
     return this.http.get<Inscripcion>(`${ this.baseUrl }/inscripciones/${id}`)
-
   }
 
   agregarIscripcion( payload: Inscripcion): Observable<Inscripcion>{
