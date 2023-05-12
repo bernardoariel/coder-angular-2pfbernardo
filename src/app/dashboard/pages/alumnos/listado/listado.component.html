@@ -33,7 +33,7 @@
   <!-- fechaNacimiento Column -->
   <ng-container matColumnDef="fechaNacimiento">
     <th mat-header-cell *matHeaderCellDef appFontSize> Edad </th>
-    <td mat-cell *matCellDef="let estudiante">  {{ calcularEdad(estudiante.fechaNacimiento) }} años  </td>
+    <td mat-cell *matCellDef="let estudiante">  {{ calcularEdad(estudiante.fechaNacimiento) > 1 ?calcularEdad(estudiante.fechaNacimiento): ' falta completar ' }} años  </td>
   </ng-container>
 
 

@@ -62,4 +62,11 @@ export class UsuarioService {
   actualizarUsuario( usuario: Usuario): Observable<Usuario>{
     return this.http.put<Usuario>(`${ this.baseUrl }/usuarios/${ usuario.id }`, usuario)
   }
+  actualizarPropiedades(idEstudiante:number, email:string){
+    console.log('email::: ', email);
+    console.log('idEstudiante::: ', idEstudiante);
+
+    console.log(`${ this.baseUrl }/usuarios/${ idEstudiante }`, {email:email});
+    return this.http.patch<Usuario>(`${ this.baseUrl }/usuarios/${ idEstudiante }`, {email:email})
+  }
 }

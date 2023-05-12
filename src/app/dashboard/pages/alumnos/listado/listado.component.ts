@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { TitleService } from 'src/app/core/services/title.service';
 import { ActivatedRoute } from '@angular/router';
+import { UsuarioService } from 'src/app/core/services/usuario.service';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class ListadoComponent implements OnInit, OnDestroy  {
     private titleService: TitleService,
     private cd: ChangeDetectorRef,
     private activatedRoute:ActivatedRoute,
-    private authService:AuthService
+    private authService:AuthService,
+    private usuarioService:UsuarioService
   ) {
     this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
       (usuario: Usuario | null) => {
@@ -184,18 +186,27 @@ export class ListadoComponent implements OnInit, OnDestroy  {
 
 
       if (formValue) {
+        console.log('formValue::: ', formValue);
+
         const alumnoEditado = {
           ...alumno,
           ...formValue,
           fotoPerfilUrl:foto1,
           fotoUrl:foto2,
         };
+
         this.alumnoService.actualizarAlumno(alumnoEditado).subscribe((alumno)=>{
           console.log('alumno::: ', alumno);
           const index = this.dataSource.data.findIndex(a => a.id === alumno.id);
           if (index !== -1) {
             this.dataSource.data[index] = alumno;
             this.dataSource.data = [...this.dataSource.data];
+            this.usuarioService.actualizarPropiedades(alumnoEditado.id,formValue.email).subscribe(
+              (resultado) => {
+    console.log('Resultado de la operación adicional en usuariosService:', resultado);
+    // Realizar cualquier acción necesaria con el resultado de la operación adicional en usuariosService
+  }
+            )
           }
         });
 

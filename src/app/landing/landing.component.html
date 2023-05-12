@@ -3,7 +3,7 @@
 <p-menubar [model]="[]" styleClass="my-menubar">
   <ng-template pTemplate="start">
     <div class="d-flex align-items-center justify-content-between">
-      <img src="../../assets/img/logo.png" height="40" class="mr-2" />
+      <img alt="" src="../../assets/img/logo.png" height="40" class="mr-2" />
       <p-chip class="ml-3 btnEscritorio" *ngIf="isLogged" label="Ir al Escritorio" styleClass="p-clickable" routerLink="dashboard"><span class="material-icons ml-2">dashboard</span></p-chip>
     </div>
   </ng-template>
@@ -15,7 +15,9 @@
 
     </div>
     <div class="flex flex-wrap justify-content-center gap-3" *ngIf="isLogged && estudiante">
-      <p-chip class="mt-1"label="{{estudiante.nombre | titlecase}} {{ estudiante.apellido | titlecase}}" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"></p-chip>
+      <p-chip
+      class="mt-1"label="{{estudiante.nombre | titlecase}} {{ estudiante.apellido | titlecase}}"
+      [image]="estudiante.fotoPerfilUrl"></p-chip>
       <p></p>
       <p-button label="Salir" icon="pi pi-fw pi-power-off"
       styleClass="p-button-rounded p-button-outlined"
@@ -117,7 +119,7 @@
   <ng-template let-product pTemplate="item">
       <div class="border-1 surface-border border-round m-2 text-center py-5 px-3 mt-5">
           <div class="mb-3">
-              <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="w-6 shadow-2" />
+              <img alt="" src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="w-6 shadow-2" />
           </div>
           <div>
               <h4 class="mb-1">{{ product.name }}</h4>

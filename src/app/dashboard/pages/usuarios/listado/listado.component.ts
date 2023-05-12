@@ -102,6 +102,17 @@ export class ListadoComponent implements OnInit, OnDestroy {
     })
 
   } */
+  obtenerFechaActual(): string {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+
+  console.log('formattedDate::: ', formattedDate);
+  return formattedDate;
+}
+
   crearUsuario(){
 
     const dialog = this.matDialog.open(UsuarioComponent);
@@ -118,8 +129,8 @@ export class ListadoComponent implements OnInit, OnDestroy {
           fotoUrl: `https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=`,
           nombre: 'user',
           apellido: 'user',
-          fechaNacimiento: '2021-01-01',
-          genero: 'Masculino',
+          fechaNacimiento: this.obtenerFechaActual(),
+          genero: 'No especificado',
           dni: '00000000',
         };
         this.alumnoService.agregarAlumno(alumnoNuevo).subscribe(

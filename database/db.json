@@ -1,27 +1,27 @@
 {
   "alumnos": [
     {
-      "nombre": "Ariel Hernan",
+      "nombre": "Ariel",
       "apellido": "Bernardo",
       "fechaNacimiento": "1974-08-26",
       "genero": "Masculino",
       "dni": "24159131",
-      "role": "Estudiante",
+      "role": "Admin",
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg",
-      "id": 1,
-      "email": "admin@admin.com"
+      "id": 1
     },
     {
-      "nombre": "noelia",
-      "apellido": "gonzalez",
-      "fechaNacimiento": "2008-03-14",
-      "genero": "Femenino",
-      "dni": "30533170",
       "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/women/3.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/women/3.jpg",
-      "id": 3
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/women/2.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/women/2.jpg",
+      "nombre": "Gabriela",
+      "apellido": "Gimenez",
+      "fechaNacimiento": "1970-07-09",
+      "genero": "Femenino",
+      "dni": "33123654",
+      "id": 2,
+      "email": "nolly@gmail.com"
     }
   ],
   "cursos": [
@@ -69,9 +69,9 @@
     {
       "idEstudiante": 2,
       "email": "nolly@gmail.com",
-      "password": "443322",
+      "password": "123456",
       "role": "Estudiante",
-      "token": "7Idmd3a7VpU8hlVt",
+      "token": "5stRUObNiAByvpoW",
       "id": 2
     }
   ]

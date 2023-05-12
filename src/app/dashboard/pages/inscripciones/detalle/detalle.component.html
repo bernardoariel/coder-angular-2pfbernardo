@@ -24,7 +24,8 @@
       <mat-label>Seleccionar alumno</mat-label>
       <mat-select #alumnoSelect>
         <mat-option *ngFor="let alumno of alumnosNoInscriptos" [value]="alumno">
-          {{alumno.nombre}} {{alumno.apellido}}
+          {{ alumno.nombre }} {{ alumno.apellido }}
+
         </mat-option>
       </mat-select>
     </mat-form-field>

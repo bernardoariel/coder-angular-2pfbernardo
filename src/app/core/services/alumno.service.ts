@@ -60,9 +60,6 @@ export class AlumnoService {
     );
   }
 
-
-
-
   borrarAlumno( id: number): Observable<any>{
     this.usuariosService.borrarUsuario(id).subscribe(
       () =>{

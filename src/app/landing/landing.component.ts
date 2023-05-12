@@ -32,7 +32,7 @@ export class LandingComponent implements OnInit{
   estudiante:any;
   constructor( private authService:AuthService, private alumnosService:AlumnoService
     ) {
-   
+
     this.products=[]
     this.items = [
       {
@@ -185,12 +185,14 @@ export class LandingComponent implements OnInit{
               if(authUser){
 
                 this.idEstudiante = authUser!.idEstudiante!;
+                console.log('this.idEstudiante ::: ', this.idEstudiante );
                 this.alumnosService.getEstudiantePorId(this.idEstudiante)
                 .subscribe(estudiante => {
                   // console.log('estudiante::: ', estudiante);
                   // Agrega el objeto alumno a la lista
-                  this.estudiante = estudiante;
-                  console.log('this.estudiante::: ', this.estudiante);
+this.estudiante = estudiante;
+                    console.log('this.estudiante::: ', this.estudiante);
+
 
                 });
 

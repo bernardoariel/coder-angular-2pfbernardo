@@ -65,8 +65,14 @@ export class DetalleComponent {
       this.alumnosService.getAlumnos().subscribe(
         alumnos => {
           this.alumnosTodos = alumnos;
-          this.alumnosNoInscriptos = alumnos.filter(alumno => !data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id));
-          this.alumnosInscriptos = alumnos.filter(alumno => data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id));
+          this.alumnosNoInscriptos = alumnos.filter(alumno => {
+      // Agrega una condición adicional para filtrar por un campo distinto de 'user'
+      return alumno.nombre !== 'user' && !data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id);
+    });
+    this.alumnosInscriptos = alumnos.filter(alumno => {
+      // Agrega una condición adicional para filtrar por un campo distinto de 'user'
+      return alumno.nombre !== 'user' && data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id);
+    });
       })
 
     }
@@ -95,13 +101,13 @@ export class DetalleComponent {
     this.alumnosInscriptos = alumnos;
   }
 
-  obtenerAlumnosNoInscriptos(alumnosInscriptos: any[]): void {
+  /* obtenerAlumnosNoInscriptos(alumnosInscriptos: any[]): void {
     this.alumnosService.getAlumnos().subscribe(
       alumnos => {
         return alumnos.filter(alumno => !alumnosInscriptos.find(a => a.id === alumno.id));
       }
     );
-  }
+  } */
 
   eliminarCursoAlumno(id: number, alumno: Estudiante) {
 
@@ -121,7 +127,7 @@ export class DetalleComponent {
       inscripcion => {
         console.log('inscripcion::: ', inscripcion);
         this.alumnosInscriptos.push(alumno);
-        this.alumnosNoInscriptos = this.alumnosNoInscriptos.filter(a => a.id !== alumno.id);
+        this.alumnosNoInscriptos = this.alumnosNoInscriptos.filter(a => a.id !== alumno.id) ;
 
 
     })
