@@ -13,49 +13,15 @@
       "email": "admin@admin.com"
     },
     {
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/2.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/2.jpg",
-      "nombre": "user",
-      "apellido": "user",
-      "fechaNacimiento": "2021-01-01",
-      "genero": "Masculino",
-      "dni": "00000000",
-      "id": 2
-    },
-    {
       "nombre": "noelia",
       "apellido": "gonzalez",
       "fechaNacimiento": "2008-03-14",
       "genero": "Femenino",
       "dni": "30533170",
       "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/3.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/women/3.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/women/3.jpg",
       "id": 3
-    },
-    {
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/4.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/4.jpg",
-      "nombre": "user",
-      "apellido": "user",
-      "fechaNacimiento": "2021-01-01",
-      "genero": "Masculino",
-      "dni": "00000000",
-      "id": 4
-    },
-    {
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/5.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/5.jpg",
-      "nombre": "juan carlos",
-      "apellido": "fernandez",
-      "fechaNacimiento": "2021-01-01",
-      "genero": "Masculino",
-      "dni": "33156123",
-      "id": 5,
-      "email": "pe@pe.com"
     }
   ],
   "cursos": [
@@ -75,12 +41,7 @@
       "tipoCurso": "Virtual",
       "fecha_inicio": "2023-06-01",
       "fecha_fin": "2023-06-30",
-      "alumnosInscriptos": [
-        2,
-        4,
-        5,
-        1
-      ],
+      "alumnosInscriptos": [],
       "id": 1
     },
     {
@@ -112,30 +73,6 @@
       "role": "Estudiante",
       "token": "7Idmd3a7VpU8hlVt",
       "id": 2
-    },
-    {
-      "idEstudiante": 3,
-      "email": "nolly@gmail.com",
-      "password": "30533170",
-      "role": "Estudiante",
-      "token": "dEemrD3jERtXNFrc",
-      "id": 3
-    },
-    {
-      "idEstudiante": 4,
-      "email": "pedro@gomez.com",
-      "password": "123456",
-      "role": "Estudiante",
-      "token": "M2ZozSwZmaP0ZrHl",
-      "id": 4
-    },
-    {
-      "idEstudiante": 5,
-      "email": "pe@pe.com",
-      "password": "123456",
-      "role": "Estudiante",
-      "token": "BsmqGY0djpMIqHfx",
-      "id": 5
     }
   ]
 }

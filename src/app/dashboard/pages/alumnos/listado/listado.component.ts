@@ -31,6 +31,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
   isLoading = true;
   titulo:string = 'Click Academy';
   authUserRole!:Usuario | null;
+
   constructor(
     private alumnoService: AlumnoService,
     private matDialog: MatDialog,
@@ -103,12 +104,29 @@ export class ListadoComponent implements OnInit, OnDestroy  {
       this.ultimoId = ultimoAlumno.id || 0;
     });
     dialog.afterClosed().subscribe((formValue) => {
+      console.log('formValue::: ', formValue.genero);
 
+      let foto1:string =''
+      let foto2:string = ''
+      switch (formValue.genero) {
+        case "Masculino":
+          foto1= `https://randomuser.me/api/portraits/med/men/${this.ultimoId + 1}.jpg`
+          foto2= `https://randomuser.me/api/portraits/men/${this.ultimoId + 1}.jpg`
+          break;
+        case "Femenino":
+          foto1= `https://randomuser.me/api/portraits/med/women/${this.ultimoId + 1}.jpg`;
+          foto2= `https://randomuser.me/api/portraits/women/${this.ultimoId + 1}.jpg`;
+          break;
+        case 'No especificado':
+          foto1 =`https://randomuser.me/api/portraits/lego/1.jpg`
+          foto2= `https://randomuser.me/api/portraits/lego/1.jpg`
+          break;
+      }
       if(formValue  && Object.keys(formValue).length > 0){
         const alumnoNuevo = {
           ...formValue,
-          fotoPerfilUrl:`https://randomuser.me/api/portraits/med/men/${this.ultimoId + 1}.jpg`,
-          fotoUrl: `https://randomuser.me/api/portraits/men/${this.ultimoId + 1}.jpg`,
+          fotoPerfilUrl:foto1,
+          fotoUrl:foto2,
         }
         this.alumnoService.agregarAlumno(alumnoNuevo).subscribe(
           (alumno) =>{
@@ -146,13 +164,31 @@ export class ListadoComponent implements OnInit, OnDestroy  {
     });
 
     dialog.afterClosed().subscribe((formValue) => {
+      console.log('valor del form::: ', formValue.genero);
+      let foto1:string =''
+      let foto2:string = ''
+      switch (formValue.genero) {
+        case "Masculino":
+          foto1= `https://randomuser.me/api/portraits/med/men/${alumno.id}.jpg`
+          foto2= `https://randomuser.me/api/portraits/men/${alumno.id}.jpg`
+          break;
+        case "Femenino":
+          foto1= `https://randomuser.me/api/portraits/med/women/${alumno.id}.jpg`;
+          foto2= `https://randomuser.me/api/portraits/women/${alumno.id}.jpg`;
+          break;
+        case 'No especificado':
+          foto1 =`https://randomuser.me/api/portraits/lego/1.jpg`
+          foto2= `https://randomuser.me/api/portraits/lego/1.jpg`
+          break;
+      }
+
 
       if (formValue) {
         const alumnoEditado = {
           ...alumno,
           ...formValue,
-          fotoPerfilUrl:`https://randomuser.me/api/portraits/med/men/${alumno.id!}.jpg`,
-          fotoUrl: `https://randomuser.me/api/portraits/men/${alumno.id!}.jpg`,
+          fotoPerfilUrl:foto1,
+          fotoUrl:foto2,
         };
         this.alumnoService.actualizarAlumno(alumnoEditado).subscribe((alumno)=>{
           console.log('alumno::: ', alumno);
