@@ -18,6 +18,7 @@ const routes: Routes = [
     pathMatch:'full'
   },
   {
+
     path:'dashboard',
     canActivate:[AutGuard],
     component: DashboardComponent,

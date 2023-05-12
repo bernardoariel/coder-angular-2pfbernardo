@@ -150,7 +150,9 @@ export class ListadoComponent implements OnInit, OnDestroy  {
       if (formValue) {
         const alumnoEditado = {
           ...alumno,
-          ...formValue
+          ...formValue,
+          fotoPerfilUrl:`https://randomuser.me/api/portraits/med/men/${alumno.id!}.jpg`,
+          fotoUrl: `https://randomuser.me/api/portraits/men/${alumno.id!}.jpg`,
         };
         this.alumnoService.actualizarAlumno(alumnoEditado).subscribe((alumno)=>{
           console.log('alumno::: ', alumno);

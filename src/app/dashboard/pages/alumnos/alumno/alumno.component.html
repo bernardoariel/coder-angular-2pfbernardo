@@ -14,6 +14,7 @@
           <mat-label>Nombre</mat-label>
 
           <input
+            title="nombre"
             [formControl]="nombreControl"
             matInput
             type="text">
@@ -29,6 +30,7 @@
         <mat-form-field class="w-100">
           <mat-label>Apellido</mat-label>
           <input
+            title="apellido"
            [formControl]="apellidoControl"
             matInput
             type="text">
@@ -42,7 +44,9 @@
       <div class="col-10 mb-1">
         <mat-form-field>
           <mat-label>Fecha de Nacimiento</mat-label>
-          <input matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter" [formControl]="fechaNacimientoControl"
+          <input
+            title="nacimiento"
+            matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter" [formControl]="fechaNacimientoControl"
           readonly>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker ></mat-datepicker>

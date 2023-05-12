@@ -47,14 +47,15 @@
     },
     {
       "role": "Estudiante",
-      "fotoPerfilUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
-      "fotoUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
-      "nombre": "user",
-      "apellido": "user",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/5.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/5.jpg",
+      "nombre": "juan carlos",
+      "apellido": "fernandez",
       "fechaNacimiento": "2021-01-01",
       "genero": "Masculino",
-      "dni": "00000000",
-      "id": 5
+      "dni": "33156123",
+      "id": 5,
+      "email": "pe@pe.com"
     }
   ],
   "cursos": [
@@ -75,7 +76,6 @@
       "fecha_inicio": "2023-06-01",
       "fecha_fin": "2023-06-30",
       "alumnosInscriptos": [
-        3,
         2,
         4,
         5,

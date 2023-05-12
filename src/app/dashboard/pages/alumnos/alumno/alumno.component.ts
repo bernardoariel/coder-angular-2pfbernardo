@@ -120,12 +120,17 @@ export class AlumnoComponent {
 
   guardar(){
     if(this.estudianteForm.valid){
+
       const formData = this.estudianteForm.value;
       formData.fechaNacimiento = formData.fechaNacimiento ? new Date(formData.fechaNacimiento).toISOString().substring(0, 10) : null;
+      console.log('formData::: ', formData);
 
       this.dialogRef.close(formData);
+
     }else{
+
       this.dialogRef.close();
+
     }
   }
 
