@@ -114,14 +114,14 @@ export class ListadoComponent implements OnInit, OnDestroy {
       if(formValue  && Object.keys(formValue).length > 0){
         const alumnoNuevo = {
           ...formValue,
-          fotoPerfilUrl:`https://randomuser.me/api/portraits/med/men/${this.ultimoId + 1}.jpg`,
-          fotoUrl: `https://randomuser.me/api/portraits/men/${this.ultimoId + 1}.jpg`,
-          nombre:'user',
-          apellido:'user',
-          fechaNacimiento:'2021-01-01',
-          genero: "Masculino",
-          dni:"00000000",
-        }
+          fotoPerfilUrl: `https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=`,
+          fotoUrl: `https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=`,
+          nombre: 'user',
+          apellido: 'user',
+          fechaNacimiento: '2021-01-01',
+          genero: 'Masculino',
+          dni: '00000000',
+        };
         this.alumnoService.agregarAlumno(alumnoNuevo).subscribe(
           (alumno) =>{
             // this.dataSource.data = (this.dataSource.data as Usuario[]).concat(alumno)

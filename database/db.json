@@ -33,6 +33,28 @@
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/3.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
       "id": 3
+    },
+    {
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/4.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/4.jpg",
+      "nombre": "user",
+      "apellido": "user",
+      "fechaNacimiento": "2021-01-01",
+      "genero": "Masculino",
+      "dni": "00000000",
+      "id": 4
+    },
+    {
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
+      "fotoUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
+      "nombre": "user",
+      "apellido": "user",
+      "fechaNacimiento": "2021-01-01",
+      "genero": "Masculino",
+      "dni": "00000000",
+      "id": 5
     }
   ],
   "cursos": [
@@ -54,7 +76,10 @@
       "fecha_fin": "2023-06-30",
       "alumnosInscriptos": [
         3,
-        2
+        2,
+        4,
+        5,
+        1
       ],
       "id": 1
     },
@@ -95,6 +120,22 @@
       "role": "Estudiante",
       "token": "dEemrD3jERtXNFrc",
       "id": 3
+    },
+    {
+      "idEstudiante": 4,
+      "email": "pedro@gomez.com",
+      "password": "123456",
+      "role": "Estudiante",
+      "token": "M2ZozSwZmaP0ZrHl",
+      "id": 4
+    },
+    {
+      "idEstudiante": 5,
+      "email": "pe@pe.com",
+      "password": "123456",
+      "role": "Estudiante",
+      "token": "BsmqGY0djpMIqHfx",
+      "id": 5
     }
   ]
 }

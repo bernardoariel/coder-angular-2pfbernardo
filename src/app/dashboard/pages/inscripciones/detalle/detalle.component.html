@@ -48,7 +48,7 @@
       <mat-action-row *ngIf="authUserRole?.role=='Admin'">
         <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)" [disabled]="esFechaFinAnteriorAHoy"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
       </mat-action-row>
-      <mat-action-row *ngIf="estoyInscripto && alumno.id == authUserRole?.idEstudiante ">
+      <mat-action-row *ngIf="estoyInscripto && alumno.id == authUserRole?.idEstudiante && authUserRole?.role!='Admin' ">
         <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)" [disabled]="esFechaFinAnteriorAHoy">Eliminar Subscripcion<mat-icon>delete</mat-icon></button>
       </mat-action-row>
     </mat-expansion-panel>
