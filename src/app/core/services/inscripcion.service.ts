@@ -89,7 +89,24 @@ export class InscripcionService {
       })
     );
   }
+  eliminarSubscripciones(idEstudiante:number){
+    this.http.get<Inscripcion[]>(`${ this.baseUrl }/inscripciones`)
+    .subscribe((inscripciones: any[]) => {
+      const numeroEliminar = idEstudiante; // Número a eliminar del array
 
+      const inscripcionesActualizadas = inscripciones.map(inscripcion => {
+        const alumnosInscriptosActualizados = inscripcion.alumnosInscriptos.filter((alumno: number) => alumno !== numeroEliminar);
+        return { ...inscripcion, alumnosInscriptos: alumnosInscriptosActualizados };
+      });
+
+      console.log('inscripcionesActualizadas::: ', inscripcionesActualizadas);
+      // Luego puedes hacer la llamada al endpoint correspondiente para actualizar los registros en la base de datos
+
+     /*  this.http.put('url_de_la_api/inscripciones', inscripcionesActualizadas).subscribe(response => {
+        console.log('Registros actualizados:', response);
+      }); */
+    });
+  }
 
 
 }

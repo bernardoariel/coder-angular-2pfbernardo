@@ -26,7 +26,15 @@
   <ng-container matColumnDef="avatar">
     <th mat-header-cell *matHeaderCellDef appFontSize> AVATAR </th>
     <td mat-cell *matCellDef="let usuarios">
-      <mat-icon>face</mat-icon>
+      <ng-container *ngIf="usuarios.role === 'Admin'">
+        <mat-icon>manage_accounts</mat-icon>
+      </ng-container>
+      <ng-container *ngIf="usuarios.role === 'Profesor'">
+        <mat-icon>person_4</mat-icon>
+      </ng-container>
+      <ng-container *ngIf="usuarios.role === 'Estudiante'">
+        <mat-icon>school</mat-icon>
+      </ng-container>
     </td>
   </ng-container>
 

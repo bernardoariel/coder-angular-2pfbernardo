@@ -10,18 +10,6 @@
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg",
       "id": 1
-    },
-    {
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/women/2.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/women/2.jpg",
-      "nombre": "Gabriela",
-      "apellido": "Gimenez",
-      "fechaNacimiento": "1970-07-09",
-      "genero": "Femenino",
-      "dni": "33123654",
-      "id": 2,
-      "email": "nolly@gmail.com"
     }
   ],
   "cursos": [
@@ -65,14 +53,6 @@
       "token": "dsLnKJtyBluy0987876asdaasd",
       "id": 1,
       "idEstudiante": 1
-    },
-    {
-      "idEstudiante": 2,
-      "email": "nolly@gmail.com",
-      "password": "123456",
-      "role": "Estudiante",
-      "token": "5stRUObNiAByvpoW",
-      "id": 2
     }
   ]
 }

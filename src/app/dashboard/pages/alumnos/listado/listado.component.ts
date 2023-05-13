@@ -41,7 +41,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
     private cd: ChangeDetectorRef,
     private activatedRoute:ActivatedRoute,
     private authService:AuthService,
-    private usuarioService:UsuarioService
+    private usuarioService:UsuarioService,
   ) {
     this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
       (usuario: Usuario | null) => {
@@ -151,9 +151,15 @@ export class ListadoComponent implements OnInit, OnDestroy  {
       if(!result) return;
       this.alumnoService.borrarAlumno(alumnoDelete.id!).subscribe(
         () => {
+          this.usuarioService.borrarUsuario(alumnoDelete.id!).subscribe(
+            ()=>{
+             console.log('usuario eliminado');
+            }
+          )
             this.dataSource.data = (this.dataSource.data as Estudiante[]).filter((alumno) => alumno.id !== alumnoDelete.id);
         }
       )
+
     });
 
 }
@@ -201,11 +207,11 @@ export class ListadoComponent implements OnInit, OnDestroy  {
           if (index !== -1) {
             this.dataSource.data[index] = alumno;
             this.dataSource.data = [...this.dataSource.data];
-            this.usuarioService.actualizarPropiedades(alumnoEditado.id,formValue.email).subscribe(
+            this.usuarioService.actualizarPropiedades(alumnoEditado.id,formValue.email, formValue.role).subscribe(
               (resultado) => {
-    console.log('Resultado de la operación adicional en usuariosService:', resultado);
-    // Realizar cualquier acción necesaria con el resultado de la operación adicional en usuariosService
-  }
+                console.log('Resultado de la operación adicional en usuariosService:', resultado);
+                // Realizar cualquier acción necesaria con el resultado de la operación adicional en usuariosService
+              }
             )
           }
         });

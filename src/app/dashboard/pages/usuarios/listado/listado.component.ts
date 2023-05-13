@@ -13,7 +13,7 @@ import { AlumnoService } from 'src/app/core/services/alumno.service';
 import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
 interface Usuario{
   id:number;
-  idEstrudiante:number;
+  idEstudiante:number;
   password:string;
   email:string;
   role:string;
@@ -77,31 +77,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
       this.subscripcionRef.unsubscribe();
     }
   }
-  /* crearUsuario(){
 
-    const dialog = this.matDialog.open(UsuarioComponent);
-
-    dialog.afterClosed().subscribe((formValue) => {
-      if(formValue){
-        //TODO: cambiar idestudiante por algo mas generico para tener estudiantes profesores y admin
-        const usurioNuevo = {
-          ...formValue,
-          "idEstudiante": null
-        }
-        this.usuarioService.agregarUsuario(usurioNuevo).subscribe(
-          (usuario)=>{
-            this.dataSource.data = (this.dataSource.data as Usuario[]).concat(usuario)
-            this.snackBar.open('Usuario agregado con exito', '', {
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
-            })
-          }
-        )
-      }
-    })
-
-  } */
   obtenerFechaActual(): string {
   const today = new Date();
   const year = today.getFullYear();
@@ -155,6 +131,8 @@ export class ListadoComponent implements OnInit, OnDestroy {
     });
   }
   eliminarUsuario(usuarioDelete: Usuario): void {
+    console.log('usuarioDelete::: ', usuarioDelete);
+
      const dialogRef =  this.matDialog.open(ConfirmComponent,{
       data: 'Está seguro que desea eliminar este Usuario?'
     })
@@ -164,6 +142,11 @@ export class ListadoComponent implements OnInit, OnDestroy {
       if(!result) return;
       this.usuarioService.borrarUsuario(usuarioDelete.id!).subscribe(
         () => {
+          this.alumnoService.borrarAlumno(usuarioDelete.idEstudiante).subscribe(
+            ()=>{
+             console.log('usuario eliminado');
+            }
+          )
             this.dataSource.data = (this.dataSource.data as Usuario[]).filter((usuario) => usuario.id !== usuarioDelete.id);
         }
       )
@@ -192,6 +175,12 @@ export class ListadoComponent implements OnInit, OnDestroy {
           if (index !== -1) {
             this.dataSource.data[index] = usuario;
             this.dataSource.data = [...this.dataSource.data];
+            this.alumnoService.actualizarPropiedades(alumnoEditado.id,alumnoEditado.email,alumnoEditado.role).subscribe(
+              (resultado) => {
+                console.log('Resultado de la operación adicional en usuariosService:', resultado);
+                // Realizar cualquier acción necesaria con el resultado de la operación adicional en usuariosService
+              }
+            )
           }
         });
 
@@ -200,19 +189,4 @@ export class ListadoComponent implements OnInit, OnDestroy {
   }
 
 
-  /* detalleAlumno(alumno:Usuario){
-
-  const dialog =  this.matDialog.open(DetalleComponent, {
-      data:{
-        alumno
-      }
-     })
-
-     dialog.afterClosed()
-      .subscribe((formValue) => {
-       if(formValue){
-        // this.alumnoService.editarAlumno(alumno.id!, formValue)
-       }
-      })
-  } */
 }

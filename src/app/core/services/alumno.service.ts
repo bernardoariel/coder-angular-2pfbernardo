@@ -61,12 +61,12 @@ export class AlumnoService {
   }
 
   borrarAlumno( id: number): Observable<any>{
-    this.usuariosService.borrarUsuario(id).subscribe(
-      () =>{
-        console.log('usuario Eliminado')
-      }
-    )
+
     return this.http.delete<any>(`${ this.baseUrl }/alumnos/${ id }`)
+  }
+  actualizarPropiedades(id:number, email:string, role:string){
+
+    return this.http.patch<Usuario>(`${ this.baseUrl }/alumnos/${ id }`, {email:email, role:role})
   }
 
 }
