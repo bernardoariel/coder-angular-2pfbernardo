@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { enviroment } from 'src/environments/enviroments';
-import { AlumnoService } from './alumno.service';
+
 
 export interface Usuario{
   id:number;
-  idEstudiante:number;
+  studentId:number;
   password:string;
   email:string;
   role:string;
@@ -22,18 +22,20 @@ export class UsuarioService {
   constructor( private http:HttpClient ) { }
 
   getUsuarios():Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(`${ this.baseUrl }/usuarios`)
+    return this.http.get<Usuario[]>(`${ this.baseUrl }/users`)
   }
   getUsuarioById(id:number):Observable<Usuario>{
-    return this.http.get<Usuario>(`${ this.baseUrl }/usuarios/${id}`)
+    return this.http.get<Usuario>(`${ this.baseUrl }/users/${id}`)
   }
-
-  getUsuarioByIdestudiante(id:number):Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(`${ this.baseUrl }/usuarios/?idEstudiante=${id}`)
+  getUsuarioByCampoValor(campo: string, valor: string): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.baseUrl}/users?${campo}=${valor}`);
   }
-  guardarEmailYPasswordEnTablaSeparada(idEstudiante: number, email: string, password: string,role:string): Observable<any> {
+  getUsuarioByStudentId(id:number):Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(`${ this.baseUrl }/users/?studentId=${id}`)
+  }
+  guardarEmailYPasswordEnTablaSeparada(studentId: number, email: string, password: string,role:string): Observable<any> {
     const token = this.generateRandomToken(16);
-    return this.http.post(`${ this.baseUrl }/usuarios`, { idEstudiante, email,  password,role,token});
+    return this.http.post(`${ this.baseUrl }/users`, { studentId, email,  password,role,token});
   }
   generateRandomToken(length:number) {
     let token = "";
@@ -55,19 +57,19 @@ export class UsuarioService {
       token:this.generateRandomToken(16)
 
     }
-    return this.http.post<Usuario>(`${ this.baseUrl }/usuarios`, userNew)
+    return this.http.post<Usuario>(`${ this.baseUrl }/users`, userNew)
   }
   borrarUsuario( id: number): Observable<any>{
 
 
-    return this.http.delete<any>(`${ this.baseUrl }/usuarios/${ id }`)
+    return this.http.delete<any>(`${ this.baseUrl }/users/${ id }`)
   }
   actualizarUsuario( usuario: Usuario): Observable<Usuario>{
     console.log('usuario::: ', usuario);
-    return this.http.put<Usuario>(`${ this.baseUrl }/usuarios/${ usuario.id }`, usuario)
+    return this.http.put<Usuario>(`${ this.baseUrl }/users/${ usuario.id }`, usuario)
   }
-  actualizarPropiedades(idEstudiante:number, email:string, role:string){
+  actualizarPropiedades(studentId:number, email:string, role:string){
 
-    return this.http.patch<Usuario>(`${ this.baseUrl }/usuarios/${ idEstudiante }`, {email:email, role:role})
+    return this.http.patch<Usuario>(`${ this.baseUrl }/users/${ studentId }`, {email:email, role:role})
   }
 }

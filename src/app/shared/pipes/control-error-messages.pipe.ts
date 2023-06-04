@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ControlErrorMessagesPipe implements PipeTransform {
 
   transform(error: any, ...args: unknown[]): unknown {
+    console.log('error::: ', error);
     if (!error) return '';
 
     let defaultMsg = 'Error desconocido';
@@ -16,6 +17,7 @@ export class ControlErrorMessagesPipe implements PipeTransform {
       maxlength: '..',
       min: 'Debe ser mayor a ...',
       max: 'Debe ser menor a ...',
+      existeUsuario: 'El usuario ya existe en nuestra BD',
     }
 
     if (opciones[error.key]) {

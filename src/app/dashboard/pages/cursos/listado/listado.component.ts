@@ -30,11 +30,12 @@ export class ListadoComponent  implements OnInit , OnDestroy{
   isLoading = true
   titulo:string = 'Click Academy';
   authUserRole!:Usuario | null;
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = (filterValue as string).trim().toLowerCase();
-
   }
+
   constructor(
     private cursoService: CursoService,
     private matDialog: MatDialog,
@@ -45,11 +46,7 @@ export class ListadoComponent  implements OnInit , OnDestroy{
     private authService:AuthService
     ){
       this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
-        (usuario: Usuario | null) => {
-          console.log('Usuario::: ', usuario);
-          this.authUserRole = usuario;
-
-        }
+        (usuario: Usuario | null) => this.authUserRole = usuario
       );
   }
   ngOnDestroy(): void {
@@ -64,16 +61,14 @@ export class ListadoComponent  implements OnInit , OnDestroy{
       this.dataSource.data = cursos
       this.isLoading = false
     })
-    setTimeout(() => {
-      this.activatedRoute.data.subscribe(data => {
-        this.titulo = data['breadcrumb'].alias;
-        console.log('this.titulo::: ', this.titulo);
-        this.titleService.setTitle(this.titulo);
-      });
-
-      // this.titleService.setTitle('/dashboard/alumnos/listado');
-      this.cd.detectChanges();
-    }, 0);
+    setTimeout(
+      () => {
+        this.activatedRoute.data.subscribe(data => {
+          this.titulo = data['breadcrumb'].alias;
+          this.titleService.setTitle(this.titulo);
+        });
+        this.cd.detectChanges();
+      }, 0);
   }
   crearCurso(){
     const dialog =  this.matDialog.open(CursoComponent)
@@ -104,7 +99,6 @@ export class ListadoComponent  implements OnInit , OnDestroy{
       data: 'Está seguro que desea eliminar este Curso?'
     })
     dialogRef.afterClosed().subscribe(result => {
-
       if(!result) return;
       this.cursoService.borrarCurso(cursoDelete.id!).subscribe(
         () => {
@@ -123,9 +117,8 @@ export class ListadoComponent  implements OnInit , OnDestroy{
         curso
      }
     })
-
     dialog.afterClosed().subscribe((formValue) => {
-       if(formValue){
+      if(formValue){
         const cursoEditado = {
           ...curso,
           ...formValue
@@ -138,21 +131,22 @@ export class ListadoComponent  implements OnInit , OnDestroy{
             )
           }
         )
-       }
-      })
+      }
+    })
   }
+
   detalleCurso(curso:Curso){
     const dialog =  this.matDialog.open(DetalleComponent, {
       data:{
         curso
       }
-     })
+    })
 
-     dialog.afterClosed()
-      .subscribe((formValue) => {
-       if(formValue){
-        // this.cursoService.editarCurso(curso.id!, formValue)
-       }
-      })
+    dialog.afterClosed().subscribe(
+      (formValue) => {
+        if(formValue){
+          // this.cursoService.editarCurso(curso.id!, formValue)
+        }
+    })
   }
 }

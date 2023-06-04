@@ -10,10 +10,10 @@ import {  UsuarioService } from 'src/app/core/services/usuario.service';
 import { UsuarioComponent } from '../usuario/usuario.component';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
-import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
+
 interface Usuario{
   id:number;
-  idEstudiante:number;
+  studentId:number;
   password:string;
   email:string;
   role:string;
@@ -136,13 +136,12 @@ export class ListadoComponent implements OnInit, OnDestroy {
      const dialogRef =  this.matDialog.open(ConfirmComponent,{
       data: 'Está seguro que desea eliminar este Usuario?'
     })
-    //TODO si idEstudiante eliminamos solo al usuario , si idEstudiante no es null eliminamos al usuario y al estudiante
-    //TODO informar a quien se va a eliminar
+
     dialogRef.afterClosed().subscribe(result => {
       if(!result) return;
       this.usuarioService.borrarUsuario(usuarioDelete.id!).subscribe(
         () => {
-          this.alumnoService.borrarAlumno(usuarioDelete.idEstudiante).subscribe(
+          this.alumnoService.borrarAlumno(usuarioDelete.studentId).subscribe(
             ()=>{
              console.log('usuario eliminado');
             }
@@ -178,7 +177,6 @@ export class ListadoComponent implements OnInit, OnDestroy {
             this.alumnoService.actualizarPropiedades(alumnoEditado.id,alumnoEditado.email,alumnoEditado.role).subscribe(
               (resultado) => {
                 console.log('Resultado de la operación adicional en usuariosService:', resultado);
-                // Realizar cualquier acción necesaria con el resultado de la operación adicional en usuariosService
               }
             )
           }
@@ -187,6 +185,4 @@ export class ListadoComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-
 }

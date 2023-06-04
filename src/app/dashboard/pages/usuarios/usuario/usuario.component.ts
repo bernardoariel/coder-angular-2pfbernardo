@@ -4,6 +4,7 @@ import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { ListadoComponent } from '../listado/listado.component';
 import { Usuario } from 'src/app/core/services/auth.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-usuario',
@@ -36,10 +37,9 @@ export class UsuarioComponent {
     role:this.selectedRoleControl
   })
 
-
   seleccionarRol(rol: string) {
 
-      this.selectedRoleControl.setValue(rol);
+    this.selectedRoleControl.setValue(rol);
 
   }
   constructor(
@@ -52,12 +52,6 @@ export class UsuarioComponent {
       this.emailControl.setValue(data.usuario.email)
       this.passwordControl.setValue(data.usuario.password)
       this.selectedRoleControl.setValue(data.usuario.role)
-      //TODO : SI EL usuario es un se crea desde abm de usuario, el usuario esta incompleto, entonces tendra que ingresar y lo llevara a la pantalla de editar usuario para completar los datos
-      /* this.usuarioService.getUsuarioByIdestudiante(data.alumno.id!).subscribe(usuario => {
-
-        this.emailControl.setValue(usuario[0].email)
-      }) */
-
 
     }
   }
@@ -66,9 +60,18 @@ export class UsuarioComponent {
 
   guardar(){
     if(this.usuarioForm.valid){
-      //TODO: Buscar si existe un usuario con ese email
-      this.dialogRef.close(this.usuarioForm.value);
-
+      const email = this.usuarioForm.value.email;
+      this.usuarioService.getUsuarioByCampoValor('email',email!).pipe(
+        map(usuarios => usuarios.length > 0),
+        tap(existeUsuario => {
+          if(existeUsuario){
+            this.emailControl.setErrors({existeUsuario:true})
+          }else{
+            this.emailControl.setErrors(null)
+            this.dialogRef.close(this.usuarioForm.value);
+          }
+        })
+      ).subscribe()
     }else{
 
       this.dialogRef.close();

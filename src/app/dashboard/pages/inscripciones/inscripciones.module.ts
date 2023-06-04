@@ -8,8 +8,13 @@ import { DetalleComponent } from './detalle/detalle.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+
 import { ConfirmComponent } from './confirm/confirm.component';
+import { EffectsModule } from '@ngrx/effects';
+import { InscripcionesEffects } from './store/inscripciones.effects';
+import { StoreModule } from '@ngrx/store';
+import { inscripcionesFeature } from './store/inscripciones.reducer';
+
 
 
 @NgModule({
@@ -24,7 +29,9 @@ import { ConfirmComponent } from './confirm/confirm.component';
     InscripcionesRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    PipesModule
+    PipesModule,
+    StoreModule.forFeature(inscripcionesFeature),
+    EffectsModule.forFeature([InscripcionesEffects])
   ],
 
 })

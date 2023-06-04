@@ -1,5 +1,5 @@
 {
-  "alumnos": [
+  "students": [
     {
       "nombre": "Ariel",
       "apellido": "Bernardo",
@@ -10,18 +10,46 @@
       "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
       "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg",
       "id": 1
+    },
+    {
+      "nombre": "Juan",
+      "apellido": "Fernandez",
+      "fechaNacimiento": "1993-02-10",
+      "genero": "Masculino",
+      "dni": "30533170",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/2.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/2.jpg",
+      "id": 2,
+      "email": "juan@juan.com"
+    },
+    {
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
+      "fotoUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
+      "nombre": "user",
+      "apellido": "user",
+      "fechaNacimiento": "2023-05-17",
+      "genero": "No especificado",
+      "dni": "00000000",
+      "id": 3
     }
   ],
-  "cursos": [
+  "courses": [
     {
       "nombre": "Angular",
       "foto": "https://i.ytimg.com/vi/qalOpo6Mc-8/maxresdefault.jpg",
       "id": 1
+    },
+    {
+      "nombre": "Nest",
+      "foto": "https://docs.nestjs.com/assets/logo-small.svg",
+      "id": 2
     }
   ],
-  "inscripciones": [
+  "inscriptions": [
     {
-      "idCurso": 1,
+      "courseId": 1,
       "detalleCurso": "",
       "formatoCurso": "Curso",
       "nombreCurso": "Angular",
@@ -33,7 +61,7 @@
       "id": 1
     },
     {
-      "idCurso": 1,
+      "courseId": 1,
       "detalleCurso": "",
       "formatoCurso": "Curso",
       "nombreCurso": "Angular",
@@ -43,16 +71,47 @@
       "fecha_fin": "2023-05-10",
       "alumnosInscriptos": [],
       "id": 2
+    },
+    {
+      "courseId": 2,
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
+      "nombreCurso": "Nest",
+      "nivelCurso": "Básico",
+      "tipoCurso": "Presencial",
+      "fecha_inicio": "2023-08-01",
+      "fecha_fin": "2023-09-30",
+      "alumnosInscriptos": [
+        1,
+        2
+      ],
+      "id": 3
     }
   ],
-  "usuarios": [
+  "users": [
     {
       "email": "admin@admin.com",
       "password": "123456",
       "role": "Admin",
       "token": "dsLnKJtyBluy0987876asdaasd",
       "id": 1,
-      "idEstudiante": 1
+      "studentId": 1
+    },
+    {
+      "studentId": 2,
+      "email": "juan@juan.com",
+      "password": "30533170",
+      "role": "Estudiante",
+      "token": "9FDJHgC7DOtKvT9Z",
+      "id": 2
+    },
+    {
+      "studentId": 3,
+      "email": "aa@aa.com.ar",
+      "password": "123456",
+      "role": "Estudiante",
+      "token": "7JzGEShwhTjtCG0G",
+      "id": 3
     }
   ]
 }

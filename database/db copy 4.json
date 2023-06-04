@@ -1,0 +1,58 @@
+{
+  "alumnos": [
+    {
+      "nombre": "Ariel",
+      "apellido": "Bernardo",
+      "fechaNacimiento": "1974-08-26",
+      "genero": "Masculino",
+      "dni": "24159131",
+      "role": "Admin",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/1.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/1.jpg",
+      "id": 1
+    }
+  ],
+  "cursos": [
+    {
+      "nombre": "Angular",
+      "foto": "https://i.ytimg.com/vi/qalOpo6Mc-8/maxresdefault.jpg",
+      "id": 1
+    }
+  ],
+  "inscripciones": [
+    {
+      "idCurso": 1,
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
+      "nombreCurso": "Angular",
+      "nivelCurso": "Básico",
+      "tipoCurso": "Virtual",
+      "fecha_inicio": "2023-06-01",
+      "fecha_fin": "2023-06-30",
+      "alumnosInscriptos": [],
+      "id": 1
+    },
+    {
+      "idCurso": 1,
+      "detalleCurso": "",
+      "formatoCurso": "Curso",
+      "nombreCurso": "Angular",
+      "nivelCurso": "Intermedio",
+      "tipoCurso": "Presencial",
+      "fecha_inicio": "2023-05-01",
+      "fecha_fin": "2023-05-10",
+      "alumnosInscriptos": [],
+      "id": 2
+    }
+  ],
+  "usuarios": [
+    {
+      "email": "admin@admin.com",
+      "password": "123456",
+      "role": "Admin",
+      "token": "dsLnKJtyBluy0987876asdaasd",
+      "id": 1,
+      "idEstudiante": 1
+    }
+  ]
+}

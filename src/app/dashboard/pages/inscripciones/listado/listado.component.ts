@@ -16,7 +16,7 @@ interface InscripcionOption {
   nivelCurso: string | null;
   formatoCurso: string | null;
   id: number;
-  idCurso: number;
+  courseId: number;
   nombreCurso: string;
   fecha_inicio: string;
   fecha_fin: string;
@@ -97,7 +97,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
       if (formValue && Object.keys(formValue).length > 0) {
         let nuevaInscripcion = {
           ...formValue,
-          idCurso: parseInt(formValue.idCurso),
+          courseId: parseInt(formValue.courseId),
           alumnosInscriptos: []
         };
         this.inscripcionService.agregarIscripcion(nuevaInscripcion).subscribe(

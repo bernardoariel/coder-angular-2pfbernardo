@@ -18,7 +18,7 @@ export class DetalleComponent {
   tipo:string = '';
   foto:string = './assets/foto.js';
   fotoDefault:string = '../assets/img/cursos/default.png'
-  idCurso:number = 0;
+  courseId:number = 0;
   idInscripcion: number = 0;
   nombreCurso:string = '';
   alumnos: Estudiante[] = [];
@@ -48,14 +48,14 @@ export class DetalleComponent {
       const hoy = new Date();
       this.esFechaFinAnteriorAHoy = fechaFin < hoy;
       this.nrosAlumnoInscripto = data.inscripcion.alumnosInscriptos
-      const idCurso = data.inscripcion?.idCurso;
+      const courseId = data.inscripcion?.courseId;
 
-      if (idCurso) {
-        console.log('idCurso::: ', idCurso);
-        this.cursoService.getCursoById(idCurso).subscribe(
+      if (courseId) {
+
+        this.cursoService.getCursoById(courseId).subscribe(
           curso => {
             console.log('curso::: ', curso);
-            this.idCurso = curso!.id
+            this.courseId = curso!.id
             this.nombreCurso = curso?.nombre ?? 'No encontrado'
             this.foto = curso?.foto!
 
@@ -80,7 +80,7 @@ export class DetalleComponent {
       (usuario: Usuario | null) => {
         console.log('Usuario::: ', usuario);
         this.authUserRole = usuario;
-        if(this.nrosAlumnoInscripto && this.authUserRole && this.nrosAlumnoInscripto.includes(this.authUserRole.idEstudiante!)){
+        if(this.nrosAlumnoInscripto && this.authUserRole && this.nrosAlumnoInscripto.includes(this.authUserRole.studentId!)){
           this.estoyInscripto = true
         }
 

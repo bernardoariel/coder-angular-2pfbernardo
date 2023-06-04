@@ -9,7 +9,7 @@ export interface Inscripcion {
 
   formatoCurso: string;
   id: number;
-  idCurso: number;
+  courseId: number;
   nombre: string;
   fecha_inicio: string;
   fecha_fin: string;
@@ -32,23 +32,23 @@ export class InscripcionService {
 
   getInscripciones(): Observable<Inscripcion[]> {
 
-    return this.http.get<Inscripcion[]>(`${ this.baseUrl }/inscripciones`)
+    return this.http.get<Inscripcion[]>(`${ this.baseUrl }/inscriptions`)
 
   }
   getInscripcionById(id:number):Observable<Inscripcion>{
-    return this.http.get<Inscripcion>(`${ this.baseUrl }/inscripciones/${id}`)
+    return this.http.get<Inscripcion>(`${ this.baseUrl }/inscriptions/${id}`)
   }
 
   agregarIscripcion( payload: Inscripcion): Observable<Inscripcion>{
-    return this.http.post<Inscripcion>(`${ this.baseUrl }/inscripciones`, payload)
+    return this.http.post<Inscripcion>(`${ this.baseUrl }/inscriptions`, payload)
   }
 
   borrarInscripcion( id: number): Observable<any>{
-    return this.http.delete<any>(`${ this.baseUrl }/inscripciones/${ id }`)
+    return this.http.delete<any>(`${ this.baseUrl }/inscriptions/${ id }`)
   }
 
   actualizarInscripcion( inscripcion: Inscripcion): Observable<Inscripcion>{
-    return this.http.put<Inscripcion>(`${ this.baseUrl }/inscripciones/${ inscripcion.id }`, inscripcion)
+    return this.http.put<Inscripcion>(`${ this.baseUrl }/inscriptions/${ inscripcion.id }`, inscripcion)
   }
 
   getCursosDelAlumno(alumnoId: number): Observable<Inscripcion[]> {
@@ -59,13 +59,13 @@ export class InscripcionService {
 
   eliminarInscripcionDelAlumno(inscripcionId: number, alumnoId: number) {
     // Obtener la inscripción actual del servidor
-    return this.http.get<Inscripcion>(`${this.baseUrl}/inscripciones/${inscripcionId}`).pipe(
+    return this.http.get<Inscripcion>(`${this.baseUrl}/inscriptions/${inscripcionId}`).pipe(
       switchMap(inscripcion => {
         if(inscripcion.alumnosInscriptos){
 
           inscripcion.alumnosInscriptos = inscripcion.alumnosInscriptos.filter(id => id !== alumnoId);
           // Enviar una solicitud PUT al servidor con la inscripción actualizada
-          return this.http.put<Inscripcion>(`${this.baseUrl}/inscripciones/${inscripcionId}`, inscripcion);
+          return this.http.put<Inscripcion>(`${this.baseUrl}/inscriptions/${inscripcionId}`, inscripcion);
         }else{
           return EMPTY;
         }
@@ -76,8 +76,8 @@ export class InscripcionService {
   agregarInscripcionAlumno(inscripcionId: number, alumno: Estudiante): Observable<Inscripcion> {
     console.log('alumno::: ', alumno);
     console.log('inscripcionId::: ', inscripcionId);
-    // Obtener la inscripción por idCurso
-    return this.http.get<Inscripcion>(`${this.baseUrl}/inscripciones/${inscripcionId}`).pipe(
+
+    return this.http.get<Inscripcion>(`${this.baseUrl}/inscriptions/${inscripcionId}`).pipe(
       mergeMap(inscripcion => {
         // Agregar el alumno al array de alumnosInscriptos
         if (!inscripcion.alumnosInscriptos) {
@@ -89,10 +89,10 @@ export class InscripcionService {
       })
     );
   }
-  eliminarSubscripciones(idEstudiante:number){
-    this.http.get<Inscripcion[]>(`${ this.baseUrl }/inscripciones`)
+  eliminarSubscripciones(studentId:number){
+    this.http.get<Inscripcion[]>(`${ this.baseUrl }/inscriptions`)
     .subscribe((inscripciones: any[]) => {
-      const numeroEliminar = idEstudiante; // Número a eliminar del array
+      const numeroEliminar = studentId; // Número a eliminar del array
 
       const inscripcionesActualizadas = inscripciones.map(inscripcion => {
         const alumnosInscriptosActualizados = inscripcion.alumnosInscriptos.filter((alumno: number) => alumno !== numeroEliminar);

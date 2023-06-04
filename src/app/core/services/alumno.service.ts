@@ -16,12 +16,12 @@ export class AlumnoService {
 
   getAlumnos():Observable<Estudiante[]>{
 
-    return this.http.get<Estudiante[]>(`${ this.baseUrl }/alumnos`)
+    return this.http.get<Estudiante[]>(`${ this.baseUrl }/students`)
 
   }
 
   getUltimoAlumno(): Observable<Estudiante> {
-    return this.http.get<Estudiante[]>(`${this.baseUrl}/alumnos`).pipe(
+    return this.http.get<Estudiante[]>(`${this.baseUrl}/students`).pipe(
       map((alumnos) => {
         const ultimoAlumno = alumnos.pop();
         if (!ultimoAlumno) {
@@ -32,7 +32,7 @@ export class AlumnoService {
     );
   }
   getEstudiantePorId(id:number):Observable<Estudiante>{
-    return this.http.get<Estudiante>(`${ this.baseUrl }/alumnos/${id}`)
+    return this.http.get<Estudiante>(`${ this.baseUrl }/students/${id}`)
 
   }
 
@@ -41,11 +41,11 @@ export class AlumnoService {
   } */
 
   actualizarAlumno( alumno: Estudiante): Observable<Estudiante>{
-    return this.http.put<Estudiante>(`${ this.baseUrl }/alumnos/${ alumno.id }`, alumno)
+    return this.http.put<Estudiante>(`${ this.baseUrl }/students/${ alumno.id }`, alumno)
   }
   agregarAlumno(alumno: Estudiante): Observable<Estudiante> {
     const { email, password, ...alumnoWithoutEmail } = alumno;
-    return this.http.post<Estudiante>(`${this.baseUrl}/alumnos`, alumnoWithoutEmail).pipe(
+    return this.http.post<Estudiante>(`${this.baseUrl}/students`, alumnoWithoutEmail).pipe(
       switchMap((estudianteCreado: Estudiante) => {
         const passwordToSend = alumno.password || alumno.dni;
         return this.usuariosService.guardarEmailYPasswordEnTablaSeparada(
@@ -62,11 +62,11 @@ export class AlumnoService {
 
   borrarAlumno( id: number): Observable<any>{
 
-    return this.http.delete<any>(`${ this.baseUrl }/alumnos/${ id }`)
+    return this.http.delete<any>(`${ this.baseUrl }/students/${ id }`)
   }
   actualizarPropiedades(id:number, email:string, role:string){
 
-    return this.http.patch<Usuario>(`${ this.baseUrl }/alumnos/${ id }`, {email:email, role:role})
+    return this.http.patch<Usuario>(`${ this.baseUrl }/students/${ id }`, {email:email, role:role})
   }
 
 }

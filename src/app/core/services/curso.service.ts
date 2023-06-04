@@ -15,25 +15,25 @@ export class CursoService {
 
   getCursos():Observable<Curso[]>{
 
-    return this.http.get<Curso[]>(`${ this.baseUrl }/cursos`)
+    return this.http.get<Curso[]>(`${ this.baseUrl }/courses`)
 
   }
 
   getCursoById(id:number):Observable<Curso>{
-    return this.http.get<Curso>(`${ this.baseUrl }/cursos/${id}`)
+    return this.http.get<Curso>(`${ this.baseUrl }/courses/${id}`)
 
   }
 
   agregarCurso( curso: Curso): Observable<Curso>{
     console.log('curso::: ', curso);
-    return this.http.post<Curso>(`${ this.baseUrl }/cursos`, curso)
+    return this.http.post<Curso>(`${ this.baseUrl }/courses`, curso)
   }
 
   actualizarCurso( curso: Curso): Observable<Curso>{
-    return this.http.put<Curso>(`${ this.baseUrl }/cursos/${ curso.id }`, curso)
+    return this.http.put<Curso>(`${ this.baseUrl }/courses/${ curso.id }`, curso)
   }
 
   borrarCurso( id: number): Observable<any>{
-    return this.http.delete<any>(`${ this.baseUrl }/cursos/${ id }`)
+    return this.http.delete<any>(`${ this.baseUrl }/courses/${ id }`)
   }
 }

@@ -85,7 +85,7 @@ export class AlumnoComponent {
       this.dniControl.setValue(data.alumno.dni)
       this.selectedRoleControl.setValue(data.alumno.role)
 
-      this.usuarioService.getUsuarioByIdestudiante(data.alumno.id!).subscribe(usuario => {
+      this.usuarioService.getUsuarioByStudentId(data.alumno.id!).subscribe(usuario => {
 
         this.emailControl.setValue(usuario[0].email)
       })

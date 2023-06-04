@@ -28,7 +28,7 @@ export class LandingComponent implements OnInit{
   messages1!: Message[];
   isLogged:boolean=false;
   // authUser$:Observable<Usuario | null>;
-  idEstudiante!:number;
+  studentId!:number;
   estudiante:any;
   constructor( private authService:AuthService, private alumnosService:AlumnoService
     ) {
@@ -184,9 +184,9 @@ export class LandingComponent implements OnInit{
             (authUser) => {
               if(authUser){
 
-                this.idEstudiante = authUser!.idEstudiante!;
-                console.log('this.idEstudiante ::: ', this.idEstudiante );
-                this.alumnosService.getEstudiantePorId(this.idEstudiante)
+                this.studentId = authUser!.studentId!;
+                console.log('this.studentId ::: ', this.studentId );
+                this.alumnosService.getEstudiantePorId(this.studentId)
                 .subscribe(estudiante => {
                   // console.log('estudiante::: ', estudiante);
                   // Agrega el objeto alumno a la lista

@@ -16,7 +16,7 @@ export interface Usuario {
   password: string;
   email:string;
   token:string;
-  idEstudiante?:number;
+  studentId?:number;
 }
 
 export interface LoginFormValue {
@@ -44,38 +44,40 @@ export class AuthService {
     // this.authUser$.next(usuario)
     this.store.dispatch(EstablecerUsuarioAutenticado({payload:{...usuario,token}}))
   }
-  login(formValue:LoginFormValue):void{
-
-    this.http.get<Usuario[]>(`${this.baseUrl}/usuarios`,
-    {
-      params:{
-        ...formValue
-      }
-    }).subscribe(
-      {
-        next:(usuarios)=>{
-          const usuarioAutenticado = usuarios[0]
-          if(usuarioAutenticado){
-            console.log('usuarioAutenticado::: ', usuarioAutenticado);
-            localStorage.setItem('token',usuarioAutenticado.token)
-            this.establecerUsuarioAutenticado(usuarioAutenticado,usuarioAutenticado.token)
-            if(usuarioAutenticado.role === 'admin'){
-              this.router.navigate(['/dashboard'])}
-              else{
-                this.router.navigate(['/landing'])
-              }
-            // this.router.navigate(['/dashboard'])
-          }else{
-            alert('usuario y contraseña incorrecta')
-          }
+  login(formValue: LoginFormValue): Promise<Usuario | null> {
+    return new Promise((resolve, reject) => {
+      this.http.get<Usuario[]>(`${this.baseUrl}/users`, {
+        params: {
+          ...formValue
         }
+      }).subscribe((usuarios) => {
+      const usuarioAutenticado = usuarios[0];
+      if (usuarioAutenticado) {
+        
+        localStorage.setItem('token', usuarioAutenticado.token);
+        this.establecerUsuarioAutenticado(usuarioAutenticado, usuarioAutenticado.token);
+        if (usuarioAutenticado.role === 'admin') {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.router.navigate(['/landing']);
+        }
+        resolve(usuarioAutenticado);
+      } else {
+        resolve(null);
       }
-    )
-  }
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
+
+
+
 
   verificarToken(): Observable<boolean>{
     const token = localStorage.getItem('token')
-    return this.http.get<Usuario[]>(`${this.baseUrl}/usuarios?token=${token}`,
+    return this.http.get<Usuario[]>(`${this.baseUrl}/users?token=${token}`,
     {
       headers: new HttpHeaders({
         'Authorizations': token || ''

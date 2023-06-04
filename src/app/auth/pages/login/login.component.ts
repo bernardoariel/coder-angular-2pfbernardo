@@ -16,7 +16,7 @@ export class LoginComponent {
     email: this.emailControl,
     password: this.passwordControl,
   });
-
+errorAutenticacion:boolean=false;
   constructor(
      private authService: AuthService,
     private activatedRoute: ActivatedRoute) {
@@ -27,19 +27,23 @@ export class LoginComponent {
   onSubmit(): void {
 
     this.isLoadding = true
-    setTimeout(() => {
-      // cambiar el valor de la variable después de 5 segundos
-      this.isLoadding = false;
-    }, 5000);
+
     if (this.loginForm.invalid) {
+
       this.loginForm.markAllAsTouched();
-      /* this.isLoadding = false
-      console.log('this.isLoadding::: ', this.isLoadding); */
+     
     } else {
-      console.log(this.loginForm.value)
-      this.authService.login(this.loginForm.value as LoginFormValue)
-    /*    this.isLoadding = false
-      console.log('this.isLoadding::: ', this.isLoadding); */
+
+      let respuestaLogin = this.authService.login(this.loginForm.value as LoginFormValue);
+      respuestaLogin.then((usuarioAutenticado) => {
+        this.isLoadding = false;
+        if(!usuarioAutenticado){
+          //aca va el mensaje
+           this.errorAutenticacion = true;
+        }
+      }).catch((error) => {
+        console.error('Error al iniciar sesión:', error);
+      });
     }
 
   }

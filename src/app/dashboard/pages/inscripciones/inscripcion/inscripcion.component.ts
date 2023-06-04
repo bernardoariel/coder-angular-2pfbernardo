@@ -37,7 +37,7 @@ export class InscripcionComponent implements OnInit{
 
  /* form */
   inscripcionForm = new FormGroup({
-    idCurso: this.selectedCursoControl,
+    courseId: this.selectedCursoControl,
     detalleCurso: this.detalleControl,
     formatoCurso: this.selectedFormatoCursoControl,
     nombreCurso: new FormControl(this.nombreCursoSeleccionado, [Validators.required]),
@@ -77,7 +77,7 @@ export class InscripcionComponent implements OnInit{
       const inscripcionParaEditar = data.inscripcion;
       this.fechaInicioControl.setValue(inscripcionParaEditar.fecha_inicio);
       this.fechaFinControl.setValue(inscripcionParaEditar.fecha_fin);
-      this.selectedCursoControl.setValue((inscripcionParaEditar.idCurso).toString());
+      this.selectedCursoControl.setValue((inscripcionParaEditar.courseId).toString());
       this.nombreCursoSeleccionado = inscripcionParaEditar.nombreCurso as string;
       this.selectedNivelCursoControl.setValue(inscripcionParaEditar.nivelCurso as string);
       this.selectedTipoCursoControl.setValue(inscripcionParaEditar.tipoCurso as string);
@@ -114,13 +114,13 @@ export class InscripcionComponent implements OnInit{
       const cursoSeleccionado = this.cursos.find(curso => curso.id === (+cursoId! ?? -1));
       if (cursoSeleccionado) {
         console.log('cursoSeleccionado::: ', cursoSeleccionado);
-        this.inscripcionForm.get('idCurso')?.setValue(cursoSeleccionado.id.toString());
+        this.inscripcionForm.get('courseId')?.setValue(cursoSeleccionado.id.toString());
         this.inscripcionForm.get('nombreCurso')?.setValue(cursoSeleccionado.nombre)
         this.nombreCursoSeleccionado = cursoSeleccionado.nombre;
 
         console.log('this.nombreCursoSeleccionado ::: ', this.nombreCursoSeleccionado );
       } else {
-        this.inscripcionForm.get('idCurso')?.reset();
+        this.inscripcionForm.get('courseId')?.reset();
         this.inscripcionForm.get('nombreCurso')?.reset();
       }
     });

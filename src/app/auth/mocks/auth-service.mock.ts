@@ -10,7 +10,7 @@ const USUARIO_MOCK: Usuario = {
     role: "admin",
     token: "dsLnKJtyBluy0987876asdaasd",
     id: 1,
-    idEstudiante: 0
+    studentId: 0
 
 }
 

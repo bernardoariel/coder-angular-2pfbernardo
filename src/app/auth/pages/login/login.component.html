@@ -1,23 +1,28 @@
-<h2>Iniciar sesión</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div class="field">
-    <mat-form-field class="w-full">
-      <mat-label>E-mail</mat-label>
-      <input [formControl]="emailControl" type="text" matInput />
-      <mat-error *ngFor="let error of emailControl.errors | keyvalue">{{ error | controlErrorMessages }}</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="field">
-    <mat-form-field class="w-full">
-      <mat-label>Contraseña</mat-label>
-      <input [formControl]="passwordControl" type="password" matInput />
-      <mat-error *ngFor="let error of emailControl.errors | keyvalue">{{ error | controlErrorMessages }}</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="flex justify-content-end">
-    <button type="submit" color="primary" mat-flat-button [disabled]="!this.loginForm.valid">
-      Ingresar
-    </button>
-  </div>
-</form>
-<mat-progress-bar *ngIf="isLoadding" class="mt-2" mode="indeterminate" color="accent"></mat-progress-bar>
+<div class="login">
+  <h2>Iniciar sesión</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>E-mail</mat-label>
+        <input [formControl]="emailControl" type="text" matInput />
+        <mat-error *ngFor="let error of emailControl.errors | keyvalue">{{ error | controlErrorMessages }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Contraseña</mat-label>
+        <input [formControl]="passwordControl" type="password" matInput />
+        <mat-error *ngFor="let error of emailControl.errors | keyvalue">{{ error | controlErrorMessages }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div *ngIf="errorAutenticacion" class="error-message mb-1 text-center text-danger">
+      Error al autenticarse. Revise su usuario y contraseña.
+    </div>
+    <div class="flex justify-content-end">
+      <button type="submit" color="primary" mat-flat-button [disabled]="!this.loginForm.valid">
+        Ingresar
+      </button>
+    </div>
+  </form>
+  <mat-progress-bar *ngIf="isLoadding" class="mt-2" mode="indeterminate" color="accent"></mat-progress-bar>
+</div>

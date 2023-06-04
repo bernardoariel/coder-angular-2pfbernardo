@@ -9,6 +9,6 @@ export interface Estudiante {
   dni: string;
   role: string;
   genero: string;
-  idEstudiante?: number;
+  studentId?: number;
   password?: string;
 }
