@@ -28,7 +28,7 @@ export class UsuarioComponent {
   ])
 
 
-  tipoRole: string[] = ['Estudiante', 'Admin', 'Profesor'];
+  tipoRole: string[] = ['Estudiante', 'Admin', ];
 
   valorEmail: string = '';
   usuarioForm = new FormGroup({

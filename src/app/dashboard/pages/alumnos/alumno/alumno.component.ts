@@ -45,7 +45,7 @@ export class AlumnoComponent {
     Validators.required,
   ])
   generoEstudiante: string[] = ['Masculino', 'Femenino', 'No especificado'];
-  tipoRole: string[] = ['Estudiante', 'Admin', 'Profesor'];
+  tipoRole: string[] = ['Estudiante', 'Admin'];
 
   valorEmail: string = '';
   estudianteForm = new FormGroup({

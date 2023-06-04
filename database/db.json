@@ -33,6 +33,28 @@
       "genero": "No especificado",
       "dni": "00000000",
       "id": 3
+    },
+    {
+      "nombre": "juan",
+      "apellido": "fernadez",
+      "fechaNacimiento": "1998-06-03",
+      "genero": "Masculino",
+      "dni": "30533170",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/4.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/men/4.jpg",
+      "id": 4
+    },
+    {
+      "nombre": "noelia",
+      "apellido": "misugin",
+      "fechaNacimiento": "2023-06-01",
+      "genero": "Femenino",
+      "dni": "22654321",
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/women/5.jpg",
+      "fotoUrl": "https://randomuser.me/api/portraits/women/5.jpg",
+      "id": 5
     }
   ],
   "courses": [
@@ -112,6 +134,22 @@
       "role": "Estudiante",
       "token": "7JzGEShwhTjtCG0G",
       "id": 3
+    },
+    {
+      "studentId": 4,
+      "email": "ariel@ariel.com",
+      "password": "30533170",
+      "role": "Estudiante",
+      "token": "BlJ7c1zYl73IZWJN",
+      "id": 4
+    },
+    {
+      "studentId": 5,
+      "email": "aa@hotmail.com",
+      "password": "22654321",
+      "role": "Estudiante",
+      "token": "szTcnOfvvhnJ19om",
+      "id": 5
     }
   ]
 }
