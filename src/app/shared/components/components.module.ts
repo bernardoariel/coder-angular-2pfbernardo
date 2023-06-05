@@ -5,16 +5,19 @@ import { MaterialModule } from '../material/material.module';
 
 
 
+
 @NgModule({
   declarations: [
-    ConfirmComponent
+    ConfirmComponent,
+    
   ],
   imports: [
     CommonModule,
     MaterialModule
   ],
   exports:[
-    ConfirmComponent
+    ConfirmComponent,
+
   ]
 })
 export class ComponentsModule { }
