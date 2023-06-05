@@ -1,6 +1,6 @@
 <mat-card class="example-card">
   <mat-card-header>
-    <!-- <div mat-card-avatar class="example-header-image"></div> -->
+    
     <mat-card-title>
       <div class="row align-items-center">
           <div class="col-auto">{{titulo}}</div>
@@ -9,68 +9,75 @@
               <small class="align-middle">Inscriptos!</small>
           </div>
       </div>
-  </mat-card-title>
-    <!-- <mat-card-subtitle></mat-card-subtitle> -->
+    </mat-card-title>
 
   </mat-card-header>
-  <div class="info d-inline-flex text-center">
-   
-    <img mat-card-image width="150px" src="{{ foto }}" alt="mensaje" class="mx-3 my-3">
+
+  <mat-card-content> 
+
+    <div class="info d-inline-flex text-center">
     
-    <!-- <div class="d-flex align-items-center" *ngIf="alumnosNoInscriptos.length>0 && authUserRole?.role=='Admin'"> -->
-    <div class="d-flex align-items-center" *ngIf="(!isNotFinalized) && (alumnosNoInscriptos.length > 0 && authUserRole?.role == 'Admin');else finCurso">
+      <img mat-card-image width="150px" src="{{ foto }}" alt="mensaje" class="mx-3 my-3" >
       
-      <mat-form-field class="me-3">
+      <!-- <div class="d-flex align-items-center" *ngIf="alumnosNoInscriptos.length>0 && authUserRole?.role=='Admin'"> -->
+      <div class="d-flex align-items-center" *ngIf="(!isNotFinalized) && (alumnosNoInscriptos.length > 0 && authUserRole?.role == 'Admin');else finCurso">
+        
+        <mat-form-field class="me-3">
 
-        <mat-label>Seleccionar alumno</mat-label>
-        <mat-select #alumnoSelect>
-          <mat-option *ngFor="let alumno of alumnosNoInscriptos" [value]="alumno">
-            {{ alumno.nombre }} {{ alumno.apellido }}
-          </mat-option>
-        </mat-select>
+          <mat-label>Seleccionar alumno</mat-label>
+          <mat-select #alumnoSelect>
+            <mat-option *ngFor="let alumno of alumnosNoInscriptos" [value]="alumno">
+              {{ alumno.nombre }} {{ alumno.apellido }}
+            </mat-option>
+          </mat-select>
 
-      </mat-form-field>
+        </mat-form-field>
 
-      <button mat-flat-button 
-          class="mb-3" 
-          (click)="agregarAlumno(alumnoSelect?.value)" 
-          [disabled]="esFechaFinAnteriorAHoy">Agregar Alumno</button>
-    
+        <button mat-flat-button 
+            class="mb-3" 
+            (click)="agregarAlumno(alumnoSelect?.value)" 
+            [disabled]="esFechaFinAnteriorAHoy">Agregar Alumno</button>
+      
+      </div>
+      <ng-template #finCurso>
+        <h2 class="mt-4">Curso Finalizado!</h2>
+      </ng-template>
+      
     </div>
-    <ng-template #finCurso>
-      <h2 class="mt-4">Curso Finalizado!</h2>
-    </ng-template>
+
+    <button mat-flat-button class="mb-3" *ngIf="authUserRole?.role =='Estudiante' && !estoyInscripto" (click)="agregarEstudiante(authUserRole!)" [disabled]="esFechaFinAnteriorAHoy">Quiero Anotarme!</button>
     
-  </div>
+    <mat-accordion class="example-headers-align">
 
-  <button mat-flat-button class="mb-3" *ngIf="authUserRole?.role =='Estudiante' && !estoyInscripto" (click)="agregarEstudiante(authUserRole!)" [disabled]="esFechaFinAnteriorAHoy">Quiero Anotarme!</button>
-  <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let alumno of alumnosInscriptos; let i = index" [expanded]="false"  hideToggle>
 
-    <mat-expansion-panel *ngFor="let alumno of alumnosInscriptos; let i = index" [expanded]="false"  hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ alumno.apellido | uppercase }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ alumno.nombre | titlecase }}
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ alumno.apellido | uppercase }}
-        </mat-panel-title>
-        <mat-panel-description>
-          {{ alumno.nombre | titlecase }}
-          <mat-icon>account_circle</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+        <mat-action-row *ngIf="authUserRole?.role=='Admin'">
+          <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)" [disabled]="esFechaFinAnteriorAHoy"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
+        </mat-action-row>
+        <mat-action-row *ngIf="estoyInscripto && alumno.id == authUserRole?.studentId && authUserRole?.role!='Admin' ">
+          <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)" [disabled]="esFechaFinAnteriorAHoy">Eliminar Subscripcion<mat-icon>delete</mat-icon></button>
+        </mat-action-row>
+      </mat-expansion-panel>
 
-      <mat-action-row *ngIf="authUserRole?.role=='Admin'">
-        <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)" [disabled]="esFechaFinAnteriorAHoy"> Eliminar Alumno<mat-icon>delete</mat-icon></button>
-      </mat-action-row>
-      <mat-action-row *ngIf="estoyInscripto && alumno.id == authUserRole?.studentId && authUserRole?.role!='Admin' ">
-        <button mat-button color="warn" (click)="eliminarCursoAlumno(idInscripcion,alumno)" [disabled]="esFechaFinAnteriorAHoy">Eliminar Subscripcion<mat-icon>delete</mat-icon></button>
-      </mat-action-row>
-    </mat-expansion-panel>
+    </mat-accordion>
 
-  </mat-accordion>
-  <mat-card-actions>
+    <mat-card-actions>
 
-    <button mat-flat-button mat-dialog-close="true" color="primary">ok</button>
+      <button mat-flat-button mat-dialog-close="true" color="primary">ok</button>
 
-  </mat-card-actions>
+    </mat-card-actions>
+
+  </mat-card-content>
+
 </mat-card>
 

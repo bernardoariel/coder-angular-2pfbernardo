@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { NombreCompletoPipe } from './nombre-completo.pipe';
 import { ControlErrorMessagesPipe } from './control-error-messages.pipe';
+import { TimeFormatPipe } from './time-format.pipe';
 
 
 @NgModule({
   declarations: [
     NombreCompletoPipe,
-    ControlErrorMessagesPipe
+    ControlErrorMessagesPipe,
+    TimeFormatPipe
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { ControlErrorMessagesPipe } from './control-error-messages.pipe';
   ],
   exports:[
     NombreCompletoPipe,
-    ControlErrorMessagesPipe
+    ControlErrorMessagesPipe,
+    TimeFormatPipe
   ]
 })
 export class PipesModule { }

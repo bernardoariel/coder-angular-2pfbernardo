@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ListadoComponent } from '../listado/listado.component';
 import { Inscripcion, InscripcionService } from 'src/app/core/services/inscripcion.service';
@@ -13,7 +13,7 @@ import { take } from 'rxjs';
   templateUrl: './detalle.component.html',
   styleUrls: ['./detalle.component.scss']
 })
-export class DetalleComponent {
+export class DetalleComponent{
   titulo:string = '';
   tipo:string = '';
   foto:string = './assets/foto.js';
@@ -31,6 +31,8 @@ export class DetalleComponent {
   authUserRole!:Usuario | null;
   estoyInscripto:boolean = false
   nrosAlumnoInscripto?:number[] = []
+
+
   constructor(
     private dialogRef:MatDialogRef<ListadoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { inscripcion?: Inscripcion },
@@ -62,8 +64,8 @@ export class DetalleComponent {
            this.isNotFinalized = true;
         } else {
           // La fecha de finalización es posterior a la fecha de hoy
-this.esFechaFinAnteriorAHoy = false;
- this.isNotFinalized = false;
+          this.esFechaFinAnteriorAHoy = false;
+          this.isNotFinalized = false;
         }
       }
 
@@ -108,6 +110,7 @@ this.esFechaFinAnteriorAHoy = false;
       }
     );
   }
+
   obtenerAlumnosInscriptos(alumnosInscriptos: number[]): void {
     
     const alumnos: any[] = [];

@@ -3,8 +3,6 @@
   <!-- SIDEBAR -->
   <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
 
-
-
     <div class="text-center">
 
       <img width="50" height="50" src="../../assets/img/usuarios/admin.png">
@@ -39,24 +37,54 @@
   <div class="example-sidenav-content">
     <!-- TOOLBAR  -->
     <mat-toolbar color="primary">
+      
       <div class="menu-wrapper">
+        
         <div class="menu-button">
-          <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon>menu</mat-icon>
+          <button (click)="drawer.toggle();toggleIcono()" 
+          mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon [ngClass]="{'icono-girado': !iconoGirado}">menu</mat-icon>
           </button>
         </div>
+
         <div class="title-wrapper">
           <span class="title">{{ title }}</span>
           <small class="breadcrumbs">{{ breadcrumbs | async }}</small>
         </div>
+
       </div>
-      <p></p>
-    </mat-toolbar>
+      
+      <div class="derecho">
+        <div style="display: flex; align-items: center; margin-top: 6px;">
+          <mat-icon style="margin-right: 5px;">access_time</mat-icon>
+          {{ horaActual$ | async | timeFormat}}
+          <button mat-icon-button title="Ingresá a la configuracion" [matMenuTriggerFor]="menu">
+            <mat-icon>settings</mat-icon>
+          </button>
+        </div>
+      </div>
 
-    <main>
+       <mat-menu #menu="matMenu">
 
-      <router-outlet></router-outlet>
+    <button mat-menu-item title="Cambia los colores de preferencia de tu sistema" (click)="onChangeTheme()">
+      <mat-icon>format_paint</mat-icon>
+      <span>Editar Preferencias</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item title="Salir del sistema" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Salir</span>
+    </button>
+    
+  </mat-menu>
 
-    </main>
+      </mat-toolbar>
+
+      <main>
+
+        <router-outlet></router-outlet>
+
+      </main>
+
   </div>
 </mat-drawer-container>
