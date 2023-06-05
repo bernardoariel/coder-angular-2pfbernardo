@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingComponent } from './landing.component';
-import { PagesComponent } from './pages/pages.component';
+
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { StyleLoaderService } from '../core/services/style-loader.service';
@@ -16,8 +16,6 @@ import { ChipModule } from 'primeng/chip';
 @NgModule({
   declarations: [
     LandingComponent,
-    PagesComponent,
-    
   ],
   imports: [
     CommonModule,
