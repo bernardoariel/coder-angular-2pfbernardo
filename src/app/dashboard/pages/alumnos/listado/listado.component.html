@@ -8,7 +8,8 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="buscar ..." #input>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" *ngIf="authUserRole?.role == 'Admin'" (click)="crearAlumno()">Agregar Alumno</button>
+  <button mat-flat-button color="primary"
+   *ngIf="authUserRole?.role == 'Admin'" (click)="crearAlumno()">Agregar Alumno</button>
 
 </div>
 
@@ -18,7 +19,7 @@
 
 </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!isLoading">
+<table mat-table [dataSource]="dataSource" *ngIf="!isLoading">
 
   <ng-container matColumnDef="matricula">
     <th mat-header-cell *matHeaderCellDef appFontSize> ID </th>
