@@ -50,7 +50,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
     ){
       this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
         (usuario: Usuario | null) => {
-          console.log('Usuario::: ', usuario);
+          
           this.authUserRole = usuario;
 
         }
@@ -73,7 +73,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
       setTimeout(() => {
         this.activatedRoute.data.subscribe(data => {
           this.titulo = data['breadcrumb'].alias;
-          console.log('this.titulo::: ', this.titulo);
+          
           this.titleService.setTitle(this.titulo);
         });
 
@@ -127,13 +127,15 @@ export class ListadoComponent  implements OnInit , OnDestroy {
     }
   }
   eliminarInscripcion(inscripcionDelete:Inscripcion){
+
     const dialogRef =  this.matDialog.open(ConfirmComponent,{
       data: 'Está seguro que desea eliminar esta Inscripcion?'
     })
 
     dialogRef.afterClosed().subscribe(result => {
       if(!result) return;
-      this.inscripcionService.borrarInscripcion(inscripcionDelete.id!).subscribe(
+      this.inscripcionService.borrarInscripcion(inscripcionDelete.id!)
+      .subscribe(
         () => {
             this.dataSource.data = (this.dataSource.data as Inscripcion[])
             .filter((inscripcion) => inscripcion.id !== inscripcionDelete.id);
@@ -161,7 +163,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
           ...formValue
         };
         this.inscripcionService.actualizarInscripcion(inscripcionEditado).subscribe((inscrip)=>{
-          console.log('alumno::: ', inscrip);
+          
           const index = this.dataSource.data.findIndex(a => a.id === inscrip.id);
           if (index !== -1) {
             this.dataSource.data[index] = inscrip;
@@ -184,7 +186,7 @@ export class ListadoComponent  implements OnInit , OnDestroy {
 
     dialog.afterClosed()
     .subscribe((formValue) => {
-      console.log('formValue::: ', formValue);
+      
       if(formValue){
         this.subscripcionRef = this.inscripcionService.getInscripciones().subscribe(
           (inscripciones: any[]) => {

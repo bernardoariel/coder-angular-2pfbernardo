@@ -12,49 +12,15 @@
       "id": 1
     },
     {
-      "nombre": "Juan",
-      "apellido": "Fernandez",
-      "fechaNacimiento": "1993-02-10",
-      "genero": "Masculino",
-      "dni": "30533170",
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/2.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/2.jpg",
-      "id": 2,
-      "email": "juan@juan.com"
-    },
-    {
       "role": "Estudiante",
       "fotoPerfilUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
       "fotoUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
       "nombre": "user",
       "apellido": "user",
-      "fechaNacimiento": "2023-05-17",
+      "fechaNacimiento": "2023-06-04",
       "genero": "No especificado",
       "dni": "00000000",
-      "id": 3
-    },
-    {
-      "nombre": "juan",
-      "apellido": "fernadez",
-      "fechaNacimiento": "1998-06-03",
-      "genero": "Masculino",
-      "dni": "30533170",
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/men/4.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/men/4.jpg",
-      "id": 4
-    },
-    {
-      "nombre": "noelia",
-      "apellido": "misugin",
-      "fechaNacimiento": "2023-06-01",
-      "genero": "Femenino",
-      "dni": "22654321",
-      "role": "Estudiante",
-      "fotoPerfilUrl": "https://randomuser.me/api/portraits/med/women/5.jpg",
-      "fotoUrl": "https://randomuser.me/api/portraits/women/5.jpg",
-      "id": 5
+      "id": 2
     }
   ],
   "courses": [
@@ -101,13 +67,27 @@
       "nombreCurso": "Nest",
       "nivelCurso": "Básico",
       "tipoCurso": "Presencial",
-      "fecha_inicio": "2023-08-01",
-      "fecha_fin": "2023-09-30",
+      "fecha_inicio": "2023-06-14",
+      "fecha_fin": "2023-08-19",
       "alumnosInscriptos": [
-        1,
-        2
+        4,
+        5
       ],
       "id": 3
+    },
+    {
+      "courseId": 1,
+      "detalleCurso": "Especial",
+      "formatoCurso": "Clase",
+      "nombreCurso": "Angular",
+      "nivelCurso": "Básico",
+      "tipoCurso": "Presencial",
+      "fecha_inicio": "2023-06-13",
+      "fecha_fin": "2023-06-05",
+      "alumnosInscriptos": [
+        3
+      ],
+      "id": 4
     }
   ],
   "users": [
@@ -121,35 +101,11 @@
     },
     {
       "studentId": 2,
-      "email": "juan@juan.com",
-      "password": "30533170",
-      "role": "Estudiante",
-      "token": "9FDJHgC7DOtKvT9Z",
-      "id": 2
-    },
-    {
-      "studentId": 3,
-      "email": "aa@aa.com.ar",
+      "email": "ariel@hotmail.com",
       "password": "123456",
       "role": "Estudiante",
-      "token": "7JzGEShwhTjtCG0G",
-      "id": 3
-    },
-    {
-      "studentId": 4,
-      "email": "ariel@ariel.com",
-      "password": "30533170",
-      "role": "Estudiante",
-      "token": "BlJ7c1zYl73IZWJN",
-      "id": 4
-    },
-    {
-      "studentId": 5,
-      "email": "aa@hotmail.com",
-      "password": "22654321",
-      "role": "Estudiante",
-      "token": "szTcnOfvvhnJ19om",
-      "id": 5
+      "token": "7QPxTeGIu1k89fT4",
+      "id": 2
     }
   ]
 }

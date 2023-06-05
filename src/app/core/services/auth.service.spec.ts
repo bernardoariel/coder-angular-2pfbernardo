@@ -30,7 +30,7 @@ describe('Pruebas de AuthService', () => {
       skip(1)
     )
     .subscribe(usuario=>{
-      console.log('usuario::: ', usuario);
+
       expect(usuario).toBeTruthy()
 
     })

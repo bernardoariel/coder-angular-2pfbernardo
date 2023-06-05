@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Estudiante } from 'src/app/core/interfaces/estudiante.interface';
 import { differenceInYears } from 'date-fns';
-import { Subject, Subscription, take } from 'rxjs';
+import { Subject, Subscription, catchError, filter, map, of, switchMap, take } from 'rxjs';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AlumnoComponent } from '../alumno/alumno.component';
@@ -14,6 +14,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 import { TitleService } from 'src/app/core/services/title.service';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
+import { Inscripcion, InscripcionService } from 'src/app/core/services/inscripcion.service';
 
 
 @Component({
@@ -42,13 +43,13 @@ export class ListadoComponent implements OnInit, OnDestroy  {
     private activatedRoute:ActivatedRoute,
     private authService:AuthService,
     private usuarioService:UsuarioService,
+    private inscripcionesService:InscripcionService
   ) {
     this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
       (usuario: Usuario | null) => {
-        console.log('Usuario::: ', usuario);
+
         this.authUserRole = usuario;
 
-        console.log('Valor de authUser:', this.authUserRole?.role);
       }
     );
   }
@@ -67,7 +68,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
     setTimeout(() => {
       this.activatedRoute.data.subscribe(data => {
         this.titulo = data['breadcrumb'].alias;
-        console.log('this.titulo::: ', this.titulo);
+       
         this.titleService.setTitle(this.titulo);
       });
 
@@ -106,7 +107,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
       this.ultimoId = ultimoAlumno.id || 0;
     });
     dialog.afterClosed().subscribe((formValue) => {
-      console.log('formValue::: ', formValue.genero);
+
 
       let foto1:string =''
       let foto2:string = ''
@@ -144,21 +145,53 @@ export class ListadoComponent implements OnInit, OnDestroy  {
     });
   }
   eliminarAlumno(alumnoDelete: Estudiante): void {
+    
     const dialogRef =  this.matDialog.open(ConfirmComponent,{
       data: 'Está seguro que desea eliminar este Alumno?'
     })
+
     dialogRef.afterClosed().subscribe(result => {
       if(!result) return;
-      this.alumnoService.borrarAlumno(alumnoDelete.id!).subscribe(
-        () => {
-          this.usuarioService.borrarUsuario(alumnoDelete.id!).subscribe(
-            ()=>{
-             console.log('usuario eliminado');
-            }
-          )
-            this.dataSource.data = (this.dataSource.data as Estudiante[]).filter((alumno) => alumno.id !== alumnoDelete.id);
+     
+      this.inscripcionesService.getInscripciones().subscribe(
+        (inscripciones) => {
+          const alumnoInscripto = inscripciones.filter((inscripcion) => 
+            inscripcion?.alumnosInscriptos?.includes(alumnoDelete.id!)
+          );
+          let nombreCompleto:string = ''
+          if (alumnoInscripto.length > 0) {
+            nombreCompleto = `El alumno ${alumnoDelete.apellido.toUpperCase()} está inscripto en al menos un curso.`
+            this.snackBar.open(nombreCompleto, '', {
+              duration: 4000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+            return
+          } 
+          
         }
-      )
+      );
+  
+      this.alumnoService.borrarAlumno(alumnoDelete.id!).pipe(
+        switchMap(() => this.usuarioService.getUsuarios()),
+          map(usuarios => usuarios.find(usuario => usuario.id === alumnoDelete.id)),
+          filter(usuario => usuario !== undefined), // Filtra solo si el usuario existe
+          switchMap(() => this.usuarioService.borrarUsuario(alumnoDelete.id!).pipe(
+            catchError((error) => {
+              this.snackBar.open('Este alumno no tenía usuario registrado', '', {
+                duration: 4000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+              });
+              return of(null); // Retorna un observable que emite null en caso de error
+            })
+          ))
+      ).subscribe(
+        () => {
+       
+          this.dataSource.data = (this.dataSource.data as Estudiante[]).filter(alumno => alumno.id !== alumnoDelete.id);
+        }
+      );
 
     });
 
@@ -172,7 +205,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
     });
 
     dialog.afterClosed().subscribe((formValue) => {
-      console.log('valor del form::: ', formValue.genero);
+
       let foto1:string =''
       let foto2:string = ''
       switch (formValue.genero) {
@@ -192,7 +225,7 @@ export class ListadoComponent implements OnInit, OnDestroy  {
 
 
       if (formValue) {
-        console.log('formValue::: ', formValue);
+
 
         const alumnoEditado = {
           ...alumno,
@@ -202,14 +235,14 @@ export class ListadoComponent implements OnInit, OnDestroy  {
         };
 
         this.alumnoService.actualizarAlumno(alumnoEditado).subscribe((alumno)=>{
-          console.log('alumno::: ', alumno);
+    
           const index = this.dataSource.data.findIndex(a => a.id === alumno.id);
           if (index !== -1) {
             this.dataSource.data[index] = alumno;
             this.dataSource.data = [...this.dataSource.data];
             this.usuarioService.actualizarPropiedades(alumnoEditado.id,formValue.email, formValue.role).subscribe(
               (resultado) => {
-                console.log('Resultado de la operación adicional en usuariosService:', resultado);
+              
                 // Realizar cualquier acción necesaria con el resultado de la operación adicional en usuariosService
               }
             )

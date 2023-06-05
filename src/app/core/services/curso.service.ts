@@ -25,7 +25,7 @@ export class CursoService {
   }
 
   agregarCurso( curso: Curso): Observable<Curso>{
-    console.log('curso::: ', curso);
+    
     return this.http.post<Curso>(`${ this.baseUrl }/courses`, curso)
   }
 

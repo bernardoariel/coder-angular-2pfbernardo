@@ -27,6 +27,7 @@ export class DetalleComponent {
   alumnosInscriptos: Estudiante[] = []
   fechaFin!:Date
   esFechaFinAnteriorAHoy: boolean = false;
+  isNotFinalized: boolean = false;
   authUserRole!:Usuario | null;
   estoyInscripto:boolean = false
   nrosAlumnoInscripto?:number[] = []
@@ -39,14 +40,34 @@ export class DetalleComponent {
     private authService: AuthService
   ){
     if(data && data.inscripcion){
-      console.log('datos en detalle ', data.inscripcion);
+      console.log('data.inscripcion::: ', data.inscripcion);
+      
 
       this.titulo = data.inscripcion.nombre ; //tengo el nombre
       this.idInscripcion = data.inscripcion.id; //tengo el id de la inscripcion o curso a inscribir
       this.foto = '../assets/img/cursos/default.png'
-      const fechaFin = new Date(data.inscripcion?.fecha_fin!);
       const hoy = new Date();
-      this.esFechaFinAnteriorAHoy = fechaFin < hoy;
+      const fechaFin = data.inscripcion?.fecha_fin;
+      if (fechaFin) {
+        const fechaFinDate = new Date(fechaFin);
+        const fechaHoyString = hoy.toISOString().substr(0, 10);
+
+        if (fechaFinDate.toISOString().substr(0, 10) === fechaHoyString) {
+          // La fecha de hoy es igual a la fecha de finalización
+          this.esFechaFinAnteriorAHoy = false;
+          this.isNotFinalized = false;
+        } else if (fechaFinDate < hoy) {
+          // La fecha de finalización es anterior a la fecha de hoy
+          this.esFechaFinAnteriorAHoy = true;
+           this.isNotFinalized = true;
+        } else {
+          // La fecha de finalización es posterior a la fecha de hoy
+this.esFechaFinAnteriorAHoy = false;
+ this.isNotFinalized = false;
+        }
+      }
+
+
       this.nrosAlumnoInscripto = data.inscripcion.alumnosInscriptos
       const courseId = data.inscripcion?.courseId;
 
@@ -54,7 +75,7 @@ export class DetalleComponent {
 
         this.cursoService.getCursoById(courseId).subscribe(
           curso => {
-            console.log('curso::: ', curso);
+          
             this.courseId = curso!.id
             this.nombreCurso = curso?.nombre ?? 'No encontrado'
             this.foto = curso?.foto!
@@ -66,19 +87,19 @@ export class DetalleComponent {
         alumnos => {
           this.alumnosTodos = alumnos;
           this.alumnosNoInscriptos = alumnos.filter(alumno => {
-      // Agrega una condición adicional para filtrar por un campo distinto de 'user'
-      return alumno.nombre !== 'user' && !data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id);
-    });
-    this.alumnosInscriptos = alumnos.filter(alumno => {
-      // Agrega una condición adicional para filtrar por un campo distinto de 'user'
-      return alumno.nombre !== 'user' && data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id);
-    });
+          // Agrega una condición adicional para filtrar por un campo distinto de 'user'
+          return alumno.nombre !== 'user' && !data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id);
+        });
+        this.alumnosInscriptos = alumnos.filter(alumno => {
+          // Agrega una condición adicional para filtrar por un campo distinto de 'user'
+          return alumno.nombre !== 'user' && data.inscripcion?.alumnosInscriptos?.find(a => a === alumno.id);
+        });
       })
 
     }
     this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
       (usuario: Usuario | null) => {
-        console.log('Usuario::: ', usuario);
+        
         this.authUserRole = usuario;
         if(this.nrosAlumnoInscripto && this.authUserRole && this.nrosAlumnoInscripto.includes(this.authUserRole.studentId!)){
           this.estoyInscripto = true
@@ -88,26 +109,18 @@ export class DetalleComponent {
     );
   }
   obtenerAlumnosInscriptos(alumnosInscriptos: number[]): void {
-    console.log('alumnosInscriptos::: ', alumnosInscriptos);
+    
     const alumnos: any[] = [];
     for (const id of alumnosInscriptos) {
       this.alumnosService.getEstudiantePorId(id)
         .subscribe(estudiante => {
-          console.log('estudiante::: ', estudiante);
+          
           // Agrega el objeto alumno a la lista
           alumnos.push({id: estudiante.id, nombre: estudiante.nombre, apellido: estudiante.apellido});
         });
     }
     this.alumnosInscriptos = alumnos;
   }
-
-  /* obtenerAlumnosNoInscriptos(alumnosInscriptos: any[]): void {
-    this.alumnosService.getAlumnos().subscribe(
-      alumnos => {
-        return alumnos.filter(alumno => !alumnosInscriptos.find(a => a.id === alumno.id));
-      }
-    );
-  } */
 
   eliminarCursoAlumno(id: number, alumno: Estudiante) {
 
@@ -125,7 +138,7 @@ export class DetalleComponent {
 
     this.inscripcionesService.agregarInscripcionAlumno(this.idInscripcion, alumno).subscribe(
       inscripcion => {
-        console.log('inscripcion::: ', inscripcion);
+        
         this.alumnosInscriptos.push(alumno);
         this.alumnosNoInscriptos = this.alumnosNoInscriptos.filter(a => a.id !== alumno.id) ;
 
@@ -134,11 +147,11 @@ export class DetalleComponent {
   }
   agregarEstudiante(usuario: Usuario) {
     this.alumnosService.getEstudiantePorId(usuario.id).subscribe(estudiante => {
-      console.log(estudiante);
+      
       // Aquí puedes llamar a la función agregarInscripcionAlumno y pasar el estudiante como argumento
       this.inscripcionesService.agregarInscripcionAlumno(this.idInscripcion, estudiante).subscribe(
         inscripcion => {
-          console.log('inscripcion::: ', inscripcion);
+          
           this.alumnosInscriptos.push(estudiante);
           this.alumnosNoInscriptos = this.alumnosNoInscriptos.filter(a => a.id !== estudiante.id);
         }

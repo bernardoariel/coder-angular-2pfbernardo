@@ -185,13 +185,13 @@ export class LandingComponent implements OnInit{
               if(authUser){
 
                 this.studentId = authUser!.studentId!;
-                console.log('this.studentId ::: ', this.studentId );
+    
                 this.alumnosService.getEstudiantePorId(this.studentId)
                 .subscribe(estudiante => {
-                  // console.log('estudiante::: ', estudiante);
+              
                   // Agrega el objeto alumno a la lista
 this.estudiante = estudiante;
-                    console.log('this.estudiante::: ', this.estudiante);
+ 
 
 
                 });
@@ -210,14 +210,10 @@ this.estudiante = estudiante;
   ngOnInit(): void {
 
   }
-  login(){
-    console.log('login');
 
-  }
 
   logout(){
-    // this.router.navigate(['auth','login'])
-    console.log('logout');
+    
     this.authService.logout()
     this.authService.verificarToken().subscribe( userLogueado => this.isLogged = userLogueado);
     }

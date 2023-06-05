@@ -76,7 +76,7 @@ export class AlumnoComponent {
     @Inject(MAT_DIALOG_DATA) public data: { alumno?: Estudiante }
   ){
     if(data && data.alumno){
-      console.log('data.alumno::: ', data.alumno);
+     
       this.nombreControl.setValue(data.alumno.nombre)
       this.apellidoControl.setValue(data.alumno.apellido)
       this.fechaNacimientoControl.setValue(data.alumno.fechaNacimiento)
@@ -91,14 +91,14 @@ export class AlumnoComponent {
       })
       this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
         (usuario: Usuario | null) => {
-          console.log('Usuario::: ', usuario);
+         
           this.authUserRole = usuario;
           if(this.authUserRole?.role == 'Estudiante'){
             this.tipoRole = ['Estudiante'];
           }else if(this.authUserRole?.role == 'Profesor'){
             this.tipoRole = ['Profesor'];
           }
-          console.log('Valor de authUser:', this.authUserRole?.role);
+         
         }
       );
 
@@ -123,7 +123,7 @@ export class AlumnoComponent {
 
       const formData = this.estudianteForm.value;
       formData.fechaNacimiento = formData.fechaNacimiento ? new Date(formData.fechaNacimiento).toISOString().substring(0, 10) : null;
-      console.log('formData::: ', formData);
+     
 
       this.dialogRef.close(formData);
 

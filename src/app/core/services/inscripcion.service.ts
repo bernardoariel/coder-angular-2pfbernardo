@@ -74,8 +74,7 @@ export class InscripcionService {
   }
 
   agregarInscripcionAlumno(inscripcionId: number, alumno: Estudiante): Observable<Inscripcion> {
-    console.log('alumno::: ', alumno);
-    console.log('inscripcionId::: ', inscripcionId);
+
 
     return this.http.get<Inscripcion>(`${this.baseUrl}/inscriptions/${inscripcionId}`).pipe(
       mergeMap(inscripcion => {
@@ -99,12 +98,7 @@ export class InscripcionService {
         return { ...inscripcion, alumnosInscriptos: alumnosInscriptosActualizados };
       });
 
-      console.log('inscripcionesActualizadas::: ', inscripcionesActualizadas);
-      // Luego puedes hacer la llamada al endpoint correspondiente para actualizar los registros en la base de datos
-
-     /*  this.http.put('url_de_la_api/inscripciones', inscripcionesActualizadas).subscribe(response => {
-        console.log('Registros actualizados:', response);
-      }); */
+     
     });
   }
 

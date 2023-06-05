@@ -27,7 +27,6 @@ export class DetalleComponent {
     private inscripcionesService: InscripcionService
   ){
     if(data && data.alumno){
-      console.log('data.alumno::: ', data.alumno);
       this.titulo = data.alumno.nombre + ' ' + data.alumno.apellido;
       this.avatar = data.alumno.fotoPerfilUrl
       this.foto = data.alumno.fotoPerfilUrl
@@ -35,13 +34,12 @@ export class DetalleComponent {
       this.fechaNacimiento= data.alumno.fechaNacimiento
        this.inscripcionesService.getCursosDelAlumno(data.alumno.id!).subscribe((cursos:any)=>{
         this.cursosDelAlumno = cursos
-        console.log('this.cursosDelAlumno ::: ', this.cursosDelAlumno );
+
       })
       this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
         (usuario: Usuario | null) => {
-          console.log('Usuario::: ', usuario);
-          this.authUserRole = usuario;
 
+          this.authUserRole = usuario;
          
         }
       );

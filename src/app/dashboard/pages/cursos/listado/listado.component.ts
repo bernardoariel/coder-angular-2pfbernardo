@@ -111,7 +111,7 @@ export class ListadoComponent  implements OnInit , OnDestroy{
 
   }
   editarCurso(curso:Curso){
-    console.log('curso::: ', curso);
+  
     const dialog =  this.matDialog.open(CursoComponent, {
      data:{
         curso

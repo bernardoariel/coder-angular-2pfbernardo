@@ -13,20 +13,36 @@
     <!-- <mat-card-subtitle></mat-card-subtitle> -->
 
   </mat-card-header>
-  <img mat-card-image src="{{ foto }}" alt="mensaje">
+  <div class="info d-inline-flex text-center">
+   
+    <img mat-card-image width="150px" src="{{ foto }}" alt="mensaje" class="mx-3 my-3">
+    
+    <!-- <div class="d-flex align-items-center" *ngIf="alumnosNoInscriptos.length>0 && authUserRole?.role=='Admin'"> -->
+    <div class="d-flex align-items-center" *ngIf="(!isNotFinalized) && (alumnosNoInscriptos.length > 0 && authUserRole?.role == 'Admin');else finCurso">
+      
+      <mat-form-field class="me-3">
 
-  <div class="d-flex align-items-center" *ngIf="alumnosNoInscriptos.length>0 && authUserRole?.role=='Admin'">
-    <mat-form-field class="me-3">
-      <mat-label>Seleccionar alumno</mat-label>
-      <mat-select #alumnoSelect>
-        <mat-option *ngFor="let alumno of alumnosNoInscriptos" [value]="alumno">
-          {{ alumno.nombre }} {{ alumno.apellido }}
+        <mat-label>Seleccionar alumno</mat-label>
+        <mat-select #alumnoSelect>
+          <mat-option *ngFor="let alumno of alumnosNoInscriptos" [value]="alumno">
+            {{ alumno.nombre }} {{ alumno.apellido }}
+          </mat-option>
+        </mat-select>
 
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-flat-button class="mb-3" (click)="agregarAlumno(alumnoSelect?.value)" [disabled]="esFechaFinAnteriorAHoy">Agregar Alumno</button>
+      </mat-form-field>
+
+      <button mat-flat-button 
+          class="mb-3" 
+          (click)="agregarAlumno(alumnoSelect?.value)" 
+          [disabled]="esFechaFinAnteriorAHoy">Agregar Alumno</button>
+    
+    </div>
+    <ng-template #finCurso>
+      <h2 class="mt-4">Curso Finalizado!</h2>
+    </ng-template>
+    
   </div>
+
   <button mat-flat-button class="mb-3" *ngIf="authUserRole?.role =='Estudiante' && !estoyInscripto" (click)="agregarEstudiante(authUserRole!)" [disabled]="esFechaFinAnteriorAHoy">Quiero Anotarme!</button>
   <mat-accordion class="example-headers-align">
 

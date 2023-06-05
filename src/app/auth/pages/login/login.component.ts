@@ -20,7 +20,7 @@ errorAutenticacion:boolean=false;
   constructor(
      private authService: AuthService,
     private activatedRoute: ActivatedRoute) {
-    console.log(this.activatedRoute.snapshot);
+
   }
 
 

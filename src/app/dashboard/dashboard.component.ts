@@ -27,21 +27,21 @@ export class DashboardComponent implements OnInit, OnDestroy{
   private activatedRoute:ActivatedRoute
  ) {
   this.authUser$ = this.authService.obtenerUsuarioAutenticado()
-  console.log('this.authUser$::: ', this.authUser$);
+ 
   this.breadcrumbs = this.titleService.obtenerBreadcrumbs();
   this.authService.obtenerUsuarioAutenticado().pipe(take(1)).subscribe(
     (usuario: Usuario | null) => {
       this.authUserRole = usuario;
-      console.log('Valor de authUser:', this.authUserRole?.role);
+    
     }
   );
-  // console.log('this.breadcrumbs ::: ', this.breadcrumbs );
+
  }
   ngOnInit(): void {
     setTimeout(() => {
       this.activatedRoute.data.subscribe(data => {
         this.titulo = data['breadcrumb'].alias;
-        console.log('this.titulo::: ', this.titulo);
+  
         this.titleService.setTitle(this.titulo);
       });
 

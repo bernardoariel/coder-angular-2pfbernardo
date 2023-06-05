@@ -14,11 +14,11 @@ export class AdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('aaa')
+    
       return this.authService.obtenerUsuarioAutenticado()
       .pipe(
         map((usuarioAutenticado)=>{
-          console.log('usuarioAutenticado::: ', usuarioAutenticado);
+
           if(usuarioAutenticado && usuarioAutenticado.role!='admin'){
             alert('No tienes permiso')
             return false

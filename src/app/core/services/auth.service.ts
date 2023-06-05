@@ -95,7 +95,7 @@ export class AuthService {
           return !!usuarioAutenticado
         }),
         catchError((err)=>{
-          console.log('Error al verifivar el token');
+          
           // return throwError(()=>err)
           return of(false)
         })

@@ -54,7 +54,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.usuarioService.getUsuarios().subscribe(
       (usuarios) => {
-        console.log('usuarios::: ', usuarios);
+        
         this.usuarios = usuarios;
         this.dataSource.data = this.usuarios;
         this.isLoading = false;
@@ -64,7 +64,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.activatedRoute.data.subscribe(data => {
         this.titulo = data['breadcrumb'].alias;
-        console.log('this.titulo::: ', this.titulo);
+        
         this.titleService.setTitle(this.titulo);
       });
 
@@ -85,7 +85,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
   const day = String(today.getDate()).padStart(2, '0');
   const formattedDate = `${year}-${month}-${day}`;
 
-  console.log('formattedDate::: ', formattedDate);
+  
   return formattedDate;
 }
 
@@ -96,7 +96,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
       this.ultimoId = ultimoAlumno.id || 0;
     });
     dialog.afterClosed().subscribe((formValue) => {
-      console.log('formValue::: ', formValue);
+      
 
       if(formValue  && Object.keys(formValue).length > 0){
         const alumnoNuevo = {
@@ -114,7 +114,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
             // this.dataSource.data = (this.dataSource.data as Usuario[]).concat(alumno)
             this.usuarioService.getUsuarios().subscribe(
               (usuarios) => {
-                console.log('usuarios::: ', usuarios);
+                
                 this.usuarios = usuarios;
                 this.dataSource.data = this.usuarios;
                 this.isLoading = false;
@@ -131,7 +131,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
     });
   }
   eliminarUsuario(usuarioDelete: Usuario): void {
-    console.log('usuarioDelete::: ', usuarioDelete);
+    
 
      const dialogRef =  this.matDialog.open(ConfirmComponent,{
       data: 'Está seguro que desea eliminar este Usuario?'
@@ -143,7 +143,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
         () => {
           this.alumnoService.borrarAlumno(usuarioDelete.studentId).subscribe(
             ()=>{
-             console.log('usuario eliminado');
+             
             }
           )
             this.dataSource.data = (this.dataSource.data as Usuario[]).filter((usuario) => usuario.id !== usuarioDelete.id);
@@ -176,7 +176,7 @@ export class ListadoComponent implements OnInit, OnDestroy {
             this.dataSource.data = [...this.dataSource.data];
             this.alumnoService.actualizarPropiedades(alumnoEditado.id,alumnoEditado.email,alumnoEditado.role).subscribe(
               (resultado) => {
-                console.log('Resultado de la operación adicional en usuariosService:', resultado);
+                
               }
             )
           }

@@ -53,16 +53,16 @@ export class InscripcionComponent implements OnInit{
   cursosOptions!: { value: string; viewValue: string; }[];
 
   seleccionarNivelCurso(nivel: string) {
-    console.log('nivel::: ', nivel);
+    
     this.selectedNivelCursoControl.setValue(nivel);
   }
 
   seleccionarTipoCurso(tipo: string) {
-    console.log('tipo::: ', tipo);
+    
     this.selectedTipoCursoControl.setValue(tipo);
   }
   seleccionarFormatoCurso(formato: string) {
-    console.log('formato::: ', formato);
+    
     this.selectedFormatoCursoControl.setValue(formato);
     (formato === 'Curso') ? this.isCursoSelected = true : this.isCursoSelected = false;
   }
@@ -90,7 +90,7 @@ export class InscripcionComponent implements OnInit{
         this.detalleControl.setValue(inscripcionParaEditar.detalleCurso as string);
         this.isCursoSelected = false;
       }
-      console.log('this.isCursoSelected::: ', this.isCursoSelected);
+      
     }
 
     this.fechaInicioInvalida = false;
@@ -113,12 +113,12 @@ export class InscripcionComponent implements OnInit{
     ).subscribe(cursoId => {
       const cursoSeleccionado = this.cursos.find(curso => curso.id === (+cursoId! ?? -1));
       if (cursoSeleccionado) {
-        console.log('cursoSeleccionado::: ', cursoSeleccionado);
+        
         this.inscripcionForm.get('courseId')?.setValue(cursoSeleccionado.id.toString());
         this.inscripcionForm.get('nombreCurso')?.setValue(cursoSeleccionado.nombre)
         this.nombreCursoSeleccionado = cursoSeleccionado.nombre;
 
-        console.log('this.nombreCursoSeleccionado ::: ', this.nombreCursoSeleccionado );
+        
       } else {
         this.inscripcionForm.get('courseId')?.reset();
         this.inscripcionForm.get('nombreCurso')?.reset();
@@ -130,11 +130,11 @@ export class InscripcionComponent implements OnInit{
 
   guardar() {
     const fechaInicio = new Date(this.inscripcionForm.get('fecha_inicio')!.value!);
-    console.log('this.inscripcionForm::: ', this.inscripcionForm);
+    
     const fechaFin = new Date(this.inscripcionForm.get('fecha_fin')!.value!);
     const formatoCursoForm = this.inscripcionForm.get('formatoCurso')!.value!;
     if (fechaInicio.getTime() === fechaFin.getTime() && formatoCursoForm=='Curso') {
-      console.log('a1aa')
+      
       this.fechaInicioInvalida = true;
       this.fechaFinInvalida = true;
       this.inscripcionForm.get('fecha_inicio')!.setErrors({ fechaInvalida: true });
@@ -143,7 +143,7 @@ export class InscripcionComponent implements OnInit{
     }
 
     if (fechaInicio > fechaFin && formatoCursoForm=='Curso') {
-      console.log('a2aa')
+      
      this.fechaInicioInvalida = true;
      this.fechaFinInvalida = true;
      this.inscripcionForm.get('fecha_inicio')!.setErrors({ fechaInvalida: true });
@@ -151,13 +151,13 @@ export class InscripcionComponent implements OnInit{
      return;
     }
 
-    console.log('this.inscripcionForm.valid::: ', this.inscripcionForm.valid);
+    
     this.inscripcionForm.patchValue({
       fecha_inicio: fechaInicio.toISOString().substring(0, 10),
       fecha_fin: fechaFin.toISOString().substring(0, 10),
       nombreCurso: this.nombreCursoSeleccionado
     });
-    console.log('valores', this.inscripcionForm.value);
+    
     if (this.inscripcionForm.valid) {
       // Resto del código
 

@@ -65,7 +65,7 @@ export class UsuarioService {
     return this.http.delete<any>(`${ this.baseUrl }/users/${ id }`)
   }
   actualizarUsuario( usuario: Usuario): Observable<Usuario>{
-    console.log('usuario::: ', usuario);
+
     return this.http.put<Usuario>(`${ this.baseUrl }/users/${ usuario.id }`, usuario)
   }
   actualizarPropiedades(studentId:number, email:string, role:string){

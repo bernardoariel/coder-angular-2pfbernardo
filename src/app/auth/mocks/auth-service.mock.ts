@@ -18,7 +18,7 @@ export class AuthServiceMock{
 
   private authUser$ = new BehaviorSubject<Usuario | null>(null);
   login(formValue:LoginFormValue):void{
-    console.log('INGRESANDO AL SERVICIO MOCK')
+
     this.authUser$.next(USUARIO_MOCK)
   }
 
