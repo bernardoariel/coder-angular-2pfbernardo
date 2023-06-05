@@ -12,10 +12,12 @@ import { TagModule } from 'primeng/tag';
 import { CardModule } from 'primeng/card';
 import { MessagesModule } from 'primeng/messages';
 import { ChipModule } from 'primeng/chip';
+
 @NgModule({
   declarations: [
     LandingComponent,
-    PagesComponent
+    PagesComponent,
+    
   ],
   imports: [
     CommonModule,

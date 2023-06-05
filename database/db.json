@@ -21,6 +21,17 @@
       "genero": "No especificado",
       "dni": "00000000",
       "id": 2
+    },
+    {
+      "role": "Estudiante",
+      "fotoPerfilUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
+      "fotoUrl": "https://media.istockphoto.com/id/1187982064/es/vector/silueta-de-un-hombre-con-un-signo-de-interrogaci%C3%B3n.jpg?s=170667a&w=0&k=20&c=M3JyMP994NWFJRBBzahD2uJAIwgezLNpD6LNmJou_do=",
+      "nombre": "user",
+      "apellido": "user",
+      "fechaNacimiento": "2023-06-04",
+      "genero": "No especificado",
+      "dni": "00000000",
+      "id": 3
     }
   ],
   "courses": [
@@ -106,6 +117,14 @@
       "role": "Estudiante",
       "token": "7QPxTeGIu1k89fT4",
       "id": 2
+    },
+    {
+      "studentId": 3,
+      "email": "lean@gmail.com",
+      "password": "123456",
+      "role": "Estudiante",
+      "token": "Pr6AUttWY12T8oM3",
+      "id": 3
     }
   ]
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { enviroment } from 'src/environments/enviroments';
 
 
+
 export interface Usuario{
   id:number;
   studentId:number;
@@ -22,8 +23,10 @@ export class UsuarioService {
   constructor( private http:HttpClient ) { }
 
   getUsuarios():Observable<Usuario[]>{
+    
     return this.http.get<Usuario[]>(`${ this.baseUrl }/users`)
   }
+
   getUsuarioById(id:number):Observable<Usuario>{
     return this.http.get<Usuario>(`${ this.baseUrl }/users/${id}`)
   }
@@ -59,6 +62,7 @@ export class UsuarioService {
     }
     return this.http.post<Usuario>(`${ this.baseUrl }/users`, userNew)
   }
+
   borrarUsuario( id: number): Observable<any>{
 
 

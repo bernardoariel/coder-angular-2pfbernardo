@@ -10,6 +10,7 @@ import { AutGuard } from './auth/guards/aut.guard';
 import { LoginGuard } from './auth/guards/login.guard';
 import { AdminGuard } from './auth/guards/admin.guard';
 import { LandingComponent } from './landing/landing.component';
+import { IncompleteStudentGuard } from './auth/guards/incomplete-student.guard';
 
 const routes: Routes = [
   {
@@ -26,18 +27,22 @@ const routes: Routes = [
     children:[
       {
         path:'alumnos',
+        
         loadChildren:()=>import('./dashboard/pages/alumnos/alumnos.module').then(m=>m.AlumnosModule)
       },
       {
         path:'cursos',
+        
         loadChildren:()=>import('./dashboard/pages/cursos/cursos.module').then(m=>m.CursosModule)
       },
       {
         path:'inscripciones',
+        
         loadChildren:()=>import('./dashboard/pages/inscripciones/inscripciones.module').then(m=>m.InscripcionesModule)
       },
       {
         path:'usuarios',
+        
         loadChildren:()=>import('./dashboard/pages/usuarios/usuarios.module').then(m=>m.UsuariosModule)
       },
       {
