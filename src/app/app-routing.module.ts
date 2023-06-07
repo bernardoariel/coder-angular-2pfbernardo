@@ -10,7 +10,6 @@ import { AutGuard } from './auth/guards/aut.guard';
 import { LoginGuard } from './auth/guards/login.guard';
 import { AdminGuard } from './auth/guards/admin.guard';
 import { LandingComponent } from './landing/landing.component';
-import { IncompleteStudentGuard } from './auth/guards/incomplete-student.guard';
 
 const routes: Routes = [
   {

@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { InscripcionesEffects } from './store/inscripciones.effects';
 import { StoreModule } from '@ngrx/store';
 import { inscripcionesFeature } from './store/inscripciones.reducer';
+import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 
 
 
@@ -31,7 +32,8 @@ import { inscripcionesFeature } from './store/inscripciones.reducer';
     ReactiveFormsModule,
     PipesModule,
     StoreModule.forFeature(inscripcionesFeature),
-    EffectsModule.forFeature([InscripcionesEffects])
+    EffectsModule.forFeature([InscripcionesEffects]),
+    DirectivesModule
   ],
 
 })

@@ -12,17 +12,41 @@ y Redux
 
 > 123456
 
-## Modulos Principales
-1. Modulo de Auth
+# Modulos Principales
+1. Auth
 2. Dahsboard
 3. Landing
+4. Angular Material
 
 ## Modulo de Auth
-Tiene la view de registros
+- Login View
+- Admin Guard
+- Auth Guard
+- Login Guard
 
+## Modulo Dashboard
+- Modulo de Alumnos
+- Modulo de Cursos
+- Modulo de Home
+- Modulo de Inscripciones
+- Modulo de Usuarios
 
-2. Se utilizo el routing en el modulo general y en los submodulos
-3. en Shared tengo creado todo lo de angular material
+## Modulo Landing
+- Page Landing
+
+## Modulo Angular Material
+- Todos los componentes de Angular en un Modulo
+
+## Modulo de Pipes
+- Time-format
+- control-errores
+- nombre-completo
+
+## Modulo de Directivas
+- Formato titulo
+
+### Routing Centralizado con submodulos
+
 
 ## Aspectos a Incluir en el Entregable
 1. Se agregaron los servicios para los Abm de los modulos.
@@ -30,13 +54,13 @@ Tiene la view de registros
 3. Se realizo la modularizacion con el core, shared y features modules
 4. Tenemos la navegacion de rutas desde el menu lateral
 
-## En listado de alumnos:
-  Se puede agregar un alumno pide nombre apellido y fecha de nacimiento
-  Con esos datos utiliza los pipe de nombre completo, y de los errores
+## En listado de alumnos y usuarios
+  Se puede agregar un alumno que a su vez genera un usuario.
+  Con esos datos utiliza los pipe de nombre completo, y de los errores.
+
   ver: Se podra ver los detalles el nombre el apellido, la fecha de nacimiento y los cursos en los que esta inscripto. Tambien se podraa eliminar.
   > Al crear un alumno crea automaticamente un usuario, y se toma en cuenta tambien a la hora de eliminarse
-  editar: Podemos cambiar los valores
-  eliminar: elimina un alumno
+
   
   >Las fotos son tomada por genero, de una api externa, que tiene varon, mujer y legos
 ## En listado de Cursos:
@@ -49,7 +73,8 @@ Tiene la view de registros
   la fecha de inicio y fecha de fin
   Eliminar un curso
   editar el curso
-  Ver el curso me trae el nombre y quienes lo estan haciendo
+  Podemos crear ademas un clase de un dia, asi que tenemos dos opciones, y en el detalle tendriamos los datos a modificar... probalo jeje
+  
   
 
 

@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DirectivesRoutingModule } from './directives-routing.module';
+import { FormatoTituloDirective } from './formato-titulo.directive';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    FormatoTituloDirective
+  ],
   imports: [
     CommonModule,
-    DirectivesRoutingModule
+  ],
+  exports:[
+    FormatoTituloDirective
   ]
 })
 export class DirectivesModule { }

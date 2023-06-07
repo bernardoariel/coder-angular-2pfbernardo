@@ -9,6 +9,7 @@ import { PipesModule } from "../../../shared/pipes/pipes.module";
 import { ReactiveFormsModule } from '@angular/forms';
 import { DetalleComponent } from './detalle/detalle.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ConfirmComponent } from './confirm/confirm.component';
         AlumnosRoutingModule,
         MaterialModule,
         PipesModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DirectivesModule
     ]
 })
 export class AlumnosModule { }

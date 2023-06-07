@@ -9,6 +9,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     UsuariosRoutingModule,
     MaterialModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DirectivesModule
   ]
 })
 export class UsuariosModule { }
