@@ -1,14 +1,26 @@
 # PFinalBernardo
 
-## Segunda Entrega Final
+## Entrega Final
 
-He creado todo de cero nuevamente reordenando la info
+He creado todo de cero nuevamente reordenando la info y reeviendo los videos, 
+no me dio el tiempo para mejorar lo que fue mas dificil para mi que son los test,
+y Redux
 
-## Objetivos Especificos
-1. Se añadieron 3 modulos en el dashboar
-  1. Alumnos
-  2. Cursos
-  3. Inscripciones
+# Usuario Admin
+## Hay que levantar jsonServer
+> admin@admin.com
+
+> 123456
+
+## Modulos Principales
+1. Modulo de Auth
+2. Dahsboard
+3. Landing
+
+## Modulo de Auth
+Tiene la view de registros
+
+
 2. Se utilizo el routing en el modulo general y en los submodulos
 3. en Shared tengo creado todo lo de angular material
 
@@ -21,9 +33,12 @@ He creado todo de cero nuevamente reordenando la info
 ## En listado de alumnos:
   Se puede agregar un alumno pide nombre apellido y fecha de nacimiento
   Con esos datos utiliza los pipe de nombre completo, y de los errores
-  ver: Se podra ver los detalles el nombre el apellido, la fecha de nacimiento y los cursos en los que esta inscripto. Tambien se podraa eliminar (Todo harckodeado)
+  ver: Se podra ver los detalles el nombre el apellido, la fecha de nacimiento y los cursos en los que esta inscripto. Tambien se podraa eliminar.
+  > Al crear un alumno crea automaticamente un usuario, y se toma en cuenta tambien a la hora de eliminarse
   editar: Podemos cambiar los valores
   eliminar: elimina un alumno
+  
+  >Las fotos son tomada por genero, de una api externa, que tiene varon, mujer y legos
 ## En listado de Cursos:
   Agregar un curso, y tomara una foto por defecto
   Eliminar un curso
